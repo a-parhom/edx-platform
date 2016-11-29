@@ -1,8 +1,16 @@
-define(
-    ['jquery', 'underscore', 'backbone', 'js/models/active_video_upload', 'js/views/baseview', 'js/views/active_video_upload', 'jquery.fileupload'],
-    function($, _, Backbone, ActiveVideoUpload, BaseView, ActiveVideoUploadView) {
+define([
+    'jquery',
+    'underscore',
+    'backbone',
+    'js/models/active_video_upload',
+    'js/views/baseview',
+    'js/views/active_video_upload',
+    'common/js/components/views/feedback_notification',
+    'jquery.fileupload'
+],
+    function($, _, Backbone, ActiveVideoUpload, BaseView, ActiveVideoUploadView, NotificationView) {
         'use strict';
-
+        var allowedFileTypes = ['mp4', 'mov'];
         var ActiveVideoUploadListView = BaseView.extend({
             tagName: 'div',
             events: {
@@ -22,6 +30,8 @@ define(
                 if (options.uploadButton) {
                     options.uploadButton.click(this.chooseFile.bind(this));
                 }
+                // error message modal for file uploads
+                this.fileErrorMsg = null;
             },
 
             render: function() {
@@ -102,6 +112,12 @@ define(
             fileUploadAdd: function(event, uploadData) {
                 var view = this,
                     model;
+
+                // Validate file
+                if (!view.validateFile(uploadData)){
+                    return;
+                }
+
                 if (uploadData.redirected) {
                     model = new ActiveVideoUpload({fileName: uploadData.files[0].name, videoId: uploadData.videoId});
                     this.collection.add(model);
@@ -162,11 +178,41 @@ define(
                 if (this.onFileUploadDone) {
                     this.onFileUploadDone(this.collection);
                     this.clearSuccessful();
+                    this.fileErrorMsg = null;
                 }
             },
 
             fileUploadFail: function(event, data) {
                 this.setStatus(data.cid, ActiveVideoUpload.STATUS_FAILED);
+            },
+
+            showErrorMessage: function(error) {
+                this.fileErrorMsg = new NotificationView.Error({
+                        'title': gettext('Your file could not be uploaded'),
+                        'message': error
+                    });
+                this.fileErrorMsg.show();
+            },
+
+            validateFile: function(data){
+                var error, fileName, fileType;
+
+                $.each(data.files, function(index, file) {
+                    fileName = file.name,
+                    fileType = fileName.substr(fileName.lastIndexOf('.') + 1);
+                    // validate file type
+                    if(allowedFileTypes.indexOf(fileType) === -1) {
+                        error = gettext('File `{filename}` has unsupported file format.')
+                                        .replace('{filename}', fileName);
+                        return false;
+                    }
+                });
+
+                if (error) {
+                    this.showErrorMessage(error);
+                    return false;
+                }
+                return true;
             },
 
             removeViewAt: function(index) {
