@@ -10,7 +10,7 @@ define([
 ],
     function($, _, Backbone, ActiveVideoUpload, BaseView, ActiveVideoUploadView, NotificationView) {
         'use strict';
-        var allowedFileTypes = ['mp4', 'mov'];
+        var supportedFileFormats = ['mp4', 'mov'];
         var ActiveVideoUploadListView = BaseView.extend({
             tagName: 'div',
             events: {
@@ -201,8 +201,8 @@ define([
                     fileName = file.name,
                     fileType = fileName.substr(fileName.lastIndexOf('.') + 1);
                     // validate file type
-                    if(allowedFileTypes.indexOf(fileType) === -1) {
-                        error = gettext('File `{filename}` has unsupported file format.')
+                    if(supportedFileFormats.indexOf(fileType) === -1) {
+                        error = gettext('`{filename}` has unsupported file format.')
                                         .replace('{filename}', fileName);
                         return false;
                     }
