@@ -5,6 +5,7 @@ from nose.plugins.attrib import attr
 
 from common.test.acceptance.tests.studio.base_studio_test import StudioCourseTest
 from common.test.acceptance.pages.studio.auto_auth import AutoAuthPage
+from common.test.acceptance.pages.studio.update_user import UpdateUser
 
 from common.test.acceptance.pages.studio.users import CourseTeamPage
 from common.test.acceptance.pages.studio.index import DashboardPage
@@ -25,6 +26,18 @@ class CourseTeamPageTest(StudioCourseTest):
             username=user.get('username'), email=user.get('email'), password=user.get('password')
         ).visit()
         return user
+
+    def _update_user(self, username, is_active):
+        """
+        Update a user with given `username` with values provided as
+        method arguments.
+
+        Arguments:
+            `username`: specify a user to update
+            `is_active`: intended active status of user
+        """
+        UpdateUser(self.browser, username, is_active=is_active).visit()
+        self._go_to_course_team_page()
 
     def setUp(self, is_staff=False):
         """
@@ -173,6 +186,25 @@ class CourseTeamPageTest(StudioCourseTest):
 
         self.log_in(self.other_user)
         self._assert_current_course(visible=False)
+
+    def test_admins_can_delete_other_inactive_users(self):
+        """
+        Scenario: Admins can delete other inactive users
+        Given I have opened a new course in Studio
+        And I am viewing the course team settings.
+        When I add other user to the course team,
+        And then delete that other user from the course team.
+        And other user logs in
+        Then he/she does not see the course on page
+        """
+        self.page.add_user_to_course(self.other_user.get('email'))
+        self._assert_user_present(self.other_user, present=True)
+
+        # inactivate user
+        self._update_user(self.other_user.get('username'), is_active=False)
+        self.page.delete_user_from_course(self.other_user.get('email'))
+
+        self._assert_user_present(self.other_user, present=False)
 
     def test_admins_cannot_add_users_that_do_not_exist(self):
         """

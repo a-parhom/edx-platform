@@ -45,6 +45,7 @@ urlpatterns = (
 if settings.FEATURES.get('AUTOMATIC_AUTH_FOR_TESTING'):
     urlpatterns += (
         url(r'^auto_auth$', 'auto_auth'),
+        url(r'^update_user$', 'update_user'),
     )
 
 # add all student.views url patterns
