@@ -6,7 +6,6 @@ import csv
 import json
 import dateutil.parser
 import re
-import ddt
 from StringIO import StringIO
 
 from django.conf import settings
@@ -159,7 +158,6 @@ class VideoUploadTestMixin(object):
         self.assertEqual(self.client.get(self.url).status_code, 404)
 
 
-@ddt.ddt
 @patch.dict("django.conf.settings.FEATURES", {"ENABLE_VIDEO_UPLOAD_PIPELINE": True})
 @override_settings(VIDEO_UPLOAD_PIPELINE={"BUCKET": "test_bucket", "ROOT_PATH": "test_root"})
 class VideosHandlerTestCase(VideoUploadTestMixin, CourseTestCase):
