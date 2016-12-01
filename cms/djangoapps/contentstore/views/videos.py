@@ -297,7 +297,7 @@ def videos_post(course, request):
 
     The returned array corresponds exactly to the input array.
     """
-    supported_content_types = ['video/mp4', 'video/mov']
+    supported_content_types = ['video/mp4', 'video/quicktime']
     error = None
     if "files" not in request.json:
         error = "Request object is not JSON or does not contain 'files'"

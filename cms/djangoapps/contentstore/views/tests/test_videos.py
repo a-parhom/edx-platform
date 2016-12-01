@@ -233,8 +233,8 @@ class VideosHandlerTestCase(VideoUploadTestMixin, CourseTestCase):
                 "content_type": "video/mp4",
             },
             {
-                "file_name": "supported-2.mp4",
-                "content_type": "video/mov",
+                "file_name": "supported-2.mov",
+                "content_type": "video/quicktime",
             },
         ]
 
@@ -299,8 +299,8 @@ class VideosHandlerTestCase(VideoUploadTestMixin, CourseTestCase):
                 "content_type": "video/mp4",
             },
             {
-                "file_name": "third.mp4",
-                "content_type": "video/mp4",
+                "file_name": "third.mov",
+                "content_type": "video/quicktime",
             },
             {
                 "file_name": "fourth.mp4",
