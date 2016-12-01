@@ -203,8 +203,7 @@ define([
             validateFile: function(data) {
                 var error, fileName, fileType;
 
-                // eslint-disable-consistent-return
-                $.each(data.files, function(index, file) {
+                $.each(data.files, function(index, file) {  // eslint-disable-line consistent-return
                     fileName = file.name;
                     fileType = fileName.substr(fileName.lastIndexOf('.') + 1);
                     // validate file type
