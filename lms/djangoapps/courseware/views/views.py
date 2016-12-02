@@ -154,10 +154,8 @@ def courses(request):
             "DISPLAY_PROGRAMS_ON_MARKETING_PAGES",
             settings.FEATURES["DISPLAY_PROGRAMS_ON_MARKETING_PAGES"]
     ):
-        if request.user.is_anonymous():
-            programs_list = get_programs(User.objects.filter(is_active=True).first())  #TODO Need *any* user here.
-        else:
-            programs_list = get_programs(request.user)
+        programs_list = get_programs()
+
     return render_to_response(
         "courseware/courses.html",
         {

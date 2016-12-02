@@ -2,6 +2,7 @@
 from urlparse import urlparse
 
 from django.conf import settings
+from django.contrib.auth.models import User
 from edx_rest_api_client.client import EdxRestApiClient
 from opaque_keys.edx.keys import CourseKey
 
@@ -19,7 +20,22 @@ def create_catalog_api_client(user, catalog_integration):
     return EdxRestApiClient(catalog_integration.internal_api_url, jwt=jwt)
 
 
-def get_programs(user, uuid=None, type=None):  # pylint: disable=redefined-builtin
+def _get_service_user(user, service_username):
+    """
+    Retrieve and return the Catalog Integration Service User Object
+    if the passed user is None or anonymous
+    """
+    if not user or user.is_anonymous():
+        try:
+            service_user = User.objects.get(username=service_username)
+        except User.DoesNotExist:
+            service_user = None
+    else:
+        service_user = user
+    return service_user
+
+
+def get_programs(user=None, uuid=None, type=None):  # pylint: disable=redefined-builtin
     """Retrieve marketable programs from the catalog service.
 
     Keyword Arguments:
@@ -31,8 +47,11 @@ def get_programs(user, uuid=None, type=None):  # pylint: disable=redefined-built
         dict, if a specific program is requested.
     """
     catalog_integration = CatalogIntegration.current()
-
     if catalog_integration.enabled:
+        user = _get_service_user(user, catalog_integration.service_username)
+        if not user:
+            return []
+
         api = create_catalog_api_client(user, catalog_integration)
 
         cache_key = '{base}.programs{type}'.format(
