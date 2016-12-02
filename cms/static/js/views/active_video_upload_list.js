@@ -13,7 +13,6 @@ define([
     function($, _, Backbone, ActiveVideoUpload, BaseView, ActiveVideoUploadView, NotificationView, HtmlUtils,
              activeVideoUploadListTemplate) {
         'use strict';
-        var supportedFileFormats = ['mp4', 'mov'];
         var ActiveVideoUploadListView = BaseView.extend({
             tagName: 'div',
             events: {
@@ -29,6 +28,7 @@ define([
                 this.listenTo(this.collection, 'add', this.addUpload);
                 this.concurrentUploadLimit = options.concurrentUploadLimit || 0;
                 this.postUrl = options.postUrl;
+                this.videoSupportedFileFormats = options.videoSupportedFileFormats;
                 this.onFileUploadDone = options.onFileUploadDone;
                 if (options.uploadButton) {
                     options.uploadButton.click(this.chooseFile.bind(this));
@@ -117,11 +117,16 @@ define([
             // indicate that the correct upload url has already been retrieved
             fileUploadAdd: function(event, uploadData) {
                 var view = this,
-                    model;
+                    model,
+                    errorMsg;
 
                 // Validate file
-                if (!view.validateFile(uploadData)) {
+                errorMsg = view.validateFile(uploadData);
+                if (errorMsg) {
+                    view.showErrorMessage(errorMsg);
                     return;
+                } else {
+                    view.hideErrorMessage();
                 }
 
                 if (uploadData.redirected) {
@@ -184,12 +189,17 @@ define([
                 if (this.onFileUploadDone) {
                     this.onFileUploadDone(this.collection);
                     this.clearSuccessful();
-                    this.fileErrorMsg = null;
                 }
             },
 
             fileUploadFail: function(event, data) {
                 this.setStatus(data.cid, ActiveVideoUpload.STATUS_FAILED);
+            },
+
+            hideErrorMessage: function() {
+                if (this.fileErrorMsg) {
+                    this.fileErrorMsg.hide();
+                }
             },
 
             showErrorMessage: function(error) {
@@ -201,24 +211,26 @@ define([
             },
 
             validateFile: function(data) {
-                var error, fileName, fileType;
+                var self = this,
+                    error = '',
+                    fileName,
+                    fileType;
 
                 $.each(data.files, function(index, file) {  // eslint-disable-line consistent-return
                     fileName = file.name;
                     fileType = fileName.substr(fileName.lastIndexOf('.') + 1);
                     // validate file type
-                    if (supportedFileFormats.indexOf(fileType) === -1) {
-                        error = gettext('`{filename}` has unsupported file format.')
-                                        .replace('{filename}', fileName);
+                    if (!_.contains(self.videoSupportedFileFormats, fileType)) {
+                        error = gettext(
+                            '`{filename}` has unsupported file format. ' +
+                            'Supported file formats are {supportedFileFormats}'
+                        )
+                        .replace('{filename}', fileName)
+                        .replace('{supportedFileFormats}', self.videoSupportedFileFormats.join(', '));
                         return false;
                     }
                 });
-
-                if (error) {
-                    this.showErrorMessage(error);
-                    return false;
-                }
-                return true;
+                return error;
             },
 
             removeViewAt: function(index) {

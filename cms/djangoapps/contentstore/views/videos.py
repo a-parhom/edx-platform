@@ -29,6 +29,10 @@ __all__ = ["videos_handler", "video_encodings_download"]
 # Default expiration, in seconds, of one-time URLs used for uploading videos.
 KEY_EXPIRATION_IN_SECONDS = 86400
 
+VIDEO_SUPPORTED_FILE_FORMATS = {
+    'mp4': 'video/mp4',
+    'mov': 'video/quicktime',
+}
 
 class StatusDisplayStrings(object):
     """
@@ -257,6 +261,7 @@ def videos_index_html(course):
             "encodings_download_url": reverse_course_url("video_encodings_download", unicode(course.id)),
             "previous_uploads": _get_index_videos(course),
             "concurrent_upload_limit": settings.VIDEO_UPLOAD_PIPELINE.get("CONCURRENT_UPLOAD_LIMIT", 0),
+            "video_supported_file_formats": VIDEO_SUPPORTED_FILE_FORMATS.keys()
         }
     )
 
@@ -297,7 +302,6 @@ def videos_post(course, request):
 
     The returned array corresponds exactly to the input array.
     """
-    supported_content_types = ['video/mp4', 'video/quicktime']
     error = None
     if "files" not in request.json:
         error = "Request object is not JSON or does not contain 'files'"
@@ -307,7 +311,7 @@ def videos_post(course, request):
     ):
         error = "Request 'files' entry does not contain 'file_name' and 'content_type'"
     elif any(
-            file['content_type'] not in supported_content_types
+            file['content_type'] not in VIDEO_SUPPORTED_FILE_FORMATS.values()
             for file in request.json["files"]
     ):
         error = "Request 'files' entry contain unsupported content_type"
