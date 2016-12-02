@@ -27,11 +27,11 @@ class CatalogIntegration(ConfigurationModel):
 
     service_username = models.CharField(
         max_length=100,
-        default="course_catalog_worker",
+        default="lms_catalog_service_user",
         null=False,
         blank=False,
         help_text=_(
-            'Username created for Course Catalog Integration, e.g. course_catalog_worker.'
+            'Username created for Course Catalog Integration, e.g. lms_catalog_service_user.'
         )
     )
 

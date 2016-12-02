@@ -27,12 +27,10 @@ def _get_service_user(user, service_username):
     """
     if not user or user.is_anonymous():
         try:
-            service_user = User.objects.get(username=service_username)
+            user = User.objects.get(username=service_username)
         except User.DoesNotExist:
-            service_user = None
-    else:
-        service_user = user
-    return service_user
+            user = None
+    return user
 
 
 def get_programs(user=None, uuid=None, type=None):  # pylint: disable=redefined-builtin

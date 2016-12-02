@@ -14,6 +14,6 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='catalogintegration',
             name='service_username',
-            field=models.CharField(default=b'course_catalog_worker', help_text='Username created for Course Catalog Integration, e.g. course_catalog_worker.', max_length=100),
+            field=models.CharField(default=b'lms_catalog_service_user', help_text='Username created for Course Catalog Integration, e.g. lms_catalog_service_user.', max_length=100),
         ),
     ]

@@ -209,13 +209,10 @@ def index(request, extra_context=None, user=AnonymousUser()):
 
     # getting all the programs from catalog
     if configuration_helpers.get_value(
-            "DISPLAY_PROGRAMS_ON_MARKETING_PAGES",
-            settings.FEATURES["DISPLAY_PROGRAMS_ON_MARKETING_PAGES"]
+        "DISPLAY_PROGRAMS_ON_MARKETING_PAGES",
+        settings.FEATURES.get("DISPLAY_PROGRAMS_ON_MARKETING_PAGES")
     ):
-        if request.user.is_anonymous():
-            programs_list = get_programs(User.objects.filter(is_active=True).first())  #TODO Need *any* user here.
-        else:
-            programs_list = get_programs(request.user)
+        programs_list = get_programs(user)
 
     context["programs_list"] = programs_list
 
