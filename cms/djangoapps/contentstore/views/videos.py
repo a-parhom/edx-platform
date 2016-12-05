@@ -34,6 +34,7 @@ VIDEO_SUPPORTED_FILE_FORMATS = {
     'mov': 'video/quicktime',
 }
 
+
 class StatusDisplayStrings(object):
     """
     A class to map status strings as stored in VAL to display strings for the

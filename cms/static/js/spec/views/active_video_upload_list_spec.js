@@ -17,10 +17,12 @@ define(
                 TemplateHelpers.installTemplate('active-video-upload-list');
                 this.postUrl = '/test/post/url';
                 this.uploadButton = $('<button>');
+                this.videoSupportedFileFormats = ['mp4', 'mov'];
                 this.view = new ActiveVideoUploadListView({
                     concurrentUploadLimit: concurrentUploadLimit,
                     postUrl: this.postUrl,
-                    uploadButton: this.uploadButton
+                    uploadButton: this.uploadButton,
+                    videoSupportedFileFormats: this.videoSupportedFileFormats
                 });
                 this.view.render();
                 jasmine.Ajax.install();
@@ -80,7 +82,10 @@ define(
                     this.view.$uploadForm.fileupload('add', unSupportedFiles);
                     expect(this.view.fileErrorMsg).toBeDefined();
                     expect(this.view.fileErrorMsg.options.title).toEqual('Your file could not be uploaded');
-                    expect(this.view.fileErrorMsg.options.message).toEqual('`test-3.txt` has unsupported file format.');
+                    expect(this.view.fileErrorMsg.options.message).toEqual(
+                        '`test-3.txt` has unsupported file format. Supported file formats are ' +
+                        this.videoSupportedFileFormats.join(', ')
+                    );
                 });
             });
 
