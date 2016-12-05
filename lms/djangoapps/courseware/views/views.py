@@ -141,19 +141,15 @@ def courses(request):
     if not settings.FEATURES.get('ENABLE_COURSE_DISCOVERY'):
         courses_list = get_courses(request.user)
 
-        if configuration_helpers.get_value(
-            "ENABLE_COURSE_SORTING_BY_START_DATE",
-            settings.FEATURES["ENABLE_COURSE_SORTING_BY_START_DATE"]
-        ):
+        if configuration_helpers.get_value("ENABLE_COURSE_SORTING_BY_START_DATE",
+                                           settings.FEATURES["ENABLE_COURSE_SORTING_BY_START_DATE"]):
             courses_list = sort_by_start_date(courses_list)
         else:
             courses_list = sort_by_announcement(courses_list)
 
     # getting all the programs from catalog
-    if configuration_helpers.get_value(
-        "DISPLAY_PROGRAMS_ON_MARKETING_PAGES",
-        settings.FEATURES.get("DISPLAY_PROGRAMS_ON_MARKETING_PAGES")
-    ):
+    if configuration_helpers.get_value("DISPLAY_PROGRAMS_ON_MARKETING_PAGES",
+                                       settings.FEATURES.get("DISPLAY_PROGRAMS_ON_MARKETING_PAGES")):
         programs_list = get_programs()
 
     return render_to_response(

@@ -9,8 +9,7 @@ from opaque_keys.edx.keys import CourseKey
 from openedx.core.djangoapps.catalog import utils
 from openedx.core.djangoapps.catalog.models import CatalogIntegration
 from openedx.core.djangoapps.catalog.tests import factories, mixins
-from student.tests.factories import UserFactory
-
+from student.tests.factories import UserFactory, AnonymousUserFactory
 
 UTILS_MODULE = 'openedx.core.djangoapps.catalog.utils'
 
@@ -65,6 +64,23 @@ class TestGetPrograms(mixins.CatalogIntegrationMixin, TestCase):
         data = utils.get_programs(self.user)
 
         self.assert_contract(mock_get_catalog_data.call_args)
+        self.assertEqual(data, programs)
+
+    def test_get_programs_anonymous_user(self, _mock_cache, mock_get_catalog_data):
+        programs = [factories.Program() for __ in range(3)]
+        mock_get_catalog_data.return_value = programs
+
+        anonymous_user = AnonymousUserFactory()
+
+        # The user is an Anonymous user but the Catalog Service User has not been created yet.
+        data = utils.get_programs(anonymous_user)
+        # This should not return programs.
+        self.assertEqual(data, [])
+
+        lms_catalog_service_user = UserFactory(username='lms_catalog_service_user')
+        # After creating the service user,
+        data = utils.get_programs(anonymous_user)
+        # the programs should be returned successfully.
         self.assertEqual(data, programs)
 
     def test_get_one_program(self, _mock_cache, mock_get_catalog_data):

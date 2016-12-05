@@ -208,10 +208,8 @@ def index(request, extra_context=None, user=AnonymousUser()):
     context.update(extra_context)
 
     # getting all the programs from catalog
-    if configuration_helpers.get_value(
-        "DISPLAY_PROGRAMS_ON_MARKETING_PAGES",
-        settings.FEATURES.get("DISPLAY_PROGRAMS_ON_MARKETING_PAGES")
-    ):
+    if configuration_helpers.get_value("DISPLAY_PROGRAMS_ON_MARKETING_PAGES",
+                                       settings.FEATURES.get("DISPLAY_PROGRAMS_ON_MARKETING_PAGES")):
         programs_list = get_programs(user)
 
     context["programs_list"] = programs_list
