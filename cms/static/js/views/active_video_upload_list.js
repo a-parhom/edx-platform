@@ -222,8 +222,8 @@ define([
                     // validate file type
                     if (!_.contains(self.videoSupportedFileFormats, fileType)) {
                         error = gettext(
-                            '`{filename}` has unsupported file format. ' +
-                            'Supported file formats are {supportedFileFormats}'
+                            '{filename} is not in a supported file format. ' +
+                            'Supported file formats are "{supportedFileFormats}".'
                         )
                         .replace('{filename}', fileName)
                         .replace('{supportedFileFormats}', self.videoSupportedFileFormats.join(', '));
