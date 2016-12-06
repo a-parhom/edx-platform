@@ -77,8 +77,8 @@ class TestGetPrograms(mixins.CatalogIntegrationMixin, TestCase):
         # This should not return programs.
         self.assertEqual(data, [])
 
-        lms_catalog_service_user = UserFactory(username='lms_catalog_service_user')
-        # After creating the service user,
+        UserFactory(username='lms_catalog_service_user')
+        # After creating the service user above,
         data = utils.get_programs(anonymous_user)
         # the programs should be returned successfully.
         self.assertEqual(data, programs)
