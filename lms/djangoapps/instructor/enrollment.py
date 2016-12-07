@@ -6,11 +6,13 @@ Does not include any access control, be sure to check access before calling.
 
 import json
 import logging
+from datetime import datetime
 from django.contrib.auth.models import User
 from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.core.mail import send_mail
 from django.utils.translation import override as override_language
+import pytz
 
 from course_modes.models import CourseMode
 from courseware.models import StudentModule
@@ -21,6 +23,7 @@ from openedx.core.djangoapps.site_configuration import helpers as configuration_
 from openedx.core.djangoapps.user_api.models import UserPreference
 from submissions import api as sub_api  # installed from the edx-submissions repository
 from student.models import CourseEnrollment, CourseEnrollmentAllowed, anonymous_id_for_user
+from util.date_utils import to_timestamp
 from xmodule.modulestore.django import modulestore
 from xmodule.modulestore.exceptions import ItemNotFoundError
 
@@ -291,7 +294,7 @@ def _fire_score_changed_for_block(course_id, student, block, module_state_key):
     """
     Fires a PROBLEM_RAW_SCORE_CHANGED event for the given module.
     The earned points are always zero. We must retrieve the possible points
-    from the XModule, as noted below.
+    from the XModule, as noted below. The effective time is now().
     """
     if block and block.has_score and block.max_score() is not None:
         PROBLEM_RAW_SCORE_CHANGED.send(
@@ -304,6 +307,7 @@ def _fire_score_changed_for_block(course_id, student, block, module_state_key):
             usage_id=unicode(module_state_key),
             score_deleted=True,
             only_if_higher=False,
+            modified=to_timestamp(datetime.now().replace(tzinfo=pytz.UTC)),
         )
 
 

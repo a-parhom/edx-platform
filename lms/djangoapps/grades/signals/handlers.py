@@ -6,6 +6,7 @@ from django.dispatch import receiver
 from logging import getLogger
 
 from courseware.model_data import get_score, set_score
+from util.date_utils import to_timestamp
 from openedx.core.lib.grade_utils import is_score_higher
 from student.models import user_by_anonymous_id
 from submissions.models import score_set, score_reset
@@ -18,7 +19,7 @@ from .signals import (
 )
 from ..new.course_grade import CourseGradeFactory
 from ..scores import weighted_score
-from ..tasks import recalculate_subsection_grade
+from ..tasks import recalculate_subsection_grade_v2
 
 
 log = getLogger(__name__)
@@ -54,7 +55,8 @@ def submissions_score_set_handler(sender, **kwargs):  # pylint: disable=unused-a
         weighted_possible=points_possible,
         user_id=user.id,
         course_id=course_id,
-        usage_id=usage_id
+        usage_id=usage_id,
+        modified=kwargs['created_at'],
     )
 
 
@@ -84,7 +86,8 @@ def submissions_score_reset_handler(sender, **kwargs):  # pylint: disable=unused
         weighted_possible=0,
         user_id=user.id,
         course_id=course_id,
-        usage_id=usage_id
+        usage_id=usage_id,
+        modified=kwargs['created_at'],
     )
 
 
@@ -99,7 +102,7 @@ def score_published_handler(sender, block, user, raw_earned, raw_possible, only_
         previous_score = get_score(user.id, block.location)
 
         if previous_score is not None:
-            prev_raw_earned, prev_raw_possible = previous_score  # pylint: disable=unpacking-non-sequence
+            prev_raw_earned, prev_raw_possible = (previous_score.grade, previous_score.max_grade)
 
             if not is_score_higher(prev_raw_earned, prev_raw_possible, raw_earned, raw_possible):
                 update_score = False
@@ -111,7 +114,7 @@ def score_published_handler(sender, block, user, raw_earned, raw_possible, only_
                 )
 
     if update_score:
-        set_score(user.id, block.location, raw_earned, raw_possible)
+        score_modified_time = set_score(user.id, block.location, raw_earned, raw_possible)
         PROBLEM_RAW_SCORE_CHANGED.send(
             sender=None,
             raw_earned=raw_earned,
@@ -121,6 +124,7 @@ def score_published_handler(sender, block, user, raw_earned, raw_possible, only_
             course_id=unicode(block.location.course_key),
             usage_id=unicode(block.location),
             only_if_higher=only_if_higher,
+            modified=score_modified_time,
         )
     return update_score
 
@@ -149,6 +153,7 @@ def problem_raw_score_changed_handler(sender, **kwargs):  # pylint: disable=unus
         usage_id=kwargs['usage_id'],
         only_if_higher=kwargs['only_if_higher'],
         score_deleted=kwargs.get('score_deleted', False),
+        modified=kwargs['modified'],
     )
 
 
@@ -158,14 +163,13 @@ def enqueue_subsection_update(sender, **kwargs):  # pylint: disable=unused-argum
     Handles the PROBLEM_WEIGHTED_SCORE_CHANGED signal by
     enqueueing a subsection update operation to occur asynchronously.
     """
-    result = recalculate_subsection_grade.apply_async(
+    result = recalculate_subsection_grade_v2.apply_async(
         kwargs=dict(
             user_id=kwargs['user_id'],
             course_id=kwargs['course_id'],
             usage_id=kwargs['usage_id'],
             only_if_higher=kwargs.get('only_if_higher'),
-            weighted_earned=kwargs.get('weighted_earned'),
-            weighted_possible=kwargs.get('weighted_possible'),
+            expected_modified_time=to_timestamp(kwargs['modified']),
             score_deleted=kwargs.get('score_deleted', False),
         )
     )
