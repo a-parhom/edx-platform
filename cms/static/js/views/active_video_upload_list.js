@@ -124,45 +124,48 @@ define([
                 errorMsg = view.validateFile(uploadData);
                 if (errorMsg) {
                     view.showErrorMessage(errorMsg);
-                    return;
                 } else {
+                    // hide error message if any present.
                     view.hideErrorMessage();
-                }
 
-                if (uploadData.redirected) {
-                    model = new ActiveVideoUpload({fileName: uploadData.files[0].name, videoId: uploadData.videoId});
-                    this.collection.add(model);
-                    uploadData.cid = model.cid;
-                    uploadData.submit();
-                } else {
-                    $.ajax({
-                        url: this.postUrl,
-                        contentType: 'application/json',
-                        data: JSON.stringify({
-                            files: _.map(
-                                uploadData.files,
-                                function(file) {
-                                    return {'file_name': file.name, 'content_type': file.type};
+                    if (uploadData.redirected) {
+                        model = new ActiveVideoUpload({
+                            fileName: uploadData.files[0].name,
+                            videoId: uploadData.videoId
+                        });
+                        this.collection.add(model);
+                        uploadData.cid = model.cid;
+                        uploadData.submit();
+                    } else {
+                        $.ajax({
+                            url: this.postUrl,
+                            contentType: 'application/json',
+                            data: JSON.stringify({
+                                files: _.map(
+                                    uploadData.files,
+                                    function (file) {
+                                        return {'file_name': file.name, 'content_type': file.type};
+                                    }
+                                )
+                            }),
+                            dataType: 'json',
+                            type: 'POST'
+                        }).done(function (responseData) {
+                            _.each(
+                                responseData['files'],
+                                function (file, index) {
+                                    view.$uploadForm.fileupload('add', {
+                                        files: [uploadData.files[index]],
+                                        url: file['upload_url'],
+                                        videoId: file.edx_video_id,
+                                        multipart: false,
+                                        global: false,  // Do not trigger global AJAX error handler
+                                        redirected: true
+                                    });
                                 }
-                            )
-                        }),
-                        dataType: 'json',
-                        type: 'POST'
-                    }).done(function(responseData) {
-                        _.each(
-                            responseData['files'],
-                            function(file, index) {
-                                view.$uploadForm.fileupload('add', {
-                                    files: [uploadData.files[index]],
-                                    url: file['upload_url'],
-                                    videoId: file.edx_video_id,
-                                    multipart: false,
-                                    global: false,  // Do not trigger global AJAX error handler
-                                    redirected: true
-                                });
-                            }
-                        );
-                    });
+                            );
+                        });
+                    }
                 }
             },
 
@@ -197,9 +200,7 @@ define([
             },
 
             hideErrorMessage: function() {
-                if (this.fileErrorMsg) {
-                    this.fileErrorMsg.hide();
-                }
+                this.fileErrorMsg = null;
             },
 
             showErrorMessage: function(error) {
