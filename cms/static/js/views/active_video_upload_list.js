@@ -134,7 +134,7 @@ define([
                             videoId: uploadData.videoId
                         });
                         this.collection.add(model);
-                        uploadData.cid = model.cid;
+                        uploadData.cid = model.cid; // eslint-disable-line no-param-reassign
                         uploadData.submit();
                     } else {
                         $.ajax({
@@ -143,20 +143,20 @@ define([
                             data: JSON.stringify({
                                 files: _.map(
                                     uploadData.files,
-                                    function (file) {
-                                        return {'file_name': file.name, 'content_type': file.type};
+                                    function(file) {
+                                        return {file_name: file.name, content_type: file.type};
                                     }
                                 )
                             }),
                             dataType: 'json',
                             type: 'POST'
-                        }).done(function (responseData) {
+                        }).done(function(responseData) {
                             _.each(
-                                responseData['files'],
-                                function (file, index) {
+                                responseData.files,
+                                function(file, index) {
                                     view.$uploadForm.fileupload('add', {
                                         files: [uploadData.files[index]],
-                                        url: file['upload_url'],
+                                        url: file.upload_url,
                                         videoId: file.edx_video_id,
                                         multipart: false,
                                         global: false,  // Do not trigger global AJAX error handler
