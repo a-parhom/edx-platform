@@ -373,6 +373,7 @@ class ProgramDataExtender(object):
         certificate_data = certificate_api.certificate_downloadable_status(self.user, self.course_key)
         certificate_uuid = certificate_data.get('uuid')
         run_mode['certificate_url'] = certificate_api.get_certificate_url(
+            user_id=self.user.id,
             course_id=self.course_key,
             uuid=certificate_uuid,
         ) if certificate_uuid else None
