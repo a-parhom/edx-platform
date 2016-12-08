@@ -125,6 +125,8 @@ define('video/04_video_full_screen.js', ['edx-ui-toolkit/js/utils/html-utils'], 
     function toggleHandler(event) {
         event.preventDefault();
         this.videoCommands.execute('toggleFullScreen');
+        
+        $('#player-cover').css({height: $('#player-cover').next('iframe').height(), top: $('#player-cover').next('iframe').position().top});
     }
 
     function exit() {
