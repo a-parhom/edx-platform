@@ -2,6 +2,8 @@
 Views for the verification flow
 """
 
+import base64
+import sha
 import datetime
 import decimal
 import json
@@ -737,7 +739,7 @@ def checkout_with_shoppingcart(request, user, course_key, course_mode, amount):
     cart = Order.get_cart_for_user(user)
     cart.clear()
     enrollment_mode = course_mode.slug
-    CertificateItem.add_to_order(cart, course_key, amount, enrollment_mode)
+    CertificateItem.add_to_order(cart, course_key, amount, enrollment_mode, currency=current_mode.currency)
 
     # Change the order's status so that we don't accidentally modify it later.
     # We need to do this to ensure that the parameters we send to the payment system
@@ -761,6 +763,32 @@ def checkout_with_shoppingcart(request, user, course_key, course_mode, amount):
             extra_data=[unicode(course_key), course_mode.slug]
         ),
     }
+    
+    processor = settings.CC_PROCESSOR.get(settings.CC_PROCESSOR_NAME, {})
+
+    callback_data = {
+        "description": "Верифікований сертифікат", 
+        "order_id": cart.id, 
+        "server_url": processor.get("SERVER_URL", ""), 
+        "currency": processor.get("CURRENCY", ""), 
+        "result_url": processor.get("RESULT_URL", ""), 
+        "public_key": processor.get("PUBLIC_KEY", ""),
+        "language": processor.get("LANGUAGE", "en"),
+        "pay_way": processor.get("PAY_WAY", ""), 
+        "amount": current_mode.min_price, 
+        "sandbox": processor.get("SANDBOX", 0), 
+        "version": processor.get("VERSION", 3), 
+        "type": "buy"
+    }
+    log.warn(json.dumps(callback_data))
+    
+    callback_data = base64.b64encode(json.dumps(callback_data))
+    private_key = processor.get("PRIVATE_KEY", "")
+    callback_signature = base64.b64encode(sha.new(private_key + callback_data + private_key).digest())
+ 
+    payment_data['payment_form_data']['data'] = callback_data
+    payment_data['payment_form_data']['signature'] = callback_signature
+
     return payment_data
 
 
