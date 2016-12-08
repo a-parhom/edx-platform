@@ -96,6 +96,8 @@ define([
 
             chooseFile: function(event) {
                 event.preventDefault();
+                // hide error message if any present.
+                this.hideErrorMessage();
                 this.$uploadForm.find('.js-file-input').click();
             },
 
@@ -125,9 +127,6 @@ define([
                 if (errorMsg) {
                     view.showErrorMessage(errorMsg);
                 } else {
-                    // hide error message if any present.
-                    view.hideErrorMessage();
-
                     if (uploadData.redirected) {
                         model = new ActiveVideoUpload({
                             fileName: uploadData.files[0].name,
@@ -200,7 +199,10 @@ define([
             },
 
             hideErrorMessage: function() {
-                this.fileErrorMsg = null;
+                if (this.fileErrorMsg) {
+                    this.fileErrorMsg.hide();
+                    this.fileErrorMsg = null;
+                }
             },
 
             showErrorMessage: function(error) {
@@ -219,15 +221,15 @@ define([
 
                 $.each(data.files, function(index, file) {  // eslint-disable-line consistent-return
                     fileName = file.name;
-                    fileType = fileName.substr(fileName.lastIndexOf('.') + 1);
+                    fileType = fileName.substr(fileName.lastIndexOf('.'));
                     // validate file type
                     if (!_.contains(self.videoSupportedFileFormats, fileType)) {
                         error = gettext(
                             '{filename} is not in a supported file format. ' +
-                            'Supported file formats are "{supportedFileFormats}".'
+                            'Supported file formats are {supportedFileFormats}.'
                         )
                         .replace('{filename}', fileName)
-                        .replace('{supportedFileFormats}', self.videoSupportedFileFormats.join(', '));
+                        .replace('{supportedFileFormats}', self.videoSupportedFileFormats.join(' and '));
                         return false;
                     }
                 });
