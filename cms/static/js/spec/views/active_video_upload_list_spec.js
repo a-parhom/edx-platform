@@ -17,7 +17,7 @@ define(
                 TemplateHelpers.installTemplate('active-video-upload-list');
                 this.postUrl = '/test/post/url';
                 this.uploadButton = $('<button>');
-                this.videoSupportedFileFormats = ['mp4', 'mov'];
+                this.videoSupportedFileFormats = ['.mp4', '.mov'];
                 this.view = new ActiveVideoUploadListView({
                     concurrentUploadLimit: concurrentUploadLimit,
                     postUrl: this.postUrl,
@@ -83,8 +83,8 @@ define(
                     expect(this.view.fileErrorMsg).toBeDefined();
                     expect(this.view.fileErrorMsg.options.title).toEqual('Your file could not be uploaded');
                     expect(this.view.fileErrorMsg.options.message).toEqual(
-                        'test-3.txt is not in a supported file format. Supported file formats are "' +
-                        this.videoSupportedFileFormats.join(', ') + '".'
+                        'test-3.txt is not in a supported file format. Supported file formats are ' +
+                        this.videoSupportedFileFormats.join(' and ') + '.'
                     );
                 });
             });

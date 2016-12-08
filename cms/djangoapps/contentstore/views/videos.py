@@ -30,8 +30,8 @@ __all__ = ["videos_handler", "video_encodings_download"]
 KEY_EXPIRATION_IN_SECONDS = 86400
 
 VIDEO_SUPPORTED_FILE_FORMATS = {
-    'mp4': 'video/mp4',
-    'mov': 'video/quicktime',
+    '.mp4': 'video/mp4',
+    '.mov': 'video/quicktime',
 }
 
 
