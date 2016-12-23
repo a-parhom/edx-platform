@@ -125,7 +125,7 @@ class CourseMode(models.Model):
         settings.COURSE_MODE_DEFAULTS['name'],
         settings.COURSE_MODE_DEFAULTS['min_price'],
         settings.COURSE_MODE_DEFAULTS['suggested_prices'],
-        settings.COURSE_MODE_DEFAULTS['currency'],
+        'uah',
         settings.COURSE_MODE_DEFAULTS['expiration_datetime'],
         settings.COURSE_MODE_DEFAULTS['description'],
         settings.COURSE_MODE_DEFAULTS['sku'],
@@ -156,7 +156,7 @@ class CourseMode(models.Model):
     # "honor" to "audit", we still need to have the shoppingcart
     # use "honor"
     DEFAULT_SHOPPINGCART_MODE_SLUG = HONOR
-    DEFAULT_SHOPPINGCART_MODE = Mode(HONOR, _('Honor'), 0, '', 'usd', None, None, None, None)
+    DEFAULT_SHOPPINGCART_MODE = Mode(HONOR, _('Honor'), 0, '', 'uah', None, None, None, None)
 
     CACHE_NAMESPACE = u"course_modes.CourseMode.cache."
 
