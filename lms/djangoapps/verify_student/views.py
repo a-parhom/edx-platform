@@ -739,7 +739,7 @@ def checkout_with_shoppingcart(request, user, course_key, course_mode, amount):
     cart = Order.get_cart_for_user(user)
     cart.clear()
     enrollment_mode = course_mode.slug
-    CertificateItem.add_to_order(cart, course_key, amount, enrollment_mode, currency=current_mode.currency)
+    CertificateItem.add_to_order(cart, course_key, amount, enrollment_mode, currency=course_mode.currency)
 
     # Change the order's status so that we don't accidentally modify it later.
     # We need to do this to ensure that the parameters we send to the payment system
@@ -775,7 +775,7 @@ def checkout_with_shoppingcart(request, user, course_key, course_mode, amount):
         "public_key": processor.get("PUBLIC_KEY", ""),
         "language": processor.get("LANGUAGE", "en"),
         "pay_way": processor.get("PAY_WAY", ""), 
-        "amount": current_mode.min_price, 
+        "amount": course_mode.min_price, 
         "sandbox": processor.get("SANDBOX", 0), 
         "version": processor.get("VERSION", 3), 
         "type": "buy"
