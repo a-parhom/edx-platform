@@ -766,7 +766,7 @@ def checkout_with_shoppingcart(request, user, course_key, course_mode, amount):
     processor = settings.CC_PROCESSOR.get(settings.CC_PROCESSOR_NAME, {})
 
     callback_data = {
-        "description": "Верифікований сертифікат", 
+        "description": u"Верифікований сертифікат", 
         "order_id": cart.id, 
         "server_url": processor.get("SERVER_URL", ""), 
         "currency": processor.get("CURRENCY", ""), 
