@@ -105,17 +105,17 @@ def _get_course_email_context(course):
     course_title = course.display_name
     course_end_date = get_default_time_display(course.end)
     course_url = 'http://{}{}'.format(
-        settings.LMS_BASE,
+        settings.SITE_NAME,
         reverse('course_root', kwargs={'course_id': course_id})
     )
-    image_url = u'http://{}{}'.format(settings.LMS_BASE, course_image_url(course))
+    image_url = u'http://{}{}'.format(settings.SITE_NAME, course_image_url(course))
     email_context = {
         'course_title': course_title,
         'course_url': course_url,
         'course_image_url': image_url,
         'course_end_date': course_end_date,
-        'account_settings_url': '{}{}'.format(settings.LMS_BASE, reverse('account_settings')),
-        'email_settings_url': '{}{}'.format(settings.LMS_BASE, reverse('dashboard')),
+        'account_settings_url': '{}{}'.format(settings.SITE_NAME, reverse('account_settings')),
+        'email_settings_url': '{}{}'.format(settings.SITE_NAME, reverse('dashboard')),
         'platform_name': configuration_helpers.get_value('PLATFORM_NAME', settings.PLATFORM_NAME),
     }
     return email_context
