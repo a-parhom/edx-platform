@@ -632,6 +632,15 @@ class SoftwareSecurePhotoVerification(PhotoVerification):
         # verification functionality. If you do want to work on it, you have to
         # explicitly enable these in your private settings.
         if settings.FEATURES.get('AUTOMATIC_VERIFY_STUDENT_IDENTITY_FOR_TESTING'):
+            img_name = uuid.uuid1().hex + '.png'
+            img_path = '{0}/verification_photos/face'.format(settings.MEDIA_ROOT)
+            if not os.path.exists(img_path):
+                os.makedirs(img_path)
+            with open('{0}/{1}'.format(img_path, img_name), "wb") as f:
+                f.write(img_data)
+            self.face_image_url = '{0}verification_photos/face/{1}'.format(settings.MEDIA_URL, img_name)
+            self.save()
+            
             return
 
         aes_key_str = settings.VERIFY_STUDENT["SOFTWARE_SECURE"]["FACE_IMAGE_AES_KEY"]
@@ -659,8 +668,18 @@ class SoftwareSecurePhotoVerification(PhotoVerification):
         # explicitly enable these in your private settings.
         if settings.FEATURES.get('AUTOMATIC_VERIFY_STUDENT_IDENTITY_FOR_TESTING'):
             # fake photo id key is set only for initial verification
-            self.photo_id_key = 'fake-photo-id-key'
+            #self.photo_id_key = 'fake-photo-id-key'
+            #self.save()
+            
+            img_name = uuid.uuid1().hex + '.png'
+            img_path = '{0}/verification_photos/photo_id'.format(settings.MEDIA_ROOT)
+            if not os.path.exists(img_path):
+                os.makedirs(img_path)
+            with open('{0}/{1}'.format(img_path, img_name), "wb") as f:
+                f.write(img_data)
+            self.photo_id_image_url = '{0}verification_photos/photo_id/{1}'.format(settings.MEDIA_URL, img_name)
             self.save()
+            
             return
 
         aes_key = random_aes_key()
