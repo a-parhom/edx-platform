@@ -672,7 +672,7 @@ def postpay_callback(request):
     params['method'] = request.method
     result = process_postpay_callback(params)
 
-    if result['success']:
+    if result and result['success']:
         # See if this payment occurred as part of the verification flow process
         # If so, send the user back into the flow so they have the option
         # to continue with verification.
