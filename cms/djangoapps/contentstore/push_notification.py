@@ -7,6 +7,11 @@ from uuid import uuid4
 
 from django.conf import settings
 
+
+# Using self-hosted Parse Server
+import os
+os.environ["PARSE_API_ROOT"] = settings.PARSE_KEYS["PARSE_API_ROOT"]
+
 from contentstore.models import PushNotificationConfig
 from contentstore.tasks import push_course_update_task
 from parse_rest.connection import register
@@ -47,6 +52,7 @@ def send_push_course_update(course_key_string, course_subscription_id, course_di
             register(
                 settings.PARSE_KEYS["APPLICATION_ID"],
                 settings.PARSE_KEYS["REST_API_KEY"],
+                master_key=settings.PARSE_KEYS["MASTER_KEY"],
             )
             push_payload = {
                 "action": "course.announcement",
