@@ -2601,7 +2601,8 @@ class CodeResponse(LoncapaResponse):
     human_name = _('Code Input')
     tags = ['coderesponse']
     allowed_inputfields = ['textbox', 'filesubmission', 'matlabinput']
-    max_inputfields = 1
+    #max_inputfields = 1
+    max_inputfields = 5
     payload = None
     initial_display = None
     url = None
