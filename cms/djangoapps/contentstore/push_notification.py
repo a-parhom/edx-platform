@@ -8,7 +8,8 @@ from logging import exception as log_exception
 
 # Using self-hosted Parse Server
 import os
-os.environ["PARSE_API_ROOT"] = settings.PARSE_KEYS["PARSE_API_ROOT"]
+if settings.PARSE_KEYS:
+    os.environ["PARSE_API_ROOT"] = settings.PARSE_KEYS["PARSE_API_ROOT"]
 
 from contentstore.tasks import push_course_update_task
 from contentstore.models import PushNotificationConfig
