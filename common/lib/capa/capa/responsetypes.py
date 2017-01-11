@@ -2719,6 +2719,10 @@ class CodeResponse(LoncapaResponse):
     url = None
     answer = None
     queue_name = None
+    
+    def __init__(self, xml, inputfields, context, system, capa_module):
+        super(CodeResponse, self).__init__(xml, inputfields, context, system, capa_module)
+        self.answer_id = self.answer_ids[-1]
 
     def setup_response(self):
         """
@@ -2774,7 +2778,13 @@ class CodeResponse(LoncapaResponse):
         _ = self.capa_system.i18n.ugettext
         try:
             # Note that submission can be a file
-            submission = student_answers[self.answer_id]
+            #submission = student_answers[self.answer_id]
+            if len(self.answer_ids)==1:
+                submission = student_answers[self.answer_id]
+            else:
+                submission = {}
+                for k in self.answer_ids:
+                    submission[k] = student_answers[k]
         except Exception as err:
             log.error(
                 'Error in CodeResponse %s: cannot get student answer for %s;'
