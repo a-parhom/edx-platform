@@ -10,7 +10,8 @@ from django.conf import settings
 
 # Using self-hosted Parse Server
 import os
-os.environ["PARSE_API_ROOT"] = settings.PARSE_KEYS["PARSE_API_ROOT"]
+if settings.PARSE_KEYS:
+    os.environ["PARSE_API_ROOT"] = settings.PARSE_KEYS["PARSE_API_ROOT"]
 
 from contentstore.models import PushNotificationConfig
 from contentstore.tasks import push_course_update_task
