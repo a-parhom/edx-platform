@@ -26,8 +26,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1a\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2016-07-07 14:14+0000\n"
-"PO-Revision-Date: 2016-07-07 14:15:59.199191\n"
+"POT-Creation-Date: 2016-12-22 14:11+0000\n"
+"PO-Revision-Date: 2016-12-22 14:12:30.906413\n"
 "Last-Translator: \n"
 "Language-Team: openedx-translation <openedx-translation@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -38,8 +38,6 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: cms/static/cms/js/xblock/cms.runtime.v1.js
-#: cms/static/coffee/src/views/tabs.js
-#: cms/static/coffee/src/xblock/cms.runtime.v1.js
 #: cms/static/js/certificates/views/signatory_details.js
 #: cms/static/js/models/section.js cms/static/js/utils/drag_and_drop.js
 #: cms/static/js/views/asset.js cms/static/js/views/container.js
@@ -53,21 +51,33 @@ msgstr ""
 msgid "Saving"
 msgstr "Sävïng Ⱡ'σяєм ιρѕυ#"
 
-#. Translators: this is a message from the raw HTML editor displayed in the
-#. browser when a user needs to edit HTML
-#: cms/static/coffee/src/views/tabs.js
-#: cms/static/js/views/course_info_update.js cms/static/js/views/tabs.js
-#: common/lib/xmodule/xmodule/js/src/html/edit.js
-#: common/static/coffee/src/discussion/utils.js
-#: common/static/common/js/discussion/utils.js
-#: lms/static/js/Markdown.Editor.js
-msgid "OK"
-msgstr "ÖK Ⱡ'σя#"
+#: cms/static/js/certificates/views/signatory_editor.js
+#: cms/static/js/views/asset.js cms/static/js/views/list_item.js
+#: cms/static/js/views/manage_users_and_roles.js
+#: cms/static/js/views/show_textbook.js
+#: common/static/js/vendor/ova/catch/js/catch.js
+#: lms/djangoapps/teams/static/teams/js/views/instructor_tools.js
+#: cms/templates/js/certificate-details.underscore
+#: cms/templates/js/certificate-editor.underscore
+#: cms/templates/js/content-group-details.underscore
+#: cms/templates/js/content-group-editor.underscore
+#: cms/templates/js/course-instructor-details.underscore
+#: cms/templates/js/course-outline.underscore
+#: cms/templates/js/course-settings-learning-fields.underscore
+#: cms/templates/js/course_grade_policy.underscore
+#: cms/templates/js/course_info_update.underscore
+#: cms/templates/js/group-configuration-details.underscore
+#: cms/templates/js/group-configuration-editor.underscore
+#: cms/templates/js/show-textbook.underscore
+#: cms/templates/js/signatory-editor.underscore
+#: cms/templates/js/xblock-outline.underscore
+#: common/static/common/templates/discussion/forum-action-delete.underscore
+msgid "Delete"
+msgstr "Délété Ⱡ'σяєм ιρѕυ#"
 
 #. #-#-#-#-#  djangojs-partial.po (0.1a)  #-#-#-#-#
 #. Translators: this is a message from the raw HTML editor displayed in the
 #. browser when a user needs to edit HTML
-#: cms/static/coffee/src/views/tabs.js
 #: cms/static/js/certificates/views/signatory_editor.js
 #: cms/static/js/factories/export.js cms/static/js/views/asset.js
 #: cms/static/js/views/course_info_update.js
@@ -100,30 +110,6 @@ msgstr "ÖK Ⱡ'σя#"
 msgid "Cancel"
 msgstr "Çänçél Ⱡ'σяєм ιρѕυ#"
 
-#: cms/static/js/certificates/views/signatory_editor.js
-#: cms/static/js/views/asset.js cms/static/js/views/list_item.js
-#: cms/static/js/views/manage_users_and_roles.js
-#: cms/static/js/views/show_textbook.js
-#: common/static/js/vendor/ova/catch/js/catch.js
-#: lms/djangoapps/teams/static/teams/js/views/instructor_tools.js
-#: cms/templates/js/certificate-details.underscore
-#: cms/templates/js/certificate-editor.underscore
-#: cms/templates/js/content-group-details.underscore
-#: cms/templates/js/content-group-editor.underscore
-#: cms/templates/js/course-instructor-details.underscore
-#: cms/templates/js/course-outline.underscore
-#: cms/templates/js/course-settings-learning-fields.underscore
-#: cms/templates/js/course_grade_policy.underscore
-#: cms/templates/js/course_info_update.underscore
-#: cms/templates/js/group-configuration-details.underscore
-#: cms/templates/js/group-configuration-editor.underscore
-#: cms/templates/js/show-textbook.underscore
-#: cms/templates/js/signatory-editor.underscore
-#: cms/templates/js/xblock-outline.underscore
-#: common/static/common/templates/discussion/forum-action-delete.underscore
-msgid "Delete"
-msgstr "Délété Ⱡ'σяєм ιρѕυ#"
-
 #. Translators: This is the status of an active video upload
 #: cms/static/js/models/active_video_upload.js cms/static/js/views/assets.js
 #: lms/static/js/views/image_field.js
@@ -148,6 +134,15 @@ msgstr "Nämé Ⱡ'σяєм ι#"
 #: lms/templates/instructor/instructor_dashboard_2/certificate-bulk-white-list.underscore
 msgid "Choose File"
 msgstr "Çhöösé Fïlé Ⱡ'σяєм ιρѕυм ∂σłσя #"
+
+#. Translators: this is a message from the raw HTML editor displayed in the
+#. browser when a user needs to edit HTML
+#: cms/static/js/views/course_info_update.js cms/static/js/views/tabs.js
+#: common/lib/xmodule/xmodule/js/src/html/edit.js
+#: common/static/common/js/discussion/utils.js
+#: lms/static/js/Markdown.Editor.js
+msgid "OK"
+msgstr "ÖK Ⱡ'σя#"
 
 #. Translators: this is a message from the raw HTML editor displayed in the
 #. browser when a user needs to edit HTML
@@ -206,7 +201,6 @@ msgstr "Àdvänçéd Ⱡ'σяєм ιρѕυм ∂#"
 #. browser when a user needs to edit HTML
 #: cms/static/js/views/modals/edit_xblock.js
 #: common/lib/xmodule/xmodule/js/src/html/edit.js
-#: common/static/coffee/src/discussion/utils.js
 #: common/static/common/js/discussion/utils.js
 #: common/static/common/templates/image-modal.underscore
 #: common/static/common/templates/discussion/forum-action-close.underscore
@@ -1879,352 +1873,6 @@ msgstr "Türn ön tränsçrïpts Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αм
 msgid "Turn off transcripts"
 msgstr "Türn öff tränsçrïpts Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, #"
 
-#: common/static/coffee/src/discussion/discussion_module_view.js
-#: common/static/common/js/discussion/discussion_module_view.js
-msgid "Hide Discussion"
-msgstr "Hïdé Dïsçüssïön Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт α#"
-
-#: common/static/coffee/src/discussion/discussion_module_view.js
-#: common/static/common/js/discussion/discussion_module_view.js
-msgid "Show Discussion"
-msgstr "Shöw Dïsçüssïön Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт α#"
-
-#: common/static/coffee/src/discussion/discussion_module_view.js
-#: common/static/coffee/src/discussion/utils.js
-#: common/static/coffee/src/discussion/views/discussion_thread_list_view.js
-#: common/static/coffee/src/discussion/views/discussion_thread_view.js
-#: common/static/coffee/src/discussion/views/discussion_user_profile_view.js
-#: common/static/coffee/src/discussion/views/response_comment_view.js
-#: common/static/common/js/discussion/discussion_module_view.js
-#: common/static/common/js/discussion/utils.js
-#: common/static/common/js/discussion/views/discussion_thread_list_view.js
-#: common/static/common/js/discussion/views/discussion_thread_view.js
-#: common/static/common/js/discussion/views/discussion_user_profile_view.js
-#: common/static/common/js/discussion/views/response_comment_view.js
-msgid "Sorry"
-msgstr "Sörrý Ⱡ'σяєм ιρѕ#"
-
-#: common/static/coffee/src/discussion/discussion_module_view.js
-#: common/static/common/js/discussion/discussion_module_view.js
-msgid "We had some trouble loading the discussion. Please try again."
-msgstr ""
-"Wé häd sömé tröüßlé löädïng thé dïsçüssïön. Pléäsé trý ägäïn. Ⱡ'σяєм ιρѕυм "
-"∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя α#"
-
-#: common/static/coffee/src/discussion/discussion_module_view.js
-#: common/static/common/js/discussion/discussion_module_view.js
-msgid ""
-"We had some trouble loading the threads you requested. Please try again."
-msgstr ""
-"Wé häd sömé tröüßlé löädïng thé thréäds ýöü réqüéstéd. Pléäsé trý ägäïn. "
-"Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя#"
-
-#: common/static/coffee/src/discussion/utils.js
-#: common/static/common/js/discussion/utils.js
-msgid "Loading content"
-msgstr "Löädïng çöntént Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт α#"
-
-#: common/static/coffee/src/discussion/utils.js
-msgid ""
-"We had some trouble processing your request. Please ensure you have copied "
-"any unsaved work and then reload the page."
-msgstr ""
-"Wé häd sömé tröüßlé pröçéssïng ýöür réqüést. Pléäsé énsüré ýöü hävé çöpïéd "
-"äný ünsävéd wörk änd thén rélöäd thé pägé. Ⱡ'σяєм ιρѕυм ∂#"
-
-#: common/static/coffee/src/discussion/utils.js
-#: common/static/common/js/discussion/utils.js
-msgid "We had some trouble processing your request. Please try again."
-msgstr ""
-"Wé häd sömé tröüßlé pröçéssïng ýöür réqüést. Pléäsé trý ägäïn. Ⱡ'σяєм ιρѕυм "
-"∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя α#"
-
-#: common/static/coffee/src/discussion/utils.js
-#: common/static/coffee/src/discussion/views/discussion_thread_list_view.js
-#: common/static/common/js/discussion/utils.js
-#: common/static/common/js/discussion/views/discussion_thread_list_view.js
-#: common/static/common/js/discussion/views/discussion_topic_menu_view.js
-#: common/static/common/templates/discussion/pagination.underscore
-msgid "…"
-msgstr "… Ⱡ#"
-
-#: common/static/coffee/src/discussion/views/discussion_content_view.js
-#: common/static/common/js/discussion/views/discussion_content_view.js
-msgid "there is currently %(numVotes)s vote"
-msgid_plural "there are currently %(numVotes)s votes"
-msgstr[0] ""
-"théré ïs çürréntlý %(numVotes)s vöté Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє#"
-msgstr[1] ""
-"théré äré çürréntlý %(numVotes)s vötés Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢#"
-
-#: common/static/coffee/src/discussion/views/discussion_content_view.js
-#: common/static/common/js/discussion/views/discussion_content_view.js
-msgid "%(numVotes)s Vote"
-msgid_plural "%(numVotes)s Votes"
-msgstr[0] "%(numVotes)s Vöté Ⱡ'σяєм ιρѕυм ∂#"
-msgstr[1] "%(numVotes)s Vötés Ⱡ'σяєм ιρѕυм ∂σł#"
-
-#: common/static/coffee/src/discussion/views/discussion_content_view.js
-#: common/static/common/js/discussion/views/discussion_content_view.js
-msgid "We had some trouble subscribing you to this thread. Please try again."
-msgstr ""
-"Wé häd sömé tröüßlé süßsçrïßïng ýöü tö thïs thréäd. Pléäsé trý ägäïn. Ⱡ'σяєм"
-" ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя #"
-
-#: common/static/coffee/src/discussion/views/discussion_content_view.js
-#: common/static/common/js/discussion/views/discussion_content_view.js
-msgid ""
-"We had some trouble unsubscribing you from this thread. Please try again."
-msgstr ""
-"Wé häd sömé tröüßlé ünsüßsçrïßïng ýöü fröm thïs thréäd. Pléäsé trý ägäïn. "
-"Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя#"
-
-#: common/static/coffee/src/discussion/views/discussion_content_view.js
-#: common/static/common/js/discussion/views/discussion_content_view.js
-msgid ""
-"We had some trouble marking this response as an answer.  Please try again."
-msgstr ""
-"Wé häd sömé tröüßlé märkïng thïs réspönsé äs än änswér.  Pléäsé trý ägäïn. "
-"Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυ#"
-
-#: common/static/coffee/src/discussion/views/discussion_content_view.js
-#: common/static/common/js/discussion/views/discussion_content_view.js
-msgid ""
-"We had some trouble removing this response as an answer.  Please try again."
-msgstr ""
-"Wé häd sömé tröüßlé rémövïng thïs réspönsé äs än änswér.  Pléäsé trý ägäïn. "
-"Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυ#"
-
-#: common/static/coffee/src/discussion/views/discussion_content_view.js
-#: common/static/common/js/discussion/views/discussion_content_view.js
-msgid "We had some trouble marking this response endorsed.  Please try again."
-msgstr ""
-"Wé häd sömé tröüßlé märkïng thïs réspönsé éndörséd.  Pléäsé trý ägäïn. "
-"Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя #"
-
-#: common/static/coffee/src/discussion/views/discussion_content_view.js
-#: common/static/common/js/discussion/views/discussion_content_view.js
-msgid "We had some trouble removing this endorsement.  Please try again."
-msgstr ""
-"Wé häd sömé tröüßlé rémövïng thïs éndörsémént.  Pléäsé trý ägäïn. Ⱡ'σяєм "
-"ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя α#"
-
-#: common/static/coffee/src/discussion/views/discussion_content_view.js
-#: common/static/common/js/discussion/views/discussion_content_view.js
-msgid "We had some trouble saving your vote.  Please try again."
-msgstr ""
-"Wé häd sömé tröüßlé sävïng ýöür vöté.  Pléäsé trý ägäïn. Ⱡ'σяєм ιρѕυм ∂σłσя "
-"ѕιт αмєт, ¢σηѕє¢тєтυя α#"
-
-#: common/static/coffee/src/discussion/views/discussion_content_view.js
-#: common/static/common/js/discussion/views/discussion_content_view.js
-msgid "We had some trouble pinning this thread. Please try again."
-msgstr ""
-"Wé häd sömé tröüßlé pïnnïng thïs thréäd. Pléäsé trý ägäïn. Ⱡ'σяєм ιρѕυм "
-"∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя α#"
-
-#: common/static/coffee/src/discussion/views/discussion_content_view.js
-#: common/static/common/js/discussion/views/discussion_content_view.js
-msgid "We had some trouble unpinning this thread. Please try again."
-msgstr ""
-"Wé häd sömé tröüßlé ünpïnnïng thïs thréäd. Pléäsé trý ägäïn. Ⱡ'σяєм ιρѕυм "
-"∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя α#"
-
-#: common/static/coffee/src/discussion/views/discussion_content_view.js
-#: common/static/common/js/discussion/views/discussion_content_view.js
-msgid ""
-"We had some trouble removing your flag on this post.  Please try again."
-msgstr ""
-"Wé häd sömé tröüßlé rémövïng ýöür fläg ön thïs pöst.  Pléäsé trý ägäïn. "
-"Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя#"
-
-#: common/static/coffee/src/discussion/views/discussion_content_view.js
-#: common/static/common/js/discussion/views/discussion_content_view.js
-msgid "We had some trouble reporting this post.  Please try again."
-msgstr ""
-"Wé häd sömé tröüßlé répörtïng thïs pöst.  Pléäsé trý ägäïn. Ⱡ'σяєм ιρѕυм "
-"∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя α#"
-
-#: common/static/coffee/src/discussion/views/discussion_content_view.js
-#: common/static/common/js/discussion/views/discussion_content_view.js
-msgid "We had some trouble closing this thread.  Please try again."
-msgstr ""
-"Wé häd sömé tröüßlé çlösïng thïs thréäd.  Pléäsé trý ägäïn. Ⱡ'σяєм ιρѕυм "
-"∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя α#"
-
-#: common/static/coffee/src/discussion/views/discussion_content_view.js
-#: common/static/common/js/discussion/views/discussion_content_view.js
-msgid "We had some trouble reopening this thread.  Please try again."
-msgstr ""
-"Wé häd sömé tröüßlé réöpénïng thïs thréäd.  Pléäsé trý ägäïn. Ⱡ'σяєм ιρѕυм "
-"∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя α#"
-
-#: common/static/coffee/src/discussion/views/discussion_thread_list_view.js
-#: common/static/common/js/discussion/views/discussion_thread_list_view.js
-msgid "Load more"
-msgstr "Löäd möré Ⱡ'σяєм ιρѕυм ∂σł#"
-
-#: common/static/coffee/src/discussion/views/discussion_thread_list_view.js
-#: common/static/common/js/discussion/views/discussion_thread_list_view.js
-msgid "Loading more threads"
-msgstr "Löädïng möré thréäds Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, #"
-
-#: common/static/coffee/src/discussion/views/discussion_thread_list_view.js
-#: common/static/common/js/discussion/views/discussion_thread_list_view.js
-msgid "We had some trouble loading more threads. Please try again."
-msgstr ""
-"Wé häd sömé tröüßlé löädïng möré thréäds. Pléäsé trý ägäïn. Ⱡ'σяєм ιρѕυм "
-"∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя α#"
-
-#: common/static/coffee/src/discussion/views/discussion_thread_list_view.js
-#: common/static/common/js/discussion/views/discussion_thread_list_view.js
-msgid "%(unread_count)s new comment"
-msgid_plural "%(unread_count)s new comments"
-msgstr[0] "%(unread_count)s néw çömmént Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт α#"
-msgstr[1] "%(unread_count)s néw çömménts Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αм#"
-
-#: common/static/coffee/src/discussion/views/discussion_thread_list_view.js
-#: common/static/common/js/discussion/views/discussion_thread_list_view.js
-msgid "Current conversation"
-msgstr "Çürrént çönvérsätïön Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, #"
-
-#: common/static/coffee/src/discussion/views/discussion_thread_list_view.js
-#: common/static/common/js/discussion/views/discussion_thread_list_view.js
-#: lms/static/js/edxnotes/views/tabs/search_results.js
-#: lms/templates/search/course_search_results.underscore
-#: lms/templates/search/dashboard_search_results.underscore
-msgid "Search Results"
-msgstr "Séärçh Résülts Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт#"
-
-#: common/static/coffee/src/discussion/views/discussion_thread_list_view.js
-#: common/static/common/js/discussion/views/discussion_thread_list_view.js
-msgid "Loading thread list"
-msgstr "Löädïng thréäd lïst Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт,#"
-
-#: common/static/coffee/src/discussion/views/discussion_thread_list_view.js
-msgid ""
-"No results found for %(original_query)s. Showing results for "
-"%(suggested_query)s."
-msgstr ""
-"Nö résülts föünd för %(original_query)s. Shöwïng résülts för "
-"%(suggested_query)s. Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя α#"
-
-#: common/static/coffee/src/discussion/views/discussion_thread_list_view.js
-#: common/static/common/js/discussion/views/discussion_thread_list_view.js
-msgid "No threads matched your query."
-msgstr "Nö thréäds mätçhéd ýöür qüérý. Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢т#"
-
-#: common/static/coffee/src/discussion/views/discussion_thread_list_view.js
-#: common/static/common/js/discussion/views/discussion_thread_list_view.js
-msgid "Show posts by %(username)s."
-msgstr "Shöw pösts ßý %(username)s. Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт#"
-
-#: common/static/coffee/src/discussion/views/discussion_thread_view.js
-#: common/static/common/js/discussion/views/discussion_thread_view.js
-msgid ""
-"The thread you selected has been deleted. Please select another thread."
-msgstr ""
-"Thé thréäd ýöü séléçtéd häs ßéén délétéd. Pléäsé séléçt änöthér thréäd. "
-"Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя#"
-
-#: common/static/coffee/src/discussion/views/discussion_thread_view.js
-#: common/static/common/js/discussion/views/discussion_thread_view.js
-msgid "We had some trouble loading responses. Please reload the page."
-msgstr ""
-"Wé häd sömé tröüßlé löädïng réspönsés. Pléäsé rélöäd thé pägé. Ⱡ'σяєм ιρѕυм "
-"∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя α#"
-
-#: common/static/coffee/src/discussion/views/discussion_thread_view.js
-#: common/static/common/js/discussion/views/discussion_thread_view.js
-msgid "We had some trouble loading more responses. Please try again."
-msgstr ""
-"Wé häd sömé tröüßlé löädïng möré réspönsés. Pléäsé trý ägäïn. Ⱡ'σяєм ιρѕυм "
-"∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя α#"
-
-#: common/static/coffee/src/discussion/views/discussion_thread_view.js
-#: common/static/common/js/discussion/views/discussion_thread_view.js
-msgid "%(numResponses)s other response"
-msgid_plural "%(numResponses)s other responses"
-msgstr[0] "%(numResponses)s öthér réspönsé Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт#"
-msgstr[1] "%(numResponses)s öthér réspönsés Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт,#"
-
-#: common/static/coffee/src/discussion/views/discussion_thread_view.js
-#: common/static/common/js/discussion/views/discussion_thread_view.js
-msgid "%(numResponses)s response"
-msgid_plural "%(numResponses)s responses"
-msgstr[0] "%(numResponses)s réspönsé Ⱡ'σяєм ιρѕυм ∂σłσя ѕ#"
-msgstr[1] "%(numResponses)s réspönsés Ⱡ'σяєм ιρѕυм ∂σłσя ѕι#"
-
-#: common/static/coffee/src/discussion/views/discussion_thread_view.js
-#: common/static/common/js/discussion/views/discussion_thread_view.js
-msgid "Showing all responses"
-msgstr "Shöwïng äll réspönsés Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, #"
-
-#: common/static/coffee/src/discussion/views/discussion_thread_view.js
-#: common/static/common/js/discussion/views/discussion_thread_view.js
-msgid "Showing first response"
-msgid_plural "Showing first %(numResponses)s responses"
-msgstr[0] "Shöwïng fïrst réspönsé Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢#"
-msgstr[1] ""
-"Shöwïng fïrst %(numResponses)s réspönsés Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє#"
-
-#: common/static/coffee/src/discussion/views/discussion_thread_view.js
-#: common/static/common/js/discussion/views/discussion_thread_view.js
-msgid "Load all responses"
-msgstr "Löäd äll réspönsés Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт#"
-
-#: common/static/coffee/src/discussion/views/discussion_thread_view.js
-#: common/static/common/js/discussion/views/discussion_thread_view.js
-msgid "Load next %(numResponses)s responses"
-msgstr "Löäd néxt %(numResponses)s réspönsés Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σ#"
-
-#: common/static/coffee/src/discussion/views/discussion_thread_view.js
-#: common/static/common/js/discussion/views/discussion_thread_view.js
-msgid "Are you sure you want to delete this post?"
-msgstr ""
-"Àré ýöü süré ýöü wänt tö délété thïs pöst? Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, "
-"¢σηѕє¢тєтυя #"
-
-#: common/static/coffee/src/discussion/views/discussion_user_profile_view.js
-#: common/static/common/js/discussion/views/discussion_user_profile_view.js
-msgid "We had some trouble loading the page you requested. Please try again."
-msgstr ""
-"Wé häd sömé tröüßlé löädïng thé pägé ýöü réqüéstéd. Pléäsé trý ägäïn. Ⱡ'σяєм"
-" ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя #"
-
-#: common/static/coffee/src/discussion/views/new_post_view.js
-#: common/static/common/js/discussion/views/new_post_view.js
-msgid "Your post will be discarded."
-msgstr "Ýöür pöst wïll ßé dïsçärdéd. Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢#"
-
-#: common/static/coffee/src/discussion/views/response_comment_show_view.js
-#: common/static/common/js/discussion/views/response_comment_show_view.js
-#: common/static/common/templates/discussion/post-user-display.underscore
-#: common/static/common/templates/discussion/profile-thread.underscore
-msgid "anonymous"
-msgstr "änönýmöüs Ⱡ'σяєм ιρѕυм ∂σł#"
-
-#: common/static/coffee/src/discussion/views/response_comment_view.js
-#: common/static/common/js/discussion/views/response_comment_view.js
-msgid "Are you sure you want to delete this comment?"
-msgstr ""
-"Àré ýöü süré ýöü wänt tö délété thïs çömmént? Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, "
-"¢σηѕє¢тєтυя #"
-
-#: common/static/coffee/src/discussion/views/response_comment_view.js
-#: common/static/common/js/discussion/views/response_comment_view.js
-msgid "We had some trouble deleting this comment. Please try again."
-msgstr ""
-"Wé häd sömé tröüßlé délétïng thïs çömmént. Pléäsé trý ägäïn. Ⱡ'σяєм ιρѕυм "
-"∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя α#"
-
-#: common/static/coffee/src/discussion/views/thread_response_view.js
-#: common/static/common/js/discussion/views/thread_response_view.js
-msgid "Are you sure you want to delete this response?"
-msgstr ""
-"Àré ýöü süré ýöü wänt tö délété thïs réspönsé? Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, "
-"¢σηѕє¢тєтυя α#"
-
 #: common/static/common/js/components/utils/view_utils.js
 msgid "Required field."
 msgstr "Réqüïréd fïéld. Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт α#"
@@ -2266,6 +1914,40 @@ msgstr ""
 "Shöwïng {firstIndex}-{lastIndex} öüt öf {numItems} tötäl Ⱡ'σяєм ιρѕυм ∂σłσя "
 "ѕιт αмєт, ¢σηѕє¢тє#"
 
+#: common/static/common/js/discussion/discussion_module_view.js
+msgid "Hide Discussion"
+msgstr "Hïdé Dïsçüssïön Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт α#"
+
+#: common/static/common/js/discussion/discussion_module_view.js
+msgid "Show Discussion"
+msgstr "Shöw Dïsçüssïön Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт α#"
+
+#: common/static/common/js/discussion/discussion_module_view.js
+#: common/static/common/js/discussion/utils.js
+#: common/static/common/js/discussion/views/discussion_thread_list_view.js
+#: common/static/common/js/discussion/views/discussion_thread_view.js
+#: common/static/common/js/discussion/views/discussion_user_profile_view.js
+#: common/static/common/js/discussion/views/response_comment_view.js
+msgid "Sorry"
+msgstr "Sörrý Ⱡ'σяєм ιρѕ#"
+
+#: common/static/common/js/discussion/discussion_module_view.js
+msgid "We had some trouble loading the discussion. Please try again."
+msgstr ""
+"Wé häd sömé tröüßlé löädïng thé dïsçüssïön. Pléäsé trý ägäïn. Ⱡ'σяєм ιρѕυм "
+"∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя α#"
+
+#: common/static/common/js/discussion/discussion_module_view.js
+msgid ""
+"We had some trouble loading the threads you requested. Please try again."
+msgstr ""
+"Wé häd sömé tröüßlé löädïng thé thréäds ýöü réqüéstéd. Pléäsé trý ägäïn. "
+"Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя#"
+
+#: common/static/common/js/discussion/utils.js
+msgid "Loading content"
+msgstr "Löädïng çöntént Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт α#"
+
 #: common/static/common/js/discussion/utils.js
 msgid ""
 "We had some trouble processing your request. Please ensure you have copied "
@@ -2274,10 +1956,252 @@ msgstr ""
 "Wé häd sömé tröüßlé pröçéssïng ýöür réqüést. Pléäsé énsüré ýöü hävé çöpïéd "
 "äný  Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєт#"
 
+#: common/static/common/js/discussion/utils.js
+msgid "We had some trouble processing your request. Please try again."
+msgstr ""
+"Wé häd sömé tröüßlé pröçéssïng ýöür réqüést. Pléäsé trý ägäïn. Ⱡ'σяєм ιρѕυм "
+"∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя α#"
+
+#: common/static/common/js/discussion/utils.js
+#: common/static/common/js/discussion/views/discussion_thread_list_view.js
+#: common/static/common/js/discussion/views/discussion_topic_menu_view.js
+#: common/static/common/templates/discussion/pagination.underscore
+msgid "…"
+msgstr "… Ⱡ#"
+
+#: common/static/common/js/discussion/views/discussion_content_view.js
+msgid "there is currently %(numVotes)s vote"
+msgid_plural "there are currently %(numVotes)s votes"
+msgstr[0] ""
+"théré ïs çürréntlý %(numVotes)s vöté Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє#"
+msgstr[1] ""
+"théré äré çürréntlý %(numVotes)s vötés Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢#"
+
+#: common/static/common/js/discussion/views/discussion_content_view.js
+msgid "%(numVotes)s Vote"
+msgid_plural "%(numVotes)s Votes"
+msgstr[0] "%(numVotes)s Vöté Ⱡ'σяєм ιρѕυм ∂#"
+msgstr[1] "%(numVotes)s Vötés Ⱡ'σяєм ιρѕυм ∂σł#"
+
+#: common/static/common/js/discussion/views/discussion_content_view.js
+msgid "We had some trouble subscribing you to this thread. Please try again."
+msgstr ""
+"Wé häd sömé tröüßlé süßsçrïßïng ýöü tö thïs thréäd. Pléäsé trý ägäïn. Ⱡ'σяєм"
+" ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя #"
+
+#: common/static/common/js/discussion/views/discussion_content_view.js
+msgid ""
+"We had some trouble unsubscribing you from this thread. Please try again."
+msgstr ""
+"Wé häd sömé tröüßlé ünsüßsçrïßïng ýöü fröm thïs thréäd. Pléäsé trý ägäïn. "
+"Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя#"
+
+#: common/static/common/js/discussion/views/discussion_content_view.js
+msgid ""
+"We had some trouble marking this response as an answer.  Please try again."
+msgstr ""
+"Wé häd sömé tröüßlé märkïng thïs réspönsé äs än änswér.  Pléäsé trý ägäïn. "
+"Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυ#"
+
+#: common/static/common/js/discussion/views/discussion_content_view.js
+msgid ""
+"We had some trouble removing this response as an answer.  Please try again."
+msgstr ""
+"Wé häd sömé tröüßlé rémövïng thïs réspönsé äs än änswér.  Pléäsé trý ägäïn. "
+"Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυ#"
+
+#: common/static/common/js/discussion/views/discussion_content_view.js
+msgid "We had some trouble marking this response endorsed.  Please try again."
+msgstr ""
+"Wé häd sömé tröüßlé märkïng thïs réspönsé éndörséd.  Pléäsé trý ägäïn. "
+"Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя #"
+
+#: common/static/common/js/discussion/views/discussion_content_view.js
+msgid "We had some trouble removing this endorsement.  Please try again."
+msgstr ""
+"Wé häd sömé tröüßlé rémövïng thïs éndörsémént.  Pléäsé trý ägäïn. Ⱡ'σяєм "
+"ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя α#"
+
+#: common/static/common/js/discussion/views/discussion_content_view.js
+msgid "We had some trouble saving your vote.  Please try again."
+msgstr ""
+"Wé häd sömé tröüßlé sävïng ýöür vöté.  Pléäsé trý ägäïn. Ⱡ'σяєм ιρѕυм ∂σłσя "
+"ѕιт αмєт, ¢σηѕє¢тєтυя α#"
+
+#: common/static/common/js/discussion/views/discussion_content_view.js
+msgid "We had some trouble pinning this thread. Please try again."
+msgstr ""
+"Wé häd sömé tröüßlé pïnnïng thïs thréäd. Pléäsé trý ägäïn. Ⱡ'σяєм ιρѕυм "
+"∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя α#"
+
+#: common/static/common/js/discussion/views/discussion_content_view.js
+msgid "We had some trouble unpinning this thread. Please try again."
+msgstr ""
+"Wé häd sömé tröüßlé ünpïnnïng thïs thréäd. Pléäsé trý ägäïn. Ⱡ'σяєм ιρѕυм "
+"∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя α#"
+
+#: common/static/common/js/discussion/views/discussion_content_view.js
+msgid ""
+"We had some trouble removing your flag on this post.  Please try again."
+msgstr ""
+"Wé häd sömé tröüßlé rémövïng ýöür fläg ön thïs pöst.  Pléäsé trý ägäïn. "
+"Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя#"
+
+#: common/static/common/js/discussion/views/discussion_content_view.js
+msgid "We had some trouble reporting this post.  Please try again."
+msgstr ""
+"Wé häd sömé tröüßlé répörtïng thïs pöst.  Pléäsé trý ägäïn. Ⱡ'σяєм ιρѕυм "
+"∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя α#"
+
+#: common/static/common/js/discussion/views/discussion_content_view.js
+msgid "We had some trouble closing this thread.  Please try again."
+msgstr ""
+"Wé häd sömé tröüßlé çlösïng thïs thréäd.  Pléäsé trý ägäïn. Ⱡ'σяєм ιρѕυм "
+"∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя α#"
+
+#: common/static/common/js/discussion/views/discussion_content_view.js
+msgid "We had some trouble reopening this thread.  Please try again."
+msgstr ""
+"Wé häd sömé tröüßlé réöpénïng thïs thréäd.  Pléäsé trý ägäïn. Ⱡ'σяєм ιρѕυм "
+"∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя α#"
+
+#: common/static/common/js/discussion/views/discussion_thread_list_view.js
+msgid "Load more"
+msgstr "Löäd möré Ⱡ'σяєм ιρѕυм ∂σł#"
+
+#: common/static/common/js/discussion/views/discussion_thread_list_view.js
+msgid "Loading more threads"
+msgstr "Löädïng möré thréäds Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, #"
+
+#: common/static/common/js/discussion/views/discussion_thread_list_view.js
+msgid "We had some trouble loading more threads. Please try again."
+msgstr ""
+"Wé häd sömé tröüßlé löädïng möré thréäds. Pléäsé trý ägäïn. Ⱡ'σяєм ιρѕυм "
+"∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя α#"
+
+#: common/static/common/js/discussion/views/discussion_thread_list_view.js
+msgid "%(unread_count)s new comment"
+msgid_plural "%(unread_count)s new comments"
+msgstr[0] "%(unread_count)s néw çömmént Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт α#"
+msgstr[1] "%(unread_count)s néw çömménts Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αм#"
+
+#: common/static/common/js/discussion/views/discussion_thread_list_view.js
+msgid "Current conversation"
+msgstr "Çürrént çönvérsätïön Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, #"
+
+#: common/static/common/js/discussion/views/discussion_thread_list_view.js
+#: lms/static/js/edxnotes/views/tabs/search_results.js
+#: lms/templates/search/course_search_results.underscore
+#: lms/templates/search/dashboard_search_results.underscore
+msgid "Search Results"
+msgstr "Séärçh Résülts Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт#"
+
+#: common/static/common/js/discussion/views/discussion_thread_list_view.js
+msgid "Loading thread list"
+msgstr "Löädïng thréäd lïst Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт,#"
+
 #: common/static/common/js/discussion/views/discussion_thread_list_view.js
 msgid "No results found for %(original_query)s. "
 msgstr ""
 "Nö résülts föünd för %(original_query)s.  Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕ#"
+
+#: common/static/common/js/discussion/views/discussion_thread_list_view.js
+msgid "No threads matched your query."
+msgstr "Nö thréäds mätçhéd ýöür qüérý. Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢т#"
+
+#: common/static/common/js/discussion/views/discussion_thread_list_view.js
+msgid "Show posts by %(username)s."
+msgstr "Shöw pösts ßý %(username)s. Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт#"
+
+#: common/static/common/js/discussion/views/discussion_thread_view.js
+msgid ""
+"The thread you selected has been deleted. Please select another thread."
+msgstr ""
+"Thé thréäd ýöü séléçtéd häs ßéén délétéd. Pléäsé séléçt änöthér thréäd. "
+"Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя#"
+
+#: common/static/common/js/discussion/views/discussion_thread_view.js
+msgid "We had some trouble loading responses. Please reload the page."
+msgstr ""
+"Wé häd sömé tröüßlé löädïng réspönsés. Pléäsé rélöäd thé pägé. Ⱡ'σяєм ιρѕυм "
+"∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя α#"
+
+#: common/static/common/js/discussion/views/discussion_thread_view.js
+msgid "We had some trouble loading more responses. Please try again."
+msgstr ""
+"Wé häd sömé tröüßlé löädïng möré réspönsés. Pléäsé trý ägäïn. Ⱡ'σяєм ιρѕυм "
+"∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя α#"
+
+#: common/static/common/js/discussion/views/discussion_thread_view.js
+msgid "%(numResponses)s other response"
+msgid_plural "%(numResponses)s other responses"
+msgstr[0] "%(numResponses)s öthér réspönsé Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт#"
+msgstr[1] "%(numResponses)s öthér réspönsés Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт,#"
+
+#: common/static/common/js/discussion/views/discussion_thread_view.js
+msgid "%(numResponses)s response"
+msgid_plural "%(numResponses)s responses"
+msgstr[0] "%(numResponses)s réspönsé Ⱡ'σяєм ιρѕυм ∂σłσя ѕ#"
+msgstr[1] "%(numResponses)s réspönsés Ⱡ'σяєм ιρѕυм ∂σłσя ѕι#"
+
+#: common/static/common/js/discussion/views/discussion_thread_view.js
+msgid "Showing all responses"
+msgstr "Shöwïng äll réspönsés Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, #"
+
+#: common/static/common/js/discussion/views/discussion_thread_view.js
+msgid "Showing first response"
+msgid_plural "Showing first %(numResponses)s responses"
+msgstr[0] "Shöwïng fïrst réspönsé Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢#"
+msgstr[1] ""
+"Shöwïng fïrst %(numResponses)s réspönsés Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє#"
+
+#: common/static/common/js/discussion/views/discussion_thread_view.js
+msgid "Load all responses"
+msgstr "Löäd äll réspönsés Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт#"
+
+#: common/static/common/js/discussion/views/discussion_thread_view.js
+msgid "Load next %(numResponses)s responses"
+msgstr "Löäd néxt %(numResponses)s réspönsés Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σ#"
+
+#: common/static/common/js/discussion/views/discussion_thread_view.js
+msgid "Are you sure you want to delete this post?"
+msgstr ""
+"Àré ýöü süré ýöü wänt tö délété thïs pöst? Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, "
+"¢σηѕє¢тєтυя #"
+
+#: common/static/common/js/discussion/views/discussion_user_profile_view.js
+msgid "We had some trouble loading the page you requested. Please try again."
+msgstr ""
+"Wé häd sömé tröüßlé löädïng thé pägé ýöü réqüéstéd. Pléäsé trý ägäïn. Ⱡ'σяєм"
+" ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя #"
+
+#: common/static/common/js/discussion/views/new_post_view.js
+msgid "Your post will be discarded."
+msgstr "Ýöür pöst wïll ßé dïsçärdéd. Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢#"
+
+#: common/static/common/js/discussion/views/response_comment_show_view.js
+#: common/static/common/templates/discussion/post-user-display.underscore
+#: common/static/common/templates/discussion/profile-thread.underscore
+msgid "anonymous"
+msgstr "änönýmöüs Ⱡ'σяєм ιρѕυм ∂σł#"
+
+#: common/static/common/js/discussion/views/response_comment_view.js
+msgid "Are you sure you want to delete this comment?"
+msgstr ""
+"Àré ýöü süré ýöü wänt tö délété thïs çömmént? Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, "
+"¢σηѕє¢тєтυя #"
+
+#: common/static/common/js/discussion/views/response_comment_view.js
+msgid "We had some trouble deleting this comment. Please try again."
+msgstr ""
+"Wé häd sömé tröüßlé délétïng thïs çömmént. Pléäsé trý ägäïn. Ⱡ'σяєм ιρѕυм "
+"∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя α#"
+
+#: common/static/common/js/discussion/views/thread_response_view.js
+msgid "Are you sure you want to delete this response?"
+msgstr ""
+"Àré ýöü süré ýöü wänt tö délété thïs réspönsé? Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, "
+"¢σηѕє¢тєтυя α#"
 
 #: common/static/common/js/utils/edx.utils.validate.js
 msgid "The email address you've provided isn't formatted correctly."
@@ -2590,8 +2514,6 @@ msgid "open slots"
 msgstr "öpén slöts Ⱡ'σяєм ιρѕυм ∂σłσ#"
 
 #: lms/djangoapps/teams/static/teams/js/collections/topic.js
-#: lms/templates/edxnotes/tab-item.underscore
-#: lms/templates/learner_dashboard/program_card.underscore
 msgid "name"
 msgstr "nämé Ⱡ'σяєм ι#"
 
@@ -5232,7 +5154,6 @@ msgid "Number of Students"
 msgstr "Nümßér öf Stüdénts Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт#"
 
 #: cms/static/cms/js/xblock/cms.runtime.v1.js
-#: cms/static/coffee/src/xblock/cms.runtime.v1.js
 msgid "OpenAssessment Save Error"
 msgstr "ÖpénÀsséssmént Sävé Érrör Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕ#"
 
@@ -5255,25 +5176,6 @@ msgid "Studio's having trouble saving your work"
 msgstr ""
 "Stüdïö's hävïng tröüßlé sävïng ýöür wörk Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, "
 "¢σηѕє¢тєтυя#"
-
-#: cms/static/coffee/src/views/tabs.js cms/static/js/views/tabs.js
-msgid "Delete Page Confirmation"
-msgstr "Délété Pägé Çönfïrmätïön Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢ση#"
-
-#: cms/static/coffee/src/views/tabs.js cms/static/js/views/tabs.js
-msgid ""
-"Are you sure you want to delete this page? This action cannot be undone."
-msgstr ""
-"Àré ýöü süré ýöü wänt tö délété thïs pägé? Thïs äçtïön çännöt ßé ündöné. "
-"Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя#"
-
-#: cms/static/coffee/src/views/tabs.js
-#: cms/static/js/certificates/views/signatory_editor.js
-#: cms/static/js/views/course_info_update.js cms/static/js/views/list_item.js
-#: cms/static/js/views/show_textbook.js cms/static/js/views/tabs.js
-#: cms/static/js/views/utils/xblock_utils.js
-msgid "Deleting"
-msgstr "Délétïng Ⱡ'σяєм ιρѕυм ∂#"
 
 #: cms/static/js/base.js
 msgid "This link will open in a new browser window/tab"
@@ -5350,6 +5252,13 @@ msgstr ""
 #: cms/static/js/views/course_info_update.js
 msgid "This action cannot be undone."
 msgstr "Thïs äçtïön çännöt ßé ündöné. Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢#"
+
+#: cms/static/js/certificates/views/signatory_editor.js
+#: cms/static/js/views/course_info_update.js cms/static/js/views/list_item.js
+#: cms/static/js/views/show_textbook.js cms/static/js/views/tabs.js
+#: cms/static/js/views/utils/xblock_utils.js
+msgid "Deleting"
+msgstr "Délétïng Ⱡ'σяєм ιρѕυм ∂#"
 
 #: cms/static/js/certificates/views/signatory_editor.js
 msgid "Upload signature image."
@@ -6360,6 +6269,17 @@ msgstr ""
 "Délétïng ä téxtßöök çännöt ßé ündöné änd önçé délétéd äný référénçé tö ït ïn"
 " ýöür çöürséwäré's nävïgätïön wïll älsö ßé rémövéd. Ⱡ'σяє#"
 
+#: cms/static/js/views/tabs.js
+msgid "Delete Page Confirmation"
+msgstr "Délété Pägé Çönfïrmätïön Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢ση#"
+
+#: cms/static/js/views/tabs.js
+msgid ""
+"Are you sure you want to delete this page? This action cannot be undone."
+msgstr ""
+"Àré ýöü süré ýöü wänt tö délété thïs pägé? Thïs äçtïön çännöt ßé ündöné. "
+"Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя#"
+
 #: cms/static/js/views/uploads.js
 #: cms/templates/js/metadata-file-uploader-item.underscore
 #: cms/templates/js/video/metadata-translations-item.underscore
@@ -6550,14 +6470,6 @@ msgstr "Ûnsçhédüléd Ⱡ'σяєм ιρѕυм ∂σłσя #"
 #: lms/templates/verify_student/payment_confirmation_step.underscore
 msgid "Date"
 msgstr "Däté Ⱡ'σяєм ι#"
-
-#: cms/templates/js/edit-chapter.underscore
-#: lms/templates/ccx/schedule.underscore
-#: lms/templates/commerce/receipt.underscore
-#: lms/templates/learner_dashboard/course_card.underscore
-#: lms/templates/learner_dashboard/program_card.underscore
-msgid "gettext("
-msgstr "géttéxt( Ⱡ'σяєм ιρѕυм ∂#"
 
 #: cms/templates/js/paging-header.underscore
 #: common/static/common/templates/components/paging-footer.underscore
@@ -6836,11 +6748,6 @@ msgid "By: Community TA"
 msgstr "Bý: Çömmünïtý TÀ Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αм#"
 
 #: common/static/common/templates/discussion/thread-list-item.underscore
-#: common/static/common/templates/discussion/thread-response-show.underscore
-msgid "fmt"
-msgstr "fmt Ⱡ'σяєм#"
-
-#: common/static/common/templates/discussion/thread-list-item.underscore
 #, python-format
 msgid ""
 "%(comments_count)s %(span_sr_open)scomments (%(unread_comments_count)s "
@@ -6892,10 +6799,6 @@ msgid "Show Comment (%(num_comments)s)"
 msgid_plural "Show Comments (%(num_comments)s)"
 msgstr[0] "Shöw Çömmént (%(num_comments)s) Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт#"
 msgstr[1] "Shöw Çömménts (%(num_comments)s) Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт,#"
-
-#: common/static/common/templates/discussion/thread-response.underscore
-msgid "fmts"
-msgstr "fmts Ⱡ'σяєм ι#"
 
 #: common/static/common/templates/discussion/thread-response.underscore
 msgid "Add a comment"
@@ -7222,14 +7125,6 @@ msgid "Team capacity"
 msgstr "Téäm çäpäçïtý Ⱡ'σяєм ιρѕυм ∂σłσя ѕι#"
 
 #: lms/djangoapps/teams/static/teams/templates/team-profile.underscore
-msgid "country"
-msgstr "çöüntrý Ⱡ'σяєм ιρѕυм #"
-
-#: lms/djangoapps/teams/static/teams/templates/team-profile.underscore
-msgid "language"
-msgstr "längüägé Ⱡ'σяєм ιρѕυм ∂#"
-
-#: lms/djangoapps/teams/static/teams/templates/team-profile.underscore
 msgid "Leave Team"
 msgstr "Léävé Téäm Ⱡ'σяєм ιρѕυм ∂σłσ#"
 
@@ -7305,6 +7200,11 @@ msgid "remove all"
 msgstr "rémövé äll Ⱡ'σяєм ιρѕυм ∂σłσ#"
 
 #: lms/templates/ccx/schedule.underscore
+#, python-format
+msgid "toggle chapter %(displayName)s"
+msgstr "tögglé çhäptér %(displayName)s Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт#"
+
+#: lms/templates/ccx/schedule.underscore
 msgid "Section"
 msgstr "Séçtïön Ⱡ'σяєм ιρѕυм #"
 
@@ -7316,6 +7216,11 @@ msgstr "Rémövé çhäptér %(chapterDisplayName)s Ⱡ'σяєм ιρѕυм ∂�
 #: lms/templates/ccx/schedule.underscore
 msgid "remove"
 msgstr "rémövé Ⱡ'σяєм ιρѕυ#"
+
+#: lms/templates/ccx/schedule.underscore
+#, python-format
+msgid "toggle subsection %(displayName)s"
+msgstr "tögglé süßséçtïön %(displayName)s Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, #"
 
 #: lms/templates/ccx/schedule.underscore
 msgid "Subsection"
@@ -7349,21 +7254,6 @@ msgid ""
 msgstr ""
 "Tö fïnälïzé çöürsé çrédït, %(display_name)s réqüïrés %(platform_name)s "
 "léärnérs tö süßmït ä çrédït réqüést. Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тє#"
-
-#: lms/templates/commerce/provider.underscore
-#, python-format
-msgid "<img src='%s' alt='%s'></image>"
-msgstr "<img src='%s' alt='%s'></image> Ⱡ'σяєм ιρѕυ#"
-
-#: lms/templates/commerce/provider.underscore
-#, python-format
-msgid ""
-"<button data-provider=\"%s\" data-course-key=\"%s\" data-username=\"%s\" "
-"class=\"complete-course\" onClick=completeOrder(this)>%s</button>"
-msgstr ""
-"<button data-provider=\"%s\" data-course-key=\"%s\" data-username=\"%s\" "
-"class=\"complete-course\" onClick=completeOrder(this)>%s</button> Ⱡ'σяєм "
-"ιρѕυм ∂σł#"
 
 #: lms/templates/commerce/provider.underscore
 msgid "Get Credit"
@@ -7430,17 +7320,27 @@ msgid "Go to Dashboard"
 msgstr "Gö tö Däshßöärd Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт α#"
 
 #: lms/templates/commerce/receipt.underscore
+msgid ""
+"If you don't verify your identity now, you can still explore your course "
+"from your dashboard. You will receive periodic reminders from {platformName}"
+" to verify your identity."
+msgstr ""
+"Ìf ýöü dön't vérïfý ýöür ïdéntïtý nöw, ýöü çän stïll éxplöré ýöür çöürsé "
+"fröm ýöür däshßöärd. Ýöü wïll réçéïvé pérïödïç rémïndérs fröm {platformName}"
+" tö vérïfý ýöür ïdéntïtý. Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя "
+"α∂ιριѕι¢ιηg єłιт, ѕє∂ ∂σ єιυѕмσ∂ тємρσя ιη¢ι∂ι∂υηт υт łαвσяє єт ∂σłσяє мαgηα"
+" αłιqυα. υт єηιм α∂ мιηιм νєηιαм, qυιѕ ησѕтяυ∂ єχєя¢ιтαтιση υłłαм¢σ łαвσяιѕ "
+"ηιѕι υт αłιqυιρ єχ єα ¢σммσ∂σ ¢σηѕєqυαт. ∂υιѕ αυтє ιяυяє ∂σłσя ιη "
+"яєρяєнєη∂єяιт ιη νσłυρтαтє νєłιт єѕѕє ¢ιłłυм ∂σłσяє єυ ƒυgιαт ηυłłα "
+"ραяιαтυя. єχ¢єρтєυя ѕιηт σ¢¢αє¢αт ¢υρι∂αтαт ηση ρяσι∂єηт, ѕυηт ιη ¢υłρα qυι "
+"σƒƒι¢ια ∂є#"
+
+#: lms/templates/commerce/receipt.underscore
 #: lms/templates/verify_student/payment_confirmation_step.underscore
 msgid "Want to confirm your identity later?"
 msgstr ""
 "Wänt tö çönfïrm ýöür ïdéntïtý lätér? Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, "
 "¢σηѕє¢тєтυ#"
-
-#: lms/templates/commerce/receipt.underscore
-msgid "/verify_student/verify-now/{courseKey}/"
-msgstr ""
-"/vérïfý_stüdént/vérïfý-nöw/{courseKey}/ Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, "
-"¢σηѕє¢т#"
 
 #: lms/templates/commerce/receipt.underscore
 msgid "Verify Now"
@@ -7516,10 +7416,6 @@ msgstr "Çlïçk tö édït Ⱡ'σяєм ιρѕυм ∂σłσя ѕι#"
 #: lms/templates/fields/field_order_history.underscore
 msgid "Order Details"
 msgstr "Ördér Détäïls Ⱡ'σяєм ιρѕυм ∂σłσя ѕι#"
-
-#: lms/templates/fields/field_text.underscore
-msgid "title"
-msgstr "tïtlé Ⱡ'σяєм ιρѕ#"
 
 #: lms/templates/financial-assistance/financial_assessment_form.underscore
 #: lms/templates/financial-assistance/financial_assessment_submitted.underscore
@@ -7945,14 +7841,6 @@ msgstr "Välïd Ⱡ'σяєм ιρѕ#"
 msgid "XSeries Program Certificates"
 msgstr "XSérïés Prögräm Çértïfïçätés Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢#"
 
-#: lms/templates/learner_dashboard/certificate.underscore
-msgid "certificate.credential_url"
-msgstr "çértïfïçäté.çrédéntïäl_ürl Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕ#"
-
-#: lms/templates/learner_dashboard/certificate.underscore
-msgid "certificate.display_name"
-msgstr "çértïfïçäté.dïspläý_nämé Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢ση#"
-
 #: lms/templates/learner_dashboard/certificate_status.underscore
 msgid "Congratulations! You have earned a certificate for this course."
 msgstr ""
@@ -7962,6 +7850,11 @@ msgstr ""
 #: lms/templates/learner_dashboard/certificate_status.underscore
 msgid "View/Share Certificate"
 msgstr "Vïéw/Shäré Çértïfïçäté Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢#"
+
+#: lms/templates/learner_dashboard/course_card.underscore
+#, python-format
+msgid "%(courseName)s Home Page."
+msgstr "%(courseName)s Hömé Pägé. Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт#"
 
 #: lms/templates/learner_dashboard/course_enroll.underscore
 msgid "enrolled"
@@ -8031,10 +7924,6 @@ msgid "Explore New XSeries"
 msgstr "Éxplöré Néw XSérïés Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт,#"
 
 #: lms/templates/learner_dashboard/program_card.underscore
-msgid "type"
-msgstr "týpé Ⱡ'σяєм ι#"
-
-#: lms/templates/learner_dashboard/program_card.underscore
 #, python-format
 msgid ""
 "You have earned certificates in %(completed_courses)s of the "
@@ -8043,6 +7932,11 @@ msgstr ""
 "Ýöü hävé éärnéd çértïfïçätés ïn %(completed_courses)s öf thé "
 "%(total_courses)s çöürsés sö fär. Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт, ¢σηѕє¢тєтυя "
 "α#"
+
+#: lms/templates/learner_dashboard/program_card.underscore
+#, python-format
+msgid "%(programName)s Home Page."
+msgstr "%(programName)s Hömé Pägé. Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт#"
 
 #: lms/templates/learner_dashboard/program_header_view.underscore
 msgid "{organization}\\'s logo"
@@ -8104,10 +7998,6 @@ msgstr "Rését Pässwörd Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт#"
 #: lms/templates/student_account/account_settings.underscore
 msgid "Account Settings"
 msgstr "Àççöünt Séttïngs Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αм#"
-
-#: lms/templates/student_account/account_settings_section.underscore
-msgid "section.title"
-msgstr "séçtïön.tïtlé Ⱡ'σяєм ιρѕυм ∂σłσя ѕι#"
 
 #: lms/templates/student_account/account_settings_section.underscore
 msgid "An error occurred. Please reload the page."
@@ -9141,10 +9031,6 @@ msgstr ""
 msgid "Active Uploads"
 msgstr "Àçtïvé Ûplöäds Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт#"
 
-#: cms/templates/js/active-video-upload.underscore
-msgid "status"
-msgstr "stätüs Ⱡ'σяєм ιρѕυ#"
-
 #: cms/templates/js/add-xblock-component-button.underscore
 msgid "Add Component:"
 msgstr "Àdd Çömpönént: Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт#"
@@ -9276,13 +9162,6 @@ msgstr ""
 "єχєя¢ιтαтιση υłłαм¢σ łαвσяιѕ ηιѕι υт αłιqυιρ єχ єα ¢σммσ∂σ ¢σηѕєqυαт. ∂υιѕ "
 "αυтє ιяυяє ∂σłσя ιη яєρяєнєη∂єяιт ιη νσłυρтαтє νєłιт єѕѕє ¢ιłłυм ∂σłσяє єυ "
 "ƒυgιαт ηυłłα ραяιαтυя. єχ¢єρтєυя ѕι#"
-
-#: cms/templates/js/certificate-editor.underscore
-#: cms/templates/js/content-group-editor.underscore
-#: cms/templates/js/edit-textbook.underscore
-#: cms/templates/js/group-configuration-editor.underscore
-msgid "error.message"
-msgstr "érrör.méssägé Ⱡ'σяєм ιρѕυм ∂σłσя ѕι#"
 
 #: cms/templates/js/certificate-editor.underscore
 msgid "Certificate Information"
@@ -9681,6 +9560,10 @@ msgid "Chapter Name"
 msgstr "Çhäptér Nämé Ⱡ'σяєм ιρѕυм ∂σłσя ѕ#"
 
 #: cms/templates/js/edit-chapter.underscore
+msgid "Chapter {order}"
+msgstr "Çhäptér {order} Ⱡ'σяєм ιρѕυм ∂σłσя #"
+
+#: cms/templates/js/edit-chapter.underscore
 msgid "provide the title/name of the chapter that will be used in navigating"
 msgstr ""
 "prövïdé thé tïtlé/nämé öf thé çhäptér thät wïll ßé üséd ïn nävïgätïng Ⱡ'σяєм"
@@ -9689,6 +9572,12 @@ msgstr ""
 #: cms/templates/js/edit-chapter.underscore
 msgid "Chapter Asset"
 msgstr "Çhäptér Àssét Ⱡ'σяєм ιρѕυм ∂σłσя ѕι#"
+
+#: cms/templates/js/edit-chapter.underscore
+msgid "path/to/introductionToCookieBaking-CH{order}.pdf"
+msgstr ""
+"päth/tö/ïntrödüçtïönTöÇöökïéBäkïng-ÇH{order}.pdf Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт "
+"αмєт, ¢σηѕє¢тєтυя #"
 
 #: cms/templates/js/edit-chapter.underscore
 msgid "upload a PDF file or provide the path to a Studio asset file"
@@ -9946,11 +9835,6 @@ msgid "Last published %(last_published_date)s by %(publish_username)s"
 msgstr ""
 "Läst püßlïshéd %(last_published_date)s ßý %(publish_username)s Ⱡ'σяєм ιρѕυм "
 "∂σłσя ѕιт αмєт, ¢σηѕ#"
-
-#: cms/templates/js/publish-history.underscore
-#: cms/templates/js/staff-lock-editor.underscore
-msgid "message"
-msgstr "méssägé Ⱡ'σяєм ιρѕυм #"
 
 #: cms/templates/js/publish-history.underscore
 #: cms/templates/js/publish-xblock.underscore
@@ -10374,10 +10258,6 @@ msgstr "Édït thé nämé Ⱡ'σяєм ιρѕυм ∂σłσя ѕι#"
 #, python-format
 msgid "Edit %(display_name)s (required)"
 msgstr "Édït %(display_name)s (réqüïréd) Ⱡ'σяєм ιρѕυм ∂σłσя ѕιт αмєт,#"
-
-#: cms/templates/js/xblock-string-field-editor.underscore
-msgid "formLabel"
-msgstr "förmLäßél Ⱡ'σяєм ιρѕυм ∂σł#"
 
 #: cms/templates/js/video/transcripts/metadata-videolist-entry.underscore
 msgid "Add URLs for additional versions"

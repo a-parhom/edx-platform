@@ -32,8 +32,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1a\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2016-07-07 14:15+0000\n"
-"PO-Revision-Date: 2016-07-07 14:15:58.774596\n"
+"POT-Creation-Date: 2016-12-22 14:12+0000\n"
+"PO-Revision-Date: 2016-12-22 14:12:30.536712\n"
 "Last-Translator: \n"
 "Language-Team: openedx-translation <openedx-translation@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -1390,8 +1390,8 @@ msgid "must be {0} characters or more"
 msgstr "وعسف زث {0} ذاشقشذفثقس خق وخقث"
 
 #: common/djangoapps/util/password_policy_validators.py
-msgid "must be {0} characters or less"
-msgstr "وعسف زث {0} ذاشقشذفثقس خق مثسس"
+msgid "must be {0} characters or fewer"
+msgstr "وعسف زث {0} ذاشقشذفثقس خق بثصثق"
 
 #: common/djangoapps/util/password_policy_validators.py
 msgid "Must be more complex ({0})"
@@ -7295,6 +7295,7 @@ msgstr "فاث حشغوثرف حقخذثسسخق قثفعقرثي ش زشيمغ-
 
 #: lms/djangoapps/shoppingcart/processors/CyberSource.py
 #: lms/djangoapps/shoppingcart/processors/CyberSource2.py
+#: lms/djangoapps/shoppingcart/processors/LiqPay.py
 msgid ""
 "The payment processor accepted an order whose number is not in our system."
 msgstr ""
@@ -7638,11 +7639,13 @@ msgid "UNKNOWN REASON"
 msgstr "عرنرخصر قثشسخر"
 
 #: lms/djangoapps/shoppingcart/processors/CyberSource2.py
+#: lms/djangoapps/shoppingcart/processors/LiqPay.py
 msgid "The payment processor did not return a required parameter: {parameter}"
 msgstr ""
 "فاث حشغوثرف حقخذثسسخق يهي رخف قثفعقر ش قثضعهقثي حشقشوثفثق: {parameter}"
 
 #: lms/djangoapps/shoppingcart/processors/CyberSource2.py
+#: lms/djangoapps/shoppingcart/processors/LiqPay.py
 msgid ""
 "The payment processor returned a badly-typed value {value} for parameter "
 "{parameter}."
@@ -7651,6 +7654,7 @@ msgstr ""
 "{parameter}."
 
 #: lms/djangoapps/shoppingcart/processors/CyberSource2.py
+#: lms/djangoapps/shoppingcart/processors/LiqPay.py
 msgid ""
 "The amount charged by the processor {charged_amount} "
 "{charged_amount_currency} is different than the total cost of the order "

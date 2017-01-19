@@ -32,8 +32,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: 0.1a\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
-"POT-Creation-Date: 2016-07-07 14:15+0000\n"
-"PO-Revision-Date: 2016-07-07 14:15:58.774596\n"
+"POT-Creation-Date: 2016-12-22 14:21+0000\n"
+"PO-Revision-Date: 2016-12-22 14:21:49.703572\n"
 "Last-Translator: \n"
 "Language-Team: openedx-translation <openedx-translation@googlegroups.com>\n"
 "MIME-Version: 1.0\n"
@@ -1312,7 +1312,7 @@ msgid "must be {0} characters or more"
 msgstr ""
 
 #: common/djangoapps/util/password_policy_validators.py
-msgid "must be {0} characters or less"
+msgid "must be {0} characters or fewer"
 msgstr ""
 
 #: common/djangoapps/util/password_policy_validators.py
@@ -6596,6 +6596,7 @@ msgstr ""
 
 #: lms/djangoapps/shoppingcart/processors/CyberSource.py
 #: lms/djangoapps/shoppingcart/processors/CyberSource2.py
+#: lms/djangoapps/shoppingcart/processors/LiqPay.py
 msgid ""
 "The payment processor accepted an order whose number is not in our system."
 msgstr ""
@@ -6850,16 +6851,19 @@ msgid "UNKNOWN REASON"
 msgstr ""
 
 #: lms/djangoapps/shoppingcart/processors/CyberSource2.py
+#: lms/djangoapps/shoppingcart/processors/LiqPay.py
 msgid "The payment processor did not return a required parameter: {parameter}"
 msgstr ""
 
 #: lms/djangoapps/shoppingcart/processors/CyberSource2.py
+#: lms/djangoapps/shoppingcart/processors/LiqPay.py
 msgid ""
 "The payment processor returned a badly-typed value {value} for parameter "
 "{parameter}."
 msgstr ""
 
 #: lms/djangoapps/shoppingcart/processors/CyberSource2.py
+#: lms/djangoapps/shoppingcart/processors/LiqPay.py
 msgid ""
 "The amount charged by the processor {charged_amount} "
 "{charged_amount_currency} is different than the total cost of the order "
