@@ -56,19 +56,20 @@
 # Nikita <nikita.gritsenko@gmail.com>, 2016
 # fayçal fatihi <ofaycal.geo.x@gmail.com>, 2016
 # Alina Demidchenko <semilitrovka@gmail.com>, 2016
+# Andrii Parkhomenko <andriy.parhomenko@gmail.com>, 2016
 # Galya Galkina <galyagalkina11@gmail.com>, 2016
 # Nikolai Belochub <life_mob@mail.ru>, 2016
 # marichkafox <marichka.fox@gmail.com>, 2016
 # Edx Project <bhaylav@gmail.com>, 2016
 # Ксенія Воронова <ksenya.voronova@gmail.com>, 2016
-# Andrii Parkhomenko <andriy.parhomenko@gmail.com>, 2016
+# Andriy Havirko <a.havirko@gmail.com>, 2017
 msgid ""
 msgstr ""
 "Project-Id-Version: 0.1a\n"
 "Report-Msgid-Bugs-To: openedx-translation@googlegroups.com\n"
 "POT-Creation-Date: 2016-08-24 20:24+0000\n"
 "PO-Revision-Date: 2016-08-24 20:24:11.790702\n"
-"Last-Translator: Andrii Parkhomenko <andriy.parhomenko@gmail.com>, 2016\n"
+"Last-Translator: Andriy Havirko <a.havirko@gmail.com>, 2017\n"
 "Language-Team: Ukrainian (https://www.transifex.com/open-edx/teams/6205/uk/)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
@@ -513,7 +514,7 @@ msgid ""
 "Usernames must contain only letters, numbers, underscores (_), and hyphens "
 "(-)."
 msgstr ""
-"Ім’я користувача має містити лише англійські літери, цифри, символи "
+"Ім’я для форумів має містити лише англійські літери, цифри, символи "
 "підкреслення (_) та дефіси (-)."
 
 #: common/djangoapps/student/forms.py
@@ -1433,7 +1434,7 @@ msgstr "повинен містити  {0} символів або більше"
 
 #: common/djangoapps/util/password_policy_validators.py
 msgid "must be {0} characters or fewer"
-msgstr ""
+msgstr "повинен містити {0} символів або менше"
 
 #: common/djangoapps/util/password_policy_validators.py
 msgid "Must be more complex ({0})"
@@ -9820,7 +9821,7 @@ msgstr "Тема"
 
 #: openedx/core/lib/xblock_builtin/xblock_discussion/xblock_discussion.py
 msgid "Week 1"
-msgstr ""
+msgstr "Тиждень 1"
 
 #: openedx/core/lib/xblock_builtin/xblock_discussion/xblock_discussion.py
 msgid ""
@@ -13653,7 +13654,7 @@ msgstr ""
 #. identity verification.
 #: lms/templates/courseware/progress.html
 msgid "Certificate unavailable"
-msgstr ""
+msgstr "Сертифікат не доступний"
 
 #: lms/templates/courseware/progress.html
 msgid ""
@@ -19309,7 +19310,7 @@ msgstr ""
 
 #: cms/templates/howitworks.html
 msgid "Welcome to {studio_name}"
-msgstr "Вітаємо на {platform_name}"
+msgstr "Вітаємо на {studio_name}"
 
 #: cms/templates/howitworks.html
 msgid ""
