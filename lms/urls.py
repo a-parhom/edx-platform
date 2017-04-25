@@ -54,7 +54,7 @@ from static_template_view import views as static_template_view_views
 from staticbook import views as staticbook_views
 from student import views as student_views
 from util import views as util_views
-from openassessment.fileupload.urls import urlpatterns as oraurlpatterns
+import openassessment.fileupload.urls as oraurls
 
 RESET_COURSE_DEADLINES_NAME = 'reset_course_deadlines'
 RENDER_XBLOCK_NAME = 'render_xblock'
@@ -828,7 +828,9 @@ urlpatterns += [
 ]
 
 #ORA2
-urlpatterns+= (include(oraurlpatterns))
+urlpatterns += (
+    url(r'^openassessment/storage', include(oraurls)),
+)
 
 # Embargo
 if settings.FEATURES.get('EMBARGO'):
