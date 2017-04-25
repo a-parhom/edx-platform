@@ -2905,6 +2905,9 @@ PASSWORD_POLICY_COMPLIANCE_ROLLOUT_CONFIG = {
 
 # By default, don't use a file prefix
 ORA2_FILE_PREFIX = None
+ORA2_FILEUPLOAD_BACKEND = "filesystem"
+ORA2_FILEUPLOAD_CACHE_NAME="default"
+ORA2_FILEUPLOAD_ROOT = os.path.join(MEDIA_ROOT, 'ora-upload/')
 
 # Default File Upload Storage bucket and prefix. Used by the FileUpload Service.
 FILE_UPLOAD_STORAGE_BUCKET_NAME = 'SET-ME-PLEASE (ex. bucket-name)'

@@ -54,6 +54,7 @@ from static_template_view import views as static_template_view_views
 from staticbook import views as staticbook_views
 from student import views as student_views
 from util import views as util_views
+from openassessment.fileupload.urls import urlpatterns as oraurlpatterns
 
 RESET_COURSE_DEADLINES_NAME = 'reset_course_deadlines'
 RENDER_XBLOCK_NAME = 'render_xblock'
@@ -825,6 +826,9 @@ urlpatterns += [
     url(r'^api/course_goals/', include(('lms.djangoapps.course_goals.urls', 'lms.djangoapps.course_goals'),
                                        namespace='course_goals_api')),
 ]
+
+#ORA2
+urlpatterns+= (include(oraurlpatterns))
 
 # Embargo
 if settings.FEATURES.get('EMBARGO'):
