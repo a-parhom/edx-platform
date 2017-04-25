@@ -16,7 +16,7 @@ from openedx.core.djangoapps.programs.models import ProgramsApiConfig
 from openedx.core.djangoapps.self_paced.models import SelfPacedConfiguration
 from openedx.core.djangoapps.site_configuration import helpers as configuration_helpers
 from student.views import LogoutView
-from openassessment.fileupload.urls import urlpatterns as oraurlpatterns
+import openassessment.fileupload.urls as oraurls
 
 # Uncomment the next two lines to enable the admin:
 if settings.DEBUG or settings.FEATURES.get('ENABLE_DJANGO_ADMIN_SITE'):
@@ -825,7 +825,9 @@ urlpatterns += (
 )
 
 #ORA2
-urlpatterns+= (include(oraurlpatterns))
+urlpatterns += (
+    url(r'^openassessment/storage', include(oraurls)),
+)
 
 # Embargo
 if settings.FEATURES.get('EMBARGO'):
