@@ -12,6 +12,8 @@ from rest_framework import serializers
 from openedx.core.djangoapps.models.course_details import CourseDetails
 from openedx.core.lib.api.fields import AbsoluteURLField
 
+from static_replace import replace_static_urls
+
 
 class _MediaSerializer(serializers.Serializer):  # pylint: disable=abstract-method
     """
@@ -120,7 +122,8 @@ class CourseDetailSerializer(CourseSerializer):  # pylint: disable=abstract-meth
         # Note: This makes a call to the modulestore, unlike the other
         # fields from CourseSerializer, which get their data
         # from the CourseOverview object in SQL.
-        return CourseDetails.fetch_about_attribute(course_overview.id, 'overview')
+        course_about_text = CourseDetails.fetch_about_attribute(course_overview.id, 'overview')
+        return replace_static_urls(course_about_text, course_id=course_overview.id)
 
 
 class CourseKeySerializer(serializers.BaseSerializer):  # pylint:disable=abstract-method
@@ -129,3 +132,4 @@ class CourseKeySerializer(serializers.BaseSerializer):  # pylint:disable=abstrac
     """
     def to_representation(self, instance):
         return str(instance)
+
