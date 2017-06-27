@@ -122,7 +122,7 @@ class _ContentSerializer(serializers.Serializer):
 
     def get_author(self, obj):
         """Returns the author's username, or None if the content is anonymous."""
-        return None if self._is_anonymous(obj) else str(obj["username"])
+        return None if self._is_anonymous(obj) else obj["username"]
 
     def _get_user_label(self, user_id):
         """
@@ -318,7 +318,7 @@ class CommentSerializer(_ContentSerializer):
                     self._is_anonymous(self.context["thread"]) and
                     not self._is_user_privileged(endorser_id)
             ):
-                return str(DjangoUser.objects.get(id=endorser_id).username)
+                return DjangoUser.objects.get(id=endorser_id).username
         return None
 
     def get_endorsed_by_label(self, obj):
