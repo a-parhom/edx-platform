@@ -447,12 +447,12 @@ def _serialize_discussion_entities(request, context, discussion_entities, reques
 
         if include_profile_image:
             if serialized_entity['author'] not in usernames:
-                usernames.append(serialized_entity['author'])
+                usernames.append(str(serialized_entity['author']))
             if (
                     'endorsed' in serialized_entity and serialized_entity['endorsed'] and
                     'endorsed_by' in serialized_entity and serialized_entity['endorsed_by'] not in usernames
             ):
-                usernames.append(serialized_entity['endorsed_by'])
+                usernames.append(str(serialized_entity['endorsed_by']))
 
     results = _add_additional_response_fields(
         request, results, usernames, discussion_entity_type, include_profile_image
