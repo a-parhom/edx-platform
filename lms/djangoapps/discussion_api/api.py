@@ -459,7 +459,7 @@ def _serialize_discussion_entities(request, context, discussion_entities, reques
                     'endorsed' in serialized_entity and serialized_entity['endorsed'] and
                     'endorsed_by' in serialized_entity and serialized_entity['endorsed_by'] not in usernames
             ):
-                usernames.append(erialized_entity['endorsed_by'])
+                usernames.append(serialized_entity['endorsed_by'])
 
     results = _add_additional_response_fields(
         request, results, usernames, discussion_entity_type, include_profile_image
