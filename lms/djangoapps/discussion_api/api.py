@@ -375,10 +375,10 @@ def _get_users(discussion_entity_type, discussion_entity, username_profile_dict)
 
         A dict of users with username as key and user profile details as value.
     """
-    users = {str(discussion_entity['author']): _user_profile(username_profile_dict[str(discussion_entity['author'])])}
+    users = {discussion_entity['author']: _user_profile(username_profile_dict[discussion_entity['author']])}
 
     if discussion_entity_type == DiscussionEntity.comment and str(discussion_entity['endorsed']):
-        users[str(discussion_entity['endorsed_by'])] = _user_profile(username_profile_dict[str(discussion_entity['endorsed_by'])])
+        users[discussion_entity['endorsed_by']] = _user_profile(username_profile_dict[discussion_entity['endorsed_by']])
     return users
 
 
