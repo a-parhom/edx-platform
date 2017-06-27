@@ -375,10 +375,10 @@ def _get_users(discussion_entity_type, discussion_entity, username_profile_dict)
 
         A dict of users with username as key and user profile details as value.
     """
-    users = {discussion_entity['author']: _user_profile(username_profile_dict[discussion_entity['author']])}
+    users = {str(discussion_entity['author']): _user_profile(username_profile_dict[str(discussion_entity['author'])])}
 
-    if discussion_entity_type == DiscussionEntity.comment and discussion_entity['endorsed']:
-        users[discussion_entity['endorsed_by']] = _user_profile(username_profile_dict[discussion_entity['endorsed_by']])
+    if discussion_entity_type == DiscussionEntity.comment and str(discussion_entity['endorsed']):
+        users[str(discussion_entity['endorsed_by'])] = _user_profile(username_profile_dict[str(discussion_entity['endorsed_by'])])
     return users
 
 
@@ -447,12 +447,12 @@ def _serialize_discussion_entities(request, context, discussion_entities, reques
 
         if include_profile_image:
             if serialized_entity['author'] not in usernames:
-                usernames.append(serialized_entity['author'])
+                usernames.append(str(serialized_entity['author']))
             if (
                     'endorsed' in serialized_entity and serialized_entity['endorsed'] and
                     'endorsed_by' in serialized_entity and serialized_entity['endorsed_by'] not in usernames
             ):
-                usernames.append(serialized_entity['endorsed_by'])
+                usernames.append(str(serialized_entity['endorsed_by']))
 
     results = _add_additional_response_fields(
         request, results, usernames, discussion_entity_type, include_profile_image
