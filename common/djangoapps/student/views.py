@@ -35,6 +35,7 @@ from django.utils.translation import ugettext as _
 from django.utils.translation import get_language, ungettext
 from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
 from django.views.decorators.http import require_GET, require_POST
+from django.views.decorators.cache import cache_control
 from django.views.generic import TemplateView
 from ipware.ip import get_ip
 from opaque_keys import InvalidKeyError
@@ -62,7 +63,7 @@ from certificates.models import (  # pylint: disable=import-error
 )
 from course_modes.models import CourseMode
 from courseware.access import has_access
-from courseware.courses import get_courses, sort_by_announcement, sort_by_start_date  # pylint: disable=import-error
+from courseware.courses import get_courses, sort_by_announcement, sort_by_start_date, get_course_with_access  # pylint: disable=import-error
 from django_comment_common.models import assign_role
 from edxmako.shortcuts import render_to_response, render_to_string
 from eventtracking import tracker
@@ -96,7 +97,8 @@ from student.helpers import (
     auth_pipeline_urls,
     check_verify_status_by_course,
     destroy_oauth_tokens,
-    get_next_url_for_login_page
+    get_next_url_for_login_page,
+    trigram_check
 )
 from student.models import (
     ALLOWEDTOENROLL_TO_ENROLLED,
@@ -119,7 +121,8 @@ from student.models import (
     UserStanding,
     anonymous_id_for_user,
     create_comments_service_user,
-    unique_id_for_user
+    unique_id_for_user,
+    CertificateRegenerationRequest
 )
 from student.tasks import send_activation_email
 from third_party_auth import pipeline, provider
@@ -129,6 +132,9 @@ from util.json_request import JsonResponse
 from util.milestones_helpers import get_pre_requisite_courses_not_completed
 from util.password_policy_validators import validate_password_strength
 from xmodule.modulestore.django import modulestore
+
+from courseware.grades import grade
+from course_blocks.api import get_course_blocks
 
 log = logging.getLogger("edx.student")
 AUDIT_LOG = logging.getLogger("audit")
@@ -407,6 +413,18 @@ def _cert_info(user, course_overview, cert_status, course_mode):  # pylint: disa
                     cert_status['download_url']
                 )
 
+            #Check if certificate needs regeneration
+            status_dict['show_regenerate_button'] = False
+            status_dict['show_regenerate_in_progress'] = False
+            request_available = _regeneration_request_available(user, course_overview.id)
+            regeneration_in_progress = _regeneration_in_progress(user, course_overview.id)
+            if user.username in ['parhom_999','Geroneja','LyubovZabava','tkach_daria','Ivan','n.kukulevskyi','Kupava']:
+            #if user.username == 'parhom_999':
+                if request_available and not regeneration_in_progress:
+                    status_dict['show_regenerate_button'] = True
+                elif regeneration_in_progress:
+                    status_dict['show_regenerate_in_progress'] = True
+
     if status in {'generating', 'ready', 'notpassing', 'restricted', 'auditing', 'unverified'}:
         cert_grade_percent = -1
         persisted_grade_percent = -1
@@ -426,6 +444,95 @@ def _cert_info(user, course_overview, cert_status, course_mode):  # pylint: disa
         status_dict['grade'] = unicode(max(cert_grade_percent, persisted_grade_percent))
 
     return status_dict
+
+
+"""
+Check if certificate regeneration can be requested
+and return the purpose of regeneration if available
+"""
+def _regeneration_request_available(user, course_id):
+    try:
+        generated_certificate = GeneratedCertificate.objects.get(  # pylint: disable=no-member
+            user=user, course_id=course_id)
+        cert_grade = generated_certificate.grade or 0
+        cert_name = generated_certificate.name
+    except GeneratedCertificate.DoesNotExist:
+        return False
+
+    u_prof = UserProfile.objects.get(user=user)
+    user_name_changed = (u_prof.name != cert_name)
+
+    changed_names = CertificateRegenerationRequest.objects.filter(user=user,
+        course_id=course_id, purpose='name_changed')
+    if user_name_changed and len(changed_names)<2:
+        if not trigram_check(u_prof.name, cert_name):
+            return False
+        return 'name_changed'
+    elif len(changed_names)>=2:
+        return False
+
+    student = User.objects.prefetch_related("groups").get(id=user.id)
+
+    course = get_course_with_access(user, 'load', course_id, 
+        depth=None, check_if_enrolled=True)
+    course._field_data_cache = {}  # pylint: disable=protected-access
+    course.set_grading_policy(course.grading_policy)
+
+    course_structure = get_course_blocks(student, course.location)
+
+    grade_summary = grade(student, course, course_structure=course_structure)
+
+    if float(grade_summary['percent']) > float(cert_grade):
+        return 'grade_increased'
+
+    return False
+
+
+"""
+Check if certificate regeneration has already been requested
+"""
+def _regeneration_in_progress(user, course_id):
+    regeneration_is_requested = CertificateRegenerationRequest.objects.filter(user=user,
+            course_id=course_id, status='requested')
+    if len(regeneration_is_requested)>0:
+        return True
+    return False
+
+
+"""
+Request certificate regeneration
+"""
+@transaction.non_atomic_requests
+@require_POST
+@login_required
+@ensure_csrf_cookie
+def request_certificate_regeneration(request):
+    if 'course_id' not in request.POST:
+        return HttpResponseBadRequest(_("Course id not specified"))
+
+    try:
+        course_id = SlashSeparatedCourseKey.from_deprecated_string(request.POST.get("course_id"))
+    except InvalidKeyError:
+        log.warning(
+            u"User %s tried to request certificate regeneration with invalid course id: %s",
+            user.username,
+            request.POST.get("course_id"),
+        )
+        return HttpResponseBadRequest(_("Invalid course id"))
+
+    user = request.user
+    regeneration_purpose = _regeneration_request_available(user, course_id)
+
+    if not regeneration_purpose:
+        return HttpResponseBadRequest(_("Operation not permitted"))
+
+    if not _regeneration_in_progress(user, course_id):
+        CertificateRegenerationRequest.objects.create(user=user,
+            course_id=course_id, purpose=regeneration_purpose, 
+            status='requested')
+        return JsonResponse({'success': True})
+    else:
+        return HttpResponseBadRequest(_("Certificate is in queue for regeneration"))
 
 
 @ensure_csrf_cookie
@@ -612,7 +719,9 @@ def compose_and_send_activation_email(user, profile, user_registration=None):
     send_activation_email.delay(subject, message_for_activation, from_address, dest_addr)
 
 
+@transaction.non_atomic_requests
 @login_required
+@cache_control(no_cache=True, no_store=True, must_revalidate=True)
 @ensure_csrf_cookie
 def dashboard(request):
     """

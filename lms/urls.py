@@ -35,6 +35,7 @@ urlpatterns = (
     url(r'', include('student.urls')),
     # TODO: Move lms specific student views out of common code
     url(r'^dashboard$', 'student.views.dashboard', name="dashboard"),
+
     url(r'^change_enrollment$', 'student.views.change_enrollment', name='change_enrollment'),
 
     # Event tracking endpoints
@@ -58,6 +59,10 @@ urlpatterns = (
 
     # Feedback Form endpoint
     url(r'^submit_feedback$', 'util.views.submit_feedback'),
+
+    #Request certificate regeneration
+    url(r'^request_regeneration$', 'student.views.request_certificate_regeneration', 
+        name="request_regeneration"),
 
     # Enrollment API RESTful endpoints
     url(r'^api/enrollment/v1/', include('enrollment.urls')),

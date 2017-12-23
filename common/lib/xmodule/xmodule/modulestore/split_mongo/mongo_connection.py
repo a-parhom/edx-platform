@@ -322,7 +322,7 @@ class MongoConnection(object):
         with TIMER.timer("get_structure", course_context) as tagger_get_structure:
             cache = CourseStructureCache()
 
-            structure = cache.get(key, course_context)
+            structure = cache.get(key, course_context)            
             tagger_get_structure.tag(from_cache=str(bool(structure)).lower())
             if not structure:
                 # Always log cache misses, because they are unexpected

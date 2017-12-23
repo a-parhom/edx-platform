@@ -2452,3 +2452,20 @@ class LogoutViewConfiguration(ConfigurationModel):
     def __unicode__(self):
         """Unicode representation of the instance. """
         return u'Logout view configuration: {enabled}'.format(enabled=self.enabled)
+
+
+class CertificateRegenerationRequest(models.Model):
+    """
+    Purposes:
+        'name_changed',
+        'grade_increased'
+    Statuses:
+        'requested',
+        'regenerated'
+    """
+    user = models.ForeignKey(User, db_index=True)
+    course_id = CourseKeyField(db_index=True, max_length=255)
+    purpose = models.CharField(max_length=255)
+    created = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=255)
+    modified = models.DateTimeField(default=timezone.now)
