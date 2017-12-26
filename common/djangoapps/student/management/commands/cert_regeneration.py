@@ -11,7 +11,7 @@ from badges.events.course_complete import get_completion_badge
 from xmodule.modulestore.django import modulestore
 from lms.djangoapps.certificates.api import regenerate_user_certificates
 
-
+LOGGER = logging.getLogger("edx.student")
 class Command(BaseCommand):
 
     help = """
@@ -106,7 +106,7 @@ class Command(BaseCommand):
                     ret
                 ) 
 
-                req.update(status="regenerated")
+                CertificateRegenerationRequest.objects.filter(id=req.id).update(status="regenerated")
 
             else:
                 LOGGER.info(
