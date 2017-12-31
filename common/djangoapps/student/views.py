@@ -404,7 +404,7 @@ def _cert_info(user, course_overview, cert_status, course_mode):  # pylint: disa
             status_dict['show_regenerate_in_progress'] = False
             request_available = _regeneration_request_available(user, course_overview.id)
             regeneration_in_progress = _regeneration_in_progress(user, course_overview.id)
-            if user.username in ['parhom_999','Geroneja','LyubovZabava','tkach_daria','Ivan','n.kukulevskyi','Kupava']:
+            #if user.username in ['parhom_999','Geroneja','LyubovZabava','tkach_daria','Ivan','n.kukulevskyi','Kupava']:
             #if user.username == 'parhom_999':
                 if request_available and not regeneration_in_progress:
                     status_dict['show_regenerate_button'] = True
@@ -428,7 +428,7 @@ Check if certificate regeneration can be requested
 and return the purpose of regeneration if available
 """
 def _regeneration_request_available(user, course_id):
-    if user.username in ['parhom_999','Geroneja','LyubovZabava','tkach_daria','Ivan','n.kukulevskyi','Kupava']:
+    #if user.username in ['parhom_999','Geroneja','LyubovZabava','tkach_daria','Ivan','n.kukulevskyi','Kupava']:
     #if user.username == 'parhom_999':
         try:
             generated_certificate = GeneratedCertificate.objects.get(  # pylint: disable=no-member
@@ -471,7 +471,7 @@ def _regeneration_request_available(user, course_id):
 Check if certificate regeneration has already been requested
 """
 def _regeneration_in_progress(user, course_id):
-    if user.username in ['parhom_999','Geroneja','LyubovZabava','tkach_daria','Ivan','n.kukulevskyi','Kupava']:
+    #if user.username in ['parhom_999','Geroneja','LyubovZabava','tkach_daria','Ivan','n.kukulevskyi','Kupava']:
     #if user.username == 'parhom_999':
         regeneration_is_requested = CertificateRegenerationRequest.objects.filter(user=user,
                 course_id=course_id, status='requested')
