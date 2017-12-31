@@ -404,12 +404,10 @@ def _cert_info(user, course_overview, cert_status, course_mode):  # pylint: disa
             status_dict['show_regenerate_in_progress'] = False
             request_available = _regeneration_request_available(user, course_overview.id)
             regeneration_in_progress = _regeneration_in_progress(user, course_overview.id)
-            #if user.username in ['parhom_999','Geroneja','LyubovZabava','tkach_daria','Ivan','n.kukulevskyi','Kupava']:
-            #if user.username == 'parhom_999':
-                if request_available and not regeneration_in_progress:
-                    status_dict['show_regenerate_button'] = True
-                elif regeneration_in_progress:
-                    status_dict['show_regenerate_in_progress'] = True
+            if request_available and not regeneration_in_progress:
+                status_dict['show_regenerate_button'] = True
+            elif regeneration_in_progress:
+                status_dict['show_regenerate_in_progress'] = True
 
     if status in ('generating', 'ready', 'notpassing', 'restricted', 'auditing', 'unverified'):
         if 'grade' not in cert_status:
@@ -428,41 +426,39 @@ Check if certificate regeneration can be requested
 and return the purpose of regeneration if available
 """
 def _regeneration_request_available(user, course_id):
-    #if user.username in ['parhom_999','Geroneja','LyubovZabava','tkach_daria','Ivan','n.kukulevskyi','Kupava']:
-    #if user.username == 'parhom_999':
-        try:
-            generated_certificate = GeneratedCertificate.objects.get(  # pylint: disable=no-member
-                user=user, course_id=course_id)
-            cert_grade = generated_certificate.grade or 0
-            cert_name = generated_certificate.name
-        except GeneratedCertificate.DoesNotExist:
+    try:
+        generated_certificate = GeneratedCertificate.objects.get(  # pylint: disable=no-member
+            user=user, course_id=course_id)
+        cert_grade = generated_certificate.grade or 0
+        cert_name = generated_certificate.name
+    except GeneratedCertificate.DoesNotExist:
+        return False
+
+    u_prof = UserProfile.objects.get(user=user)
+    user_name_changed = (u_prof.name != cert_name)
+
+    changed_names = CertificateRegenerationRequest.objects.filter(user=user,
+        course_id=course_id, purpose='name_changed')
+    if user_name_changed and len(changed_names)<2:
+        if not trigram_check(u_prof.name, cert_name):
             return False
+        return 'name_changed'
+    elif len(changed_names)>=2:
+        return False
 
-        u_prof = UserProfile.objects.get(user=user)
-        user_name_changed = (u_prof.name != cert_name)
+    student = User.objects.prefetch_related("groups").get(id=user.id)
 
-        changed_names = CertificateRegenerationRequest.objects.filter(user=user,
-            course_id=course_id, purpose='name_changed')
-        if user_name_changed and len(changed_names)<2:
-            if not trigram_check(u_prof.name, cert_name):
-                return False
-            return 'name_changed'
-        elif len(changed_names)>=2:
-            return False
+    course = get_course_with_access(user, 'load', course_id, 
+        depth=None, check_if_enrolled=True)
+    course._field_data_cache = {}  # pylint: disable=protected-access
+    course.set_grading_policy(course.grading_policy)
 
-        student = User.objects.prefetch_related("groups").get(id=user.id)
+    course_structure = get_course_blocks(student, course.location)
 
-        course = get_course_with_access(user, 'load', course_id, 
-            depth=None, check_if_enrolled=True)
-        course._field_data_cache = {}  # pylint: disable=protected-access
-        course.set_grading_policy(course.grading_policy)
+    grade_summary = grade(student, course, course_structure=course_structure)
 
-        course_structure = get_course_blocks(student, course.location)
-
-        grade_summary = grade(student, course, course_structure=course_structure)
-
-        if float(grade_summary['percent']) > float(cert_grade):
-            return 'grade_increased'
+    if float(grade_summary['percent']) > float(cert_grade):
+        return 'grade_increased'
 
     return False
 
@@ -471,12 +467,10 @@ def _regeneration_request_available(user, course_id):
 Check if certificate regeneration has already been requested
 """
 def _regeneration_in_progress(user, course_id):
-    #if user.username in ['parhom_999','Geroneja','LyubovZabava','tkach_daria','Ivan','n.kukulevskyi','Kupava']:
-    #if user.username == 'parhom_999':
-        regeneration_is_requested = CertificateRegenerationRequest.objects.filter(user=user,
-                course_id=course_id, status='requested')
-        if len(regeneration_is_requested)>0:
-            return True
+    regeneration_is_requested = CertificateRegenerationRequest.objects.filter(user=user,
+            course_id=course_id, status='requested')
+    if len(regeneration_is_requested)>0:
+        return True
     return False
 
 
