@@ -107,7 +107,7 @@ class Command(BaseCommand):
                     ret
                 ) 
 
-                CertificateRegenerationRequest.objects.filter(id=req.id).update(status="regenerated", modified=timezone.now)
+                CertificateRegenerationRequest.objects.filter(id=req.id).update(status="regenerated", modified=timezone.now())
 
             else:
                 LOGGER.info(
