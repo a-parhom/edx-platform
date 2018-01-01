@@ -1,6 +1,7 @@
 import logging
 from django.contrib.auth.models import User
 from django.core.management.base import BaseCommand, CommandError
+from django.utils import timezone
 from student.models import CertificateRegenerationRequest
 from optparse import make_option
 from opaque_keys import InvalidKeyError
@@ -106,7 +107,7 @@ class Command(BaseCommand):
                     ret
                 ) 
 
-                CertificateRegenerationRequest.objects.filter(id=req.id).update(status="regenerated")
+                CertificateRegenerationRequest.objects.filter(id=req.id).update(status="regenerated", modified=timezone.now)
 
             else:
                 LOGGER.info(
