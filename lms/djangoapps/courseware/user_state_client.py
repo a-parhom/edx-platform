@@ -18,6 +18,8 @@ from xblock.fields import Scope
 from courseware.models import StudentModule, BaseStudentModuleHistory
 from edx_user_state_client.interface import XBlockUserStateClient, XBlockUserState
 
+from django.db import IntegrityError
+
 
 class DjangoXBlockUserStateClient(XBlockUserStateClient):
     """
