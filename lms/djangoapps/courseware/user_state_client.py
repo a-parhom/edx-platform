@@ -6,6 +6,7 @@ data in a Django ORM model.
 import itertools
 from operator import attrgetter
 from time import time
+import logging
 
 try:
     import simplejson as json
@@ -20,6 +21,8 @@ from edx_user_state_client.interface import XBlockUserStateClient, XBlockUserSta
 
 from django.db import transaction
 from django.db.utils import IntegrityError
+
+log = logging.getLogger(__name__)
 
 
 class DjangoXBlockUserStateClient(XBlockUserStateClient):
