@@ -453,6 +453,13 @@ def _serialize_discussion_entities(request, context, discussion_entities, reques
         elif discussion_entity_type == DiscussionEntity.comment:
             serialized_entity = CommentSerializer(entity, context=context).data
         results.append(serialized_entity)
+        
+        serialized_entity['author'] = str(serialized_entity['author'])
+        if (
+                    'endorsed' in serialized_entity and serialized_entity['endorsed'] and
+                    'endorsed_by' in serialized_entity
+            ):
+            serialized_entity['endorsed_by'] = str(serialized_entity['endorsed_by'])
 
         if include_profile_image:
             if serialized_entity['author'] and serialized_entity['author'] not in usernames:
