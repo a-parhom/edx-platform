@@ -120,19 +120,22 @@ class CourseMode(models.Model):
     NO_ID_PROFESSIONAL_MODE = "no-id-professional"
     CREDIT_MODE = "credit"
 
+    """
     DEFAULT_MODE = Mode(
         settings.COURSE_MODE_DEFAULTS['slug'],
         settings.COURSE_MODE_DEFAULTS['name'],
         settings.COURSE_MODE_DEFAULTS['min_price'],
         settings.COURSE_MODE_DEFAULTS['suggested_prices'],
-        settings.COURSE_MODE_DEFAULTS['currency'],
+        'uah',
         settings.COURSE_MODE_DEFAULTS['expiration_datetime'],
         settings.COURSE_MODE_DEFAULTS['description'],
         settings.COURSE_MODE_DEFAULTS['sku'],
         settings.COURSE_MODE_DEFAULTS['bulk_sku'],
     )
-    DEFAULT_MODE_SLUG = settings.COURSE_MODE_DEFAULTS['slug']
-
+    """
+    DEFAULT_MODE = Mode(HONOR, _('Honor'), 0, '', 'uah', None, None, None, None)
+    #DEFAULT_MODE_SLUG = settings.COURSE_MODE_DEFAULTS['slug']
+    DEFAULT_MODE_SLUG = HONOR
     # Modes utilized for audit/free enrollments
     AUDIT_MODES = [AUDIT, HONOR]
 
@@ -156,7 +159,7 @@ class CourseMode(models.Model):
     # "honor" to "audit", we still need to have the shoppingcart
     # use "honor"
     DEFAULT_SHOPPINGCART_MODE_SLUG = HONOR
-    DEFAULT_SHOPPINGCART_MODE = Mode(HONOR, _('Honor'), 0, '', 'usd', None, None, None, None)
+    DEFAULT_SHOPPINGCART_MODE = Mode(HONOR, _('Honor'), 0, '', 'uah', None, None, None, None)
 
     CACHE_NAMESPACE = u"course_modes.CourseMode.cache."
 
