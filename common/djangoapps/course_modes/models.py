@@ -141,6 +141,7 @@ class CourseMode(models.Model):
     CREDIT_MODE = u'credit'
     MASTERS = u'masters'
 
+    """
     DEFAULT_MODE = Mode(
         settings.COURSE_MODE_DEFAULTS['slug'],
         settings.COURSE_MODE_DEFAULTS['name'],
@@ -152,9 +153,13 @@ class CourseMode(models.Model):
         settings.COURSE_MODE_DEFAULTS['sku'],
         settings.COURSE_MODE_DEFAULTS['bulk_sku'],
     )
-    DEFAULT_MODE_SLUG = settings.COURSE_MODE_DEFAULTS['slug']
+    """
 
     ALL_MODES = [AUDIT, CREDIT_MODE, HONOR, NO_ID_PROFESSIONAL_MODE, PROFESSIONAL, VERIFIED, MASTERS, ]
+
+    DEFAULT_MODE = Mode(HONOR, _('Honor'), 0, '', 'uah', None, None, None, None)
+    #DEFAULT_MODE_SLUG = settings.COURSE_MODE_DEFAULTS['slug']
+    DEFAULT_MODE_SLUG = HONOR
 
     # Modes utilized for audit/free enrollments
     AUDIT_MODES = [AUDIT, HONOR]
