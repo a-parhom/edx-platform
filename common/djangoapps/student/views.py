@@ -35,7 +35,6 @@ from django.utils.translation import ugettext as _
 from django.utils.translation import get_language, ungettext
 from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
 from django.views.decorators.http import require_GET, require_POST
-from django.views.decorators.cache import cache_control
 from django.views.generic import TemplateView
 from ipware.ip import get_ip
 from opaque_keys import InvalidKeyError
@@ -63,7 +62,7 @@ from certificates.models import (  # pylint: disable=import-error
 )
 from course_modes.models import CourseMode
 from courseware.access import has_access
-from courseware.courses import get_courses, sort_by_announcement, sort_by_start_date, get_course_with_access  # pylint: disable=import-error
+from courseware.courses import get_courses, sort_by_announcement, sort_by_start_date  # pylint: disable=import-error
 from django_comment_common.models import assign_role
 from edxmako.shortcuts import render_to_response, render_to_string
 from eventtracking import tracker
@@ -133,8 +132,8 @@ from util.milestones_helpers import get_pre_requisite_courses_not_completed
 from util.password_policy_validators import validate_password_strength
 from xmodule.modulestore.django import modulestore
 
-from courseware.grades import grade
-from course_blocks.api import get_course_blocks
+#from courseware.grades import grade
+#from course_blocks.api import get_course_blocks
 
 log = logging.getLogger("edx.student")
 AUDIT_LOG = logging.getLogger("audit")
@@ -449,10 +448,10 @@ def _cert_info(user, course_overview, cert_status, course_mode):  # pylint: disa
 Check if certificate regeneration can be requested
 and return the purpose of regeneration if available
 """
-def _regeneration_request_available(user, course_id):
+def _regeneration_request_available(user, course_overview):
     try:
         generated_certificate = GeneratedCertificate.objects.get(  # pylint: disable=no-member
-            user=user, course_id=course_id)
+            user=user, course_id=course_overview.course_id)
         cert_grade = generated_certificate.grade or 0
         cert_name = generated_certificate.name
     except GeneratedCertificate.DoesNotExist:
@@ -462,7 +461,7 @@ def _regeneration_request_available(user, course_id):
     user_name_changed = (u_prof.name != cert_name)
 
     changed_names = CertificateRegenerationRequest.objects.filter(user=user,
-        course_id=course_id, purpose='name_changed')
+        course_id=course_overview.course_id, purpose='name_changed')
     if user_name_changed and len(changed_names)<2:
         if not trigram_check(u_prof.name, cert_name):
             return False
@@ -470,6 +469,7 @@ def _regeneration_request_available(user, course_id):
     elif len(changed_names)>=2:
         return False
 
+    """
     student = User.objects.prefetch_related("groups").get(id=user.id)
 
     course = get_course_with_access(user, 'load', course_id, 
@@ -480,8 +480,15 @@ def _regeneration_request_available(user, course_id):
     course_structure = get_course_blocks(student, course.location)
 
     grade_summary = grade(student, course, course_structure=course_structure)
+    """
 
-    if float(grade_summary['percent']) > float(cert_grade):
+    persisted_grade = CourseGradeFactory().read(user, course=course_overview)
+
+    grade_summary_percent = 0
+    if persisted_grade is not None:
+        grade_summary_percent = persisted_grade.percent
+
+    if float(grade_summary_percent) > float(cert_grade):
         return 'grade_increased'
 
     return False
@@ -718,9 +725,7 @@ def compose_and_send_activation_email(user, profile, user_registration=None):
     send_activation_email.delay(subject, message_for_activation, from_address, dest_addr)
 
 
-@transaction.non_atomic_requests
 @login_required
-@cache_control(no_cache=True, no_store=True, must_revalidate=True)
 @ensure_csrf_cookie
 def dashboard(request):
     """
