@@ -7,7 +7,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('student', '0011_certificateregenerationrequest'),
+        ('student', '0008_certificateregenerationrequest'),
     ]
 
     operations = [
