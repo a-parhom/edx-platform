@@ -497,9 +497,9 @@ def _regeneration_request_available(user, course_overview):
 """
 Check if certificate regeneration has already been requested
 """
-def _regeneration_in_progress(user, course_id):
+def _regeneration_in_progress(user, course_overview):
     regeneration_is_requested = CertificateRegenerationRequest.objects.filter(user=user,
-            course_id=course_id, status='requested')
+            course_id=course_overview.id, status='requested')
     if len(regeneration_is_requested)>0:
         return True
     return False
