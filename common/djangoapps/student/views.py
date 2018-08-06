@@ -451,7 +451,7 @@ and return the purpose of regeneration if available
 def _regeneration_request_available(user, course_overview):
     try:
         generated_certificate = GeneratedCertificate.objects.get(  # pylint: disable=no-member
-            user=user, course_id=course_overview.course_id)
+            user=user, course_id=course_overview.id)
         cert_grade = generated_certificate.grade or 0
         cert_name = generated_certificate.name
     except GeneratedCertificate.DoesNotExist:
@@ -461,7 +461,7 @@ def _regeneration_request_available(user, course_overview):
     user_name_changed = (u_prof.name != cert_name)
 
     changed_names = CertificateRegenerationRequest.objects.filter(user=user,
-        course_id=course_overview.course_id, purpose='name_changed')
+        course_id=course_overview.id, purpose='name_changed')
     if user_name_changed and len(changed_names)<2:
         if not trigram_check(u_prof.name, cert_name):
             return False
