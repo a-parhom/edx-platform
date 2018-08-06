@@ -415,8 +415,8 @@ def _cert_info(user, course_overview, cert_status, course_mode):  # pylint: disa
             #Check if certificate needs regeneration
             status_dict['show_regenerate_button'] = False
             status_dict['show_regenerate_in_progress'] = False
-            request_available = _regeneration_request_available(user, course_overview.id)
-            regeneration_in_progress = _regeneration_in_progress(user, course_overview.id)
+            request_available = _regeneration_request_available(user, course_overview)
+            regeneration_in_progress = _regeneration_in_progress(user, course_overview)
 
             if request_available and not regeneration_in_progress:
                 status_dict['show_regenerate_button'] = True
@@ -527,7 +527,9 @@ def request_certificate_regeneration(request):
         return HttpResponseBadRequest(_("Invalid course id"))
 
     user = request.user
-    regeneration_purpose = _regeneration_request_available(user, course_id)
+    enrollment = CourseEnrollment.get_enrollment(user, course_id)
+    course_overview = enrollment.course_overview
+    regeneration_purpose = _regeneration_request_available(user, course_overview)
 
     if not regeneration_purpose:
         return HttpResponseBadRequest(_("Operation not permitted"))
