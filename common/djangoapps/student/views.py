@@ -534,7 +534,7 @@ def request_certificate_regeneration(request):
     if not regeneration_purpose:
         return HttpResponseBadRequest(_("Operation not permitted"))
 
-    if not _regeneration_in_progress(user, course_id):
+    if not _regeneration_in_progress(user, course_overview):
         CertificateRegenerationRequest.objects.create(user=user,
             course_id=course_id, purpose=regeneration_purpose, 
             status='requested')
