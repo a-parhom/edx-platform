@@ -482,11 +482,11 @@ def _regeneration_request_available(user, course_overview):
     grade_summary = grade(student, course, course_structure=course_structure)
     """
 
-    persisted_grade = CourseGradeFactory().read(user, course=course_overview)
+    grade = CourseGradeFactory().create(user, course_key=course_overview.id)
 
     grade_summary_percent = 0
-    if persisted_grade is not None:
-        grade_summary_percent = persisted_grade.percent
+    if grade is not None:
+        grade_summary_percent = grade.percent
 
     if float(grade_summary_percent) > float(cert_grade):
         return 'grade_increased'
