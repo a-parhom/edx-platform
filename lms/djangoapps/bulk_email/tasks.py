@@ -382,7 +382,7 @@ def _get_source_address(course_id, course_title, course_language, truncate=True)
         # Although the display will be flipped in RTL languages, the byte order is still the same.
         from_addr_format = u'{name} {email}'.format(
             # Translators: Bulk email from address e.g. ("Physics 101" Course Staff)
-            name=_('"{course_title}" Course Staff'),
+            name=_('Prometheus курс "{course_title}"'),
             email=u'<{course_name}-{from_email}>',
         )
 
