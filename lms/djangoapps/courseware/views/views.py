@@ -30,6 +30,7 @@ from ipware.ip import get_ip
 from markupsafe import escape
 from opaque_keys import InvalidKeyError
 from opaque_keys.edx.keys import CourseKey, UsageKey
+from opaque_keys.edx.locations import SlashSeparatedCourseKey
 from pytz import utc
 from rest_framework import status
 from web_fragments.fragment import Fragment
@@ -38,7 +39,7 @@ import shoppingcart
 import survey.utils
 import survey.views
 from certificates import api as certs_api
-from certificates.models import CertificateStatuses
+from certificates.models import CertificateStatuses, GeneratedCertificate
 from commerce.utils import EcommerceService
 from course_modes.models import CourseMode
 from courseware.access import has_access, has_ccx_coach_role
@@ -89,11 +90,13 @@ from openedx.features.course_experience import UNIFIED_COURSE_TAB_FLAG, course_h
 from openedx.features.course_experience.views.course_dates import CourseDatesFragmentView
 from openedx.features.enterprise_support.api import data_sharing_consent_required
 from shoppingcart.utils import is_shopping_cart_enabled
-from student.models import CourseEnrollment, UserTestGroup
+from student.models import CourseEnrollment, UserTestGroup, CertificateRegenerationRequest, UserProfile
+from student.helpers import trigram_check
 from survey.utils import must_answer_survey
 from util.cache import cache, cache_if_anonymous
 from util.date_utils import strftime_localized
 from util.db import outer_atomic
+from util.json_request import JsonResponse
 from util.milestones_helpers import get_prerequisite_courses_display
 from util.views import _record_feedback_in_zendesk, ensure_valid_course_key, ensure_valid_usage_key
 from xmodule.modulestore.django import modulestore
@@ -927,6 +930,18 @@ def _progress(request, course_key, student_id):
     # checking certificate generation configuration
     enrollment_mode, is_active = CourseEnrollment.enrollment_mode_for_user(student, course_key)
 
+    #Check if certificate needs regeneration
+    enrollment = CourseEnrollment.get_enrollment(student, course_key)
+    show_regenerate_button = False
+    show_regenerate_in_progress = False
+    request_available = _regeneration_request_available(student, enrollment.course_overview)
+    regeneration_in_progress = _regeneration_in_progress(student, enrollment.course_overview)
+
+    if request_available and not regeneration_in_progress:
+        show_regenerate_button = True
+    elif regeneration_in_progress:
+        show_regenerate_in_progress = True
+
     context = {
         'course': course,
         'courseware_summary': courseware_summary,
@@ -943,12 +958,114 @@ def _progress(request, course_key, student_id):
         'upgrade_link': check_and_get_upgrade_link(request, student, course.id),
         'upgrade_price': get_cosmetic_verified_display_price(course),
         # ENDTODO
+        # Certificate regeneration request button
+        'show_regenerate_button': show_regenerate_button,
+        'show_regenerate_in_progress': show_regenerate_in_progress,
     }
 
     with outer_atomic():
         response = render_to_response('courseware/progress.html', context)
 
     return response
+
+
+"""
+Check if certificate regeneration can be requested
+and return the purpose of regeneration if available
+"""
+def _regeneration_request_available(user, course_overview):
+    try:
+        generated_certificate = GeneratedCertificate.objects.get(  # pylint: disable=no-member
+            user=user, course_id=course_overview.id)
+        cert_grade = generated_certificate.grade or 0
+        cert_name = generated_certificate.name
+    except GeneratedCertificate.DoesNotExist:
+        return False
+
+    u_prof = UserProfile.objects.get(user=user)
+    user_name_changed = (u_prof.name != cert_name)
+
+    changed_names = CertificateRegenerationRequest.objects.filter(user=user,
+        course_id=course_overview.id, purpose='name_changed')
+    if user_name_changed and len(changed_names)<2:
+        if not trigram_check(u_prof.name, cert_name):
+            return False
+        return 'name_changed'
+    elif len(changed_names)>=2:
+        return False
+
+    """
+    student = User.objects.prefetch_related("groups").get(id=user.id)
+
+    course = get_course_with_access(user, 'load', course_id, 
+        depth=None, check_if_enrolled=True)
+    course._field_data_cache = {}  # pylint: disable=protected-access
+    course.set_grading_policy(course.grading_policy)
+
+    course_structure = get_course_blocks(student, course.location)
+
+    grade_summary = grade(student, course, course_structure=course_structure)
+    """
+
+    grade = CourseGradeFactory().create(user, course_key=course_overview.id)
+
+    grade_summary_percent = 0
+    if grade is not None:
+        grade_summary_percent = grade.percent
+
+    if float(grade_summary_percent) > float(cert_grade):
+        return 'grade_increased'
+
+    return False
+
+
+"""
+Check if certificate regeneration has already been requested
+"""
+def _regeneration_in_progress(user, course_overview):
+    regeneration_is_requested = CertificateRegenerationRequest.objects.filter(user=user,
+            course_id=course_overview.id, status='requested')
+    if len(regeneration_is_requested)>0:
+        return True
+    return False
+
+
+"""
+Request certificate regeneration
+"""
+@transaction.non_atomic_requests
+@require_POST
+@login_required
+@ensure_csrf_cookie
+def request_certificate_regeneration(request):
+    if 'course_id' not in request.POST:
+        return HttpResponseBadRequest(_("Course id not specified"))
+
+    try:
+        course_id = SlashSeparatedCourseKey.from_deprecated_string(request.POST.get("course_id"))
+    except InvalidKeyError:
+        log.warning(
+            u"User %s tried to request certificate regeneration with invalid course id: %s",
+            user.username,
+            request.POST.get("course_id"),
+        )
+        return HttpResponseBadRequest(_("Invalid course id"))
+
+    user = request.user
+    enrollment = CourseEnrollment.get_enrollment(user, course_id)
+    course_overview = enrollment.course_overview
+    regeneration_purpose = _regeneration_request_available(user, course_overview)
+
+    if not regeneration_purpose:
+        return HttpResponseBadRequest(_("Operation not permitted"))
+
+    if not _regeneration_in_progress(user, course_overview):
+        CertificateRegenerationRequest.objects.create(user=user,
+            course_id=course_id, purpose=regeneration_purpose, 
+            status='requested')
+        return JsonResponse({'success': True})
+    else:
+        return HttpResponseBadRequest(_("Certificate is in queue for regeneration"))
 
 
 def _get_cert_data(student, course, course_key, is_active, enrollment_mode):
