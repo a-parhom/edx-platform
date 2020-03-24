@@ -61,7 +61,7 @@ urlpatterns = (
     url(r'^submit_feedback$', 'util.views.submit_feedback'),
 
     #Request certificate regeneration
-    url(r'^request_regeneration$', 'student.views.request_certificate_regeneration', 
+    url(r'^request_regeneration$', 'courseware.views.views.request_certificate_regeneration', 
         name="request_regeneration"),
 
     # Enrollment API RESTful endpoints

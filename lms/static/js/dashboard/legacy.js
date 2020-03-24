@@ -182,39 +182,6 @@
              $('#unenroll_course_number').text($(event.target).data('course-number'));
              $('#unenroll_course_name').text($(event.target).data('course-name'));
          });
-
-        //Certificate regeneration
-        $("a.request_regeneration").click( function(event) {
-            var element = $(event.target);
-            var do_request = confirm("Ви маєте 2 спроби на перегенерацію, пов'язану зі змінами у прізвищі, імені або по батькові. На перегенерацію через набір додаткових балів кількість спроб необмежена. Продовжити?");
-            if(!do_request) {
-                return false;
-            }
-            $.ajax({
-                type: "POST",
-                url: urls.requestRegeneration,
-                data: {'course_id': element.data("course-id")},
-                success: function(data) {
-                    if(data.success) {
-                        element.parent("li.action").html('<span class="regeneration_in_progress_message">Сертифікат в черзі перегенерації</span>');
-                    }
-                },
-                error: function(xhr) {
-                    if (xhr.status === 403) {
-                        location.href = urls.signInUser;
-                    }
-                }
-            });
-            return false;
-        });
-        $("a.cert_regen_hint_toggle i").click( function(event) {
-            var element = $(event.target);
-            if (element.parent("a").next(".cert_regen_hint").hasClass("hidden"))
-                element.parent("a").next(".cert_regen_hint").removeClass("hidden");
-            else
-                element.parent("a").next(".cert_regen_hint").addClass("hidden");
-            return false;
-        });
     };
 
  })(jQuery, gettext, Logger, accessible_modal, interpolate);
