@@ -186,12 +186,25 @@ class UserGradeView(GradeViewMixin, GenericAPIView):
 
         prep_course_for_grading(course, request)
         course_grade = CourseGradeFactory().create(grade_user, course)
+
+        courseware_summary = course_grade.chapter_grades
+        grades_schema = {}
+
+        for chapter in courseware_summary:
+            for section in chapter['sections']:
+                earned = section.all_total.earned
+                total = section.all_total.possible
+                name = section.display_name
+                if total > 0:
+                    grades_schema[unicode(name)] = "{0:.0%}".format(float(earned) / total)
+
         return Response([{
             'username': grade_user.username,
             'course_key': course_id,
             'passed': course_grade.passed,
             'percent': course_grade.percent,
             'letter_grade': course_grade.letter_grade,
+            'section_scores': grades_schema
         }])
 
 

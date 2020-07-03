@@ -1,6 +1,7 @@
 """
 Database models for the badges app
 """
+import logging
 from importlib import import_module
 
 from config_models.models import ConfigurationModel
@@ -19,6 +20,7 @@ from badges.utils import deserialize_count_specs
 from openedx.core.djangoapps.xmodule_django.models import CourseKeyField
 from xmodule.modulestore.django import modulestore
 
+logger = logging.getLogger(__name__)
 
 def validate_badge_image(image):
     """
@@ -66,7 +68,7 @@ class BadgeClass(models.Model):
     @classmethod
     def get_badge_class(
             cls, slug, issuing_component, display_name=None, description=None, criteria=None, image_file_handle=None,
-            mode='', course_id=None, create=True
+            mode='', course_id=None, create=True, slug_badgr=''
     ):
         """
         Looks up a badge class by its slug, issuing component, and course_id and returns it should it exist.
@@ -90,15 +92,26 @@ class BadgeClass(models.Model):
                 return None
         badge_class = cls(
             slug=slug,
+            slug_badgr=slug_badgr,
             issuing_component=issuing_component,
             display_name=display_name,
             course_id=course_id,
             mode=mode,
             description=description,
             criteria=criteria,
+            image=image_file_handle,
         )
-        badge_class.image.save(image_file_handle.name, image_file_handle)
-        badge_class.full_clean()
+        try:
+            badge_class.image.save(image_file_handle.name, image_file_handle)
+        except AttributeError:
+            logger.warning('Image for (%s) doesn\'t exist at %s', str(badge_class), str(image_file_handle))
+
+            try:
+                image_file_handle = CourseCompleteImageConfiguration.image_for_mode('default')
+                badge_class.image.save(image_file_handle.name, image_file_handle)
+            except CourseCompleteImageConfiguration.DoesNotExist:
+                logger.warning('Image for default Badge doesn\'t exist at %s', str(image_file_handle))
+
         badge_class.save()
         return badge_class
 
@@ -162,6 +175,15 @@ class BadgeAssertion(TimeStampedModel):
         if course_id:
             return cls.objects.filter(user=user, badge_class__course_id=course_id)
         return cls.objects.filter(user=user)
+
+    @classmethod
+    def slug_assertion_for_user(cls, user, slug=None):
+        """
+        Get a specific badge assertions for a user.
+        """
+        if slug:
+            return cls.objects.filter(user=user, badge_class__slug=slug).values()
+        return cls.objects.filter(user=user).values()
 
     class Meta(object):
         app_label = "badges"
