@@ -759,6 +759,18 @@ urlpatterns += [
     url(r'^bulk_email/', include('bulk_email.urls')),
 ]
 
+#RG Analytics
+urlpatterns += [
+    #RG Analytics
+    url(
+        r'^courses/{}/tab/instructor_analytics/'.format(
+            settings.COURSE_ID_PATTERN,
+        ),
+        include('rg_instructor_analytics.urls'),
+        name='instructor_analytics_endpoint',
+    ),
+]
+
 urlpatterns += [
     url(
         r'^courses/{}/tab/(?P<tab_type>[^/]+)/$'.format(

@@ -137,7 +137,7 @@ FEATURES = {
 
     # Allows to enable an API endpoint to serve XBlock view, used for example by external applications.
     # See jquey-xblock: https://github.com/edx-solutions/jquery-xblock
-    'ENABLE_XBLOCK_VIEW_ENDPOINT': False,
+    'ENABLE_XBLOCK_VIEW_ENDPOINT': True,
 
     # Allows to configure the LMS to provide CORS headers to serve requests from other domains
     'ENABLE_CORS_HEADERS': False,
@@ -478,6 +478,9 @@ FEATURES = {
     # .. toggle_status: supported
     # .. toggle_warnings: None
     'ENABLE_ORA_USER_STATE_UPLOAD_DATA': False,
+
+    #RG Analytics
+    'ENABLE_RG_INSTRUCTOR_ANALYTICS': True,
 }
 
 # Settings for the course reviews tool template and identification key, set either to None to disable course reviews
@@ -2562,6 +2565,9 @@ INSTALLED_APPS = [
     # Management of per-user schedules
     'openedx.core.djangoapps.schedules',
     'rest_framework_jwt',
+
+    #RG Analytics
+    'rg_instructor_analytics',
 ]
 
 ######################### CSRF #########################################
@@ -3921,3 +3927,20 @@ GITHUB_REPO_ROOT = '/edx/var/edxapp/data'
 
 ##################### SUPPORT URL ############################
 SUPPORT_HOW_TO_UNENROLL_LINK = ''
+
+############# Settings for RG Analytics ############################
+RG_ANALYTICS_ENROLLMENT_STAT_UPDATE = {
+    'minute': '*',
+    'hour': '*/6',
+    'day_of_week': '*',
+    'day_of_month': '*',
+    'month_of_year': '*',
+}
+RG_ANALYTICS_GRADE_STAT_UPDATE = {
+    'minute': '*',
+    'hour': '*/6',
+    'day_of_week': '*',
+    'day_of_month': '*',
+    'month_of_year': '*',
+}
+RG_ANALYTICS_COURSES = []
