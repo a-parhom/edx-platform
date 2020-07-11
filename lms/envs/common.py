@@ -392,6 +392,10 @@ FEATURES = {
     # Whether to check the "Notify users by email" checkbox in the batch enrollment form
     # in the instructor dashboard.
     'BATCH_ENROLLMENT_NOTIFY_USERS_DEFAULT': True,
+
+    #RG Analytics
+    'ENABLE_XBLOCK_VIEW_ENDPOINT': True,
+    'ENABLE_RG_INSTRUCTOR_ANALYTICS': True,
 }
 
 # Settings for the course reviews tool template and identification key, set either to None to disable course reviews
@@ -2238,6 +2242,9 @@ INSTALLED_APPS = (
     'openedx.features.enterprise_support',
 
     'experiments',
+
+    #RG Analytics
+    'rg_instructor_analytics',
 )
 
 ######################### CSRF #########################################
@@ -3218,3 +3225,20 @@ COURSES_API_CACHE_TIMEOUT = 3600  # Value is in seconds
 
 ############## Settings for CourseGraph ############################
 COURSEGRAPH_JOB_QUEUE = LOW_PRIORITY_QUEUE
+############# Settings for RG Analytics ############################
+RG_ANALYTICS_ENROLLMENT_STAT_UPDATE = {
+    'minute': '*',
+    'hour': '*/6',
+    'day_of_week': '*',
+    'day_of_month': '*',
+    'month_of_year': '*',
+}
+RG_ANALYTICS_GRADE_STAT_UPDATE = {
+    'minute': '*',
+    'hour': '*/6',
+    'day_of_week': '*',
+    'day_of_month': '*',
+    'month_of_year': '*',
+}
+RG_ANALYTICS_COURSES = []
+

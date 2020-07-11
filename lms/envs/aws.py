@@ -1007,3 +1007,6 @@ ICP_LICENSE = ENV_TOKENS.get('ICP_LICENSE', None)
 
 ############## Settings for CourseGraph ############################
 COURSEGRAPH_JOB_QUEUE = ENV_TOKENS.get('COURSEGRAPH_JOB_QUEUE', LOW_PRIORITY_QUEUE)
+
+############## RG Analytics courses ############################
+RG_ANALYTICS_COURSES = ENV_TOKENS.get('RG_ANALYTICS_COURSES')
