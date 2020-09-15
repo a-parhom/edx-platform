@@ -2609,8 +2609,8 @@ class CodeResponse(LoncapaResponse):
     answer = None
     queue_name = None
     
-    def __init__(self, xml, inputfields, context, system, capa_module):
-        super(CodeResponse, self).__init__(xml, inputfields, context, system, capa_module)
+    def __init__(self, xml, inputfields, context, system, capa_module, minimal_init):
+        super(CodeResponse, self).__init__(xml, inputfields, context, system, capa_module, minimal_init)
         self.answer_id = self.answer_ids[-1]
 
     def setup_response(self):
