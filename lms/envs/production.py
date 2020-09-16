@@ -918,9 +918,6 @@ PARENTAL_CONSENT_AGE_LIMIT = ENV_TOKENS.get(
     PARENTAL_CONSENT_AGE_LIMIT
 )
 
-############## RG Analytics courses ############################
-RG_ANALYTICS_COURSES = ENV_TOKENS.get('RG_ANALYTICS_COURSES')
-
 ########################## Extra middleware classes  #######################
 
 # Allow extra middleware classes to be added to the app through configuration.
