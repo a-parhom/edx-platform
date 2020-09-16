@@ -3,7 +3,7 @@ Badging service for XBlocks
 """
 
 
-from badges.models import BadgeClass, BadgeAssertion
+from badges.models import BadgeClass
 
 
 class BadgingService(object):
@@ -28,5 +28,3 @@ class BadgingService(object):
             self.course_badges_enabled = course.issue_badges
 
     get_badge_class = BadgeClass.get_badge_class
-    assertions_for_user = BadgeAssertion.assertions_for_user
-    slug_assertion_for_user = BadgeAssertion.slug_assertion_for_user
