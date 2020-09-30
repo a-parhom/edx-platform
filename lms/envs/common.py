@@ -853,7 +853,7 @@ WIKI_ENABLED = True
 
 COURSE_MODE_DEFAULTS = {
     'bulk_sku': None,
-    'currency': u'usd',
+    'currency': u'uah',
     'description': None,
     'expiration_datetime': None,
     'min_price': 0,
@@ -1222,8 +1222,8 @@ MEDIA_URL = '/media/'
 
 # Locale/Internationalization
 CELERY_TIMEZONE = 'UTC'
-TIME_ZONE = 'UTC'
-LANGUAGE_CODE = 'en'  # http://www.i18nguy.com/unicode/language-identifiers.html
+TIME_ZONE = 'Kiev/Europe'
+LANGUAGE_CODE = 'uk'  # http://www.i18nguy.com/unicode/language-identifiers.html
 # these languages display right to left
 LANGUAGES_BIDI = ("he", "ar", "fa", "ur", "fa-ir", "rtl")
 
@@ -1414,7 +1414,7 @@ CC_PROCESSOR = {
 }
 
 # Setting for PAID_COURSE_REGISTRATION, DOES NOT AFFECT VERIFIED STUDENTS
-PAID_COURSE_REGISTRATION_CURRENCY = ['usd', '$']
+PAID_COURSE_REGISTRATION_CURRENCY = ['uah', '$']
 
 # Members of this group are allowed to generate payment reports
 PAYMENT_REPORT_GENERATOR_GROUP = 'shoppingcart_report_access'
