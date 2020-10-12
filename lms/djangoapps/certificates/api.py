@@ -67,7 +67,6 @@ def format_certificate_for_user(username, cert):
             "created": cert.created_date,
             "modified": cert.modified_date,
             "is_passing": is_passing_status(cert.status),
-            "is_pdf_certificate": bool(cert.download_url),
             "download_url": (
                 cert.download_url or get_certificate_url(cert.user.id, cert.course_id, uuid=cert.verify_uuid,
                                                          user_certificate=cert)

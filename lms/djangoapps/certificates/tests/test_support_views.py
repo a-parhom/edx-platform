@@ -211,7 +211,6 @@ class CertificateSearchTests(CertificateSupportTestCase):
         self.assertEqual(retrieved_cert["status"], self.CERT_STATUS)
         self.assertEqual(retrieved_cert["type"], self.CERT_MODE)
         self.assertEqual(retrieved_cert["download_url"], self.CERT_DOWNLOAD_URL)
-        self.assertFalse(retrieved_cert["regenerate"])
 
     @override_settings(FEATURES=FEATURES_WITH_CERTS_ENABLED)
     def test_download_link(self):
@@ -233,7 +232,6 @@ class CertificateSearchTests(CertificateSupportTestCase):
                 kwargs={"certificate_uuid": self.cert.verify_uuid}
             )
         )
-        self.assertTrue(retrieved_cert["regenerate"])
 
     def _search(self, user_filter, course_filter=None):
         """Execute a search and return the response. """
@@ -288,10 +286,6 @@ class CertificateRegenerateTests(CertificateSupportTestCase):
             self.assertEqual(response.status_code, 403)
 
     def test_regenerate_certificate(self):
-        """Test web certificate regenration."""
-        self.cert.download_url = ''
-        self.cert.save()
-
         response = self._regenerate(
             course_key=self.course.id,
             username=self.STUDENT_USERNAME,

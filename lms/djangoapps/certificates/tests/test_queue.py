@@ -15,7 +15,6 @@ from django.test import TestCase
 from django.test.utils import override_settings
 from mock import Mock, patch
 from opaque_keys.edx.locator import CourseLocator
-from testfixtures import LogCapture
 
 # It is really unfortunate that we are using the XQueue client
 # code from the capa library.  In the future, we should move this
@@ -291,80 +290,6 @@ class XQueueCertInterfaceAddCertificateTest(ModuleStoreTestCase):
             GeneratedCertificate.objects.get(user=self.user_2, course_id=self.course.id).status,
             expected_status
         )
-
-    def test_regen_cert_with_pdf_certificate(self):
-        """
-        Test that regenerating PDF certifcate log warning message and certificate
-        status remains unchanged.
-        """
-        download_url = 'http://www.example.com/certificate.pdf'
-        # Create an existing verifed enrollment and certificate
-        CourseEnrollmentFactory(
-            user=self.user_2,
-            course_id=self.course.id,
-            is_active=True,
-            mode=CourseMode.VERIFIED,
-        )
-        GeneratedCertificateFactory(
-            user=self.user_2,
-            course_id=self.course.id,
-            grade='1.0',
-            status=CertificateStatuses.downloadable,
-            mode=GeneratedCertificate.MODES.verified,
-            download_url=download_url
-        )
-
-        self._assert_pdf_cert_generation_dicontinued_logs(download_url)
-
-    def test_add_cert_with_existing_pdf_certificate(self):
-        """
-        Test that add certifcate for existing PDF certificate log warning
-        message and certificate status remains unchanged.
-        """
-        download_url = 'http://www.example.com/certificate.pdf'
-        # Create an existing verifed enrollment and certificate
-        CourseEnrollmentFactory(
-            user=self.user_2,
-            course_id=self.course.id,
-            is_active=True,
-            mode=CourseMode.VERIFIED,
-        )
-        GeneratedCertificateFactory(
-            user=self.user_2,
-            course_id=self.course.id,
-            grade='1.0',
-            status=CertificateStatuses.downloadable,
-            mode=GeneratedCertificate.MODES.verified,
-            download_url=download_url
-        )
-
-        self._assert_pdf_cert_generation_dicontinued_logs(download_url, add_cert=True)
-
-    def _assert_pdf_cert_generation_dicontinued_logs(self, download_url, add_cert=False):
-        """Assert PDF certificate generation discontinued logs."""
-        with LogCapture(LOGGER.name) as log:
-            if add_cert:
-                self.xqueue.add_cert(self.user_2, self.course.id)
-            else:
-                self.xqueue.regen_cert(self.user_2, self.course.id)
-            log.check_present(
-                (
-                    LOGGER.name,
-                    'WARNING',
-                    (
-                        u"PDF certificate generation discontinued, canceling "
-                        u"PDF certificate generation for student {student_id} "
-                        u"in course '{course_id}' "
-                        u"with status '{status}' "
-                        u"and download_url '{download_url}'."
-                    ).format(
-                        student_id=self.user_2.id,
-                        course_id=six.text_type(self.course.id),
-                        status=CertificateStatuses.downloadable,
-                        download_url=download_url
-                    )
-                )
-            )
 
 
 @override_settings(CERT_QUEUE='certificates')
