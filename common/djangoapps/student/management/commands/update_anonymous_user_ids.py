@@ -7,6 +7,10 @@ from submissions.models import StudentItem, ScoreAnnotation
 from openassessment.assessment.models import (
     AIGradingWorkflow, Assessment, PeerWorkflow, StaffWorkflow, StudentTrainingWorkflow,
 )
+try:
+    from problem_builder.models import Answer
+except ImportError:
+    Answer = None
 
 
 log = logging.getLogger(__name__)
@@ -43,6 +47,8 @@ class Command(BaseCommand):
             (StudentTrainingWorkflow, 'student_id'),
         ):
             self.update_anonymous_user_ids(model, field_name, anon_ids_map)
+        if Answer:  # If problem builder is installed:
+            self.update_anonymous_user_ids(Answer, 'student_id', anon_ids_map)
 
     @staticmethod
     def generate_anonymous_user_ids():
