@@ -62,7 +62,7 @@ class BadgeClass(models.Model):
     .. no_pii:
     """
     slug = models.SlugField(max_length=255, validators=[validate_lowercase])
-    slug_badgr = models.SlugField(max_length=255, default='', blank=True)
+    slug_badgr = models.SlugField(max_length=255, default=u'', blank=True)
     issuing_component = models.SlugField(max_length=50, default=u'', blank=True, validators=[validate_lowercase])
     display_name = models.CharField(max_length=255)
     course_id = CourseKeyField(max_length=255, blank=True, default=None)
@@ -113,6 +113,7 @@ class BadgeClass(models.Model):
             image=image_file_handle,
             slug_badgr=slug_badgr
         )
+
         try:
             badge_class.image.save(image_file_handle.name, image_file_handle)
         except AttributeError:
