@@ -15,7 +15,7 @@ import traceback
 import six
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
-#from django.utils.encoding import smart_text
+from django.utils.encoding import smart_text
 from django.utils.functional import cached_property
 from pytz import utc
 from six import text_type
@@ -734,8 +734,7 @@ class CapaMixin(ScorableXBlockMixin, CapaFields):
 
         content = {
             'name': self.display_name_with_default,
-            #'html': smart_text(html),
-            'html': html,
+            'html': smart_text(html),
             'weight': self.weight,
         }
 
