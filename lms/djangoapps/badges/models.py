@@ -67,6 +67,7 @@ class BadgeClass(models.Model):
     # Mode a badge was awarded for. Included for legacy/migration purposes.
     mode = models.CharField(max_length=100, default=u'', blank=True)
     image = models.ImageField(upload_to=u'badge_classes', validators=[validate_badge_image])
+    slug_badgr = u''
 
     def __str__(self):
         return HTML(u"<Badge '{slug}' for '{issuing_component}'>").format(
@@ -100,7 +101,6 @@ class BadgeClass(models.Model):
                 return None
         badge_class = cls(
             slug=slug,
-            slug_badgr=slug_badgr,
             issuing_component=issuing_component,
             display_name=display_name,
             course_id=course_id,
@@ -109,6 +109,7 @@ class BadgeClass(models.Model):
             criteria=criteria,
             image=image_file_handle,
         )
+        badge_class.slug_badgr=slug_badgr
         try:
             badge_class.image.save(image_file_handle.name, image_file_handle)
         except AttributeError:
