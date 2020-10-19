@@ -5,7 +5,7 @@ from django.db import IntegrityError
 from student.models import AnonymousUserId, anonymous_id_for_user
 from submissions.models import StudentItem, ScoreAnnotation
 from openassessment.assessment.models import (
-    AIGradingWorkflow, Assessment, PeerWorkflow, StaffWorkflow, StudentTrainingWorkflow,
+    Assessment, PeerWorkflow, StaffWorkflow, StudentTrainingWorkflow,
 )
 try:
     from problem_builder.models import Answer
@@ -40,7 +40,6 @@ class Command(BaseCommand):
         for (model, field_name) in (
             (StudentItem, 'student_id'),
             (ScoreAnnotation, 'creator'),
-            (AIGradingWorkflow, 'student_id'),
             (Assessment, 'scorer_id'),
             (PeerWorkflow, 'student_id'),
             (StaffWorkflow, 'scorer_id'),
