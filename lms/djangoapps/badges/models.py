@@ -31,6 +31,9 @@ def validate_badge_image(image):
     """
     Validates that a particular image is small enough to be a badge and square.
     """
+    image_format = image.name.split('.')[-1]
+    if image_format != 'png':
+        raise ValidationError(_(u"The badge image must be png format."))
     if image.width != image.height:
         raise ValidationError(_(u"The badge image must be square."))
     if not image.size < (250 * 1024):
@@ -59,6 +62,7 @@ class BadgeClass(models.Model):
     .. no_pii:
     """
     slug = models.SlugField(max_length=255, validators=[validate_lowercase])
+    slug_badgr = models.SlugField(max_length=255, default='', blank=True)
     issuing_component = models.SlugField(max_length=50, default=u'', blank=True, validators=[validate_lowercase])
     display_name = models.CharField(max_length=255)
     course_id = CourseKeyField(max_length=255, blank=True, default=None)
@@ -67,7 +71,6 @@ class BadgeClass(models.Model):
     # Mode a badge was awarded for. Included for legacy/migration purposes.
     mode = models.CharField(max_length=100, default=u'', blank=True)
     image = models.ImageField(upload_to=u'badge_classes', validators=[validate_badge_image])
-    slug_badgr = u''
 
     def __str__(self):
         return HTML(u"<Badge '{slug}' for '{issuing_component}'>").format(
@@ -108,8 +111,8 @@ class BadgeClass(models.Model):
             description=description,
             criteria=criteria,
             image=image_file_handle,
+            slug_badgr=slug_badgr
         )
-        badge_class.slug_badgr=slug_badgr
         try:
             badge_class.image.save(image_file_handle.name, image_file_handle)
         except AttributeError:
