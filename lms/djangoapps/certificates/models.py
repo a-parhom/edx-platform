@@ -1233,3 +1233,23 @@ def create_course_group_badge(sender, user, course_key, status, **kwargs):  # py
     Standard signal hook to create badges when a user has completed a prespecified set of courses.
     """
     course_group_check(user, course_key)
+
+
+class CertificateRegenerationRequest(models.Model):
+    """
+    Purposes:
+        'name_changed',
+        'grade_increased'
+    Statuses:
+        'requested',
+        'regenerated'
+    """
+    class Meta(object):
+        app_label = "certificates"
+
+    user = models.ForeignKey(User, db_index=True)
+    course_id = CourseKeyField(db_index=True, max_length=255)
+    purpose = models.CharField(max_length=255)
+    created = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=255)
+    modified = models.DateTimeField(default=django.utils.timezone.now)

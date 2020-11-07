@@ -6,15 +6,17 @@ Views used by XQueue certificate generation.
 import json
 import logging
 
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import User
 from django.db import transaction
-from django.http import Http404, HttpResponse, HttpResponseForbidden
-from django.views.decorators.csrf import csrf_exempt
+from django.http import Http404, HttpResponse, HttpResponseForbidden, HttpResponseBadRequest
+from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
 from django.views.decorators.http import require_POST
 from opaque_keys.edx.keys import CourseKey
 
 from capa.xqueue_interface import XQUEUE_METRIC_NAME
 from lms.djangoapps.certificates.api import generate_user_certificates
+from lms.djangoapps.certificates.helpers import regeneration_request_available, regeneration_in_progress
 from lms.djangoapps.certificates.models import (
     CertificateStatuses,
     ExampleCertificate,
@@ -228,3 +230,40 @@ def update_example_certificate(request):
 
     # Let the XQueue know that we handled the response
     return JsonResponse({'return_code': 0})
+
+
+@transaction.non_atomic_requests
+@require_POST
+@login_required
+@ensure_csrf_cookie
+def request_certificate_regeneration(request):
+    """
+    Request certificate regeneration
+    """
+    if 'course_id' not in request.POST:
+        return HttpResponseBadRequest(_("Course id not specified"))
+    
+    user = request.user
+
+    try:
+        course_id = CourseKey.from_string(request.POST.get("course_id"))
+    except InvalidKeyError:
+        log.warning(
+            u"User %s tried to request certificate regeneration with invalid course id: %s",
+            user.username,
+            request.POST.get("course_id"),
+        )
+        return HttpResponseBadRequest(_("Invalid course id"))
+
+    regeneration_purpose = regeneration_request_available(user, course_id)
+
+    if not regeneration_purpose:
+        return HttpResponseBadRequest(_("Operation not permitted"))
+
+    if not regeneration_in_progress(user, course_id):
+        CertificateRegenerationRequest.objects.create(user=user,
+            course_id=course_id, purpose=regeneration_purpose, 
+            status='requested')
+        return JsonResponse({'success': True})
+    else:
+        return HttpResponseBadRequest(_("Certificate is in queue for regeneration"))
