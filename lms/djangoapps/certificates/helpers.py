@@ -246,7 +246,7 @@ def trigram_check(s1, s2):
     return ( c / (a + b - c) ) > 0.2
 
 
-def _regeneration_request_available(user, course_id):
+def regeneration_request_available(user, course_id):
 	"""
 	Check if certificate regeneration can be requested
 	and return the purpose of regeneration if available
@@ -283,7 +283,7 @@ def _regeneration_request_available(user, course_id):
     return False
 
 
-def _regeneration_in_progress(user, course_id):
+def regeneration_in_progress(user, course_id):
 	"""
 	Check if certificate regeneration has already been requested
 	"""
