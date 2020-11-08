@@ -914,6 +914,9 @@ urlpatterns += [
     url(r'^request_certificate$', certificates_views.request_certificate,
         name='request_certificate'),
 
+    #Request certificate regeneration
+    url(r'^request_regeneration$', certificates_views.request_certificate_regeneration, name="request_regeneration"),
+
     # REST APIs
     url(r'^api/certificates/',
         include(('lms.djangoapps.certificates.apis.urls', 'lms.djangoapps.certificates'),

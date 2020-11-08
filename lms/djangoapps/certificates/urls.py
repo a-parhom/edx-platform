@@ -36,7 +36,4 @@ urlpatterns = [
     url(r'^search', views.search_certificates, name="search"),
     url(r'^regenerate', views.regenerate_certificate_for_user, name="regenerate_certificate_for_user"),
     url(r'^generate', views.generate_certificate_for_user, name="generate_certificate_for_user"),
-
-    #Request certificate regeneration
-    url(r'^request_regeneration$', views.request_certificate_regeneration, name="request_regeneration"),
 ]
