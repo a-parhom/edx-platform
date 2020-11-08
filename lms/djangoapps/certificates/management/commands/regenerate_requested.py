@@ -20,18 +20,20 @@ class Command(BaseCommand):
         $ ... cert_regeneration --course course_id
     """
 
-    option_list = BaseCommand.option_list + (
-        make_option('-n', '--noop',
+    def add_arguments(self, parser):
+        super(Command, self).add_arguments(parser)
+
+        parser.add_argument('-n', '--noop',
                     action='store_true',
                     dest='noop',
                     default=False,
-                    help="Don't grade or add certificate requests to the queue"),
-        make_option('-c', '--course',
+                    help="Don't grade or add certificate requests to the queue")
+
+        parser.add_argument('-c', '--course',
                     metavar='COURSE_ID',
                     dest='course',
                     default=False,
                     help='The course id (e.g., mit/6-002x/circuits-and-electronics)')
-    )
 
     def handle(self, *args, **options):   
         LOGGER.info(
@@ -39,8 +41,8 @@ class Command(BaseCommand):
                 u"Starting to create tasks to regenerate certificates "
                 u"with arguments %s and options %s"
             ),
-            unicode(args),
-            unicode(options)
+            str(args),
+            str(options)
         )
 
         if options['course']:
@@ -90,7 +92,7 @@ class Command(BaseCommand):
                         u"The new certificate status is '%s'."
                     ),
                     student.id,
-                    unicode(course_id),
+                    str(course_id),
                     ret
                 ) 
 
@@ -104,7 +106,7 @@ class Command(BaseCommand):
                         u"because the noop flag is set."
                     ),
                     student.id,
-                    unicode(course_id)
+                    str(course_id)
                 )
 
             LOGGER.info(
@@ -113,5 +115,5 @@ class Command(BaseCommand):
                     u"user %s and course '%s'."
                 ),
                 student.id,
-                unicode(course_id)
+                str(course_id)
             )

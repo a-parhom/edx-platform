@@ -61,6 +61,7 @@ from django.core.exceptions import ValidationError
 from django.db import models, transaction
 from django.db.models import Count
 from django.dispatch import receiver
+from django.utils import timezone
 from django.utils.encoding import python_2_unicode_compatible
 from django.utils.translation import ugettext_lazy as _
 from model_utils import Choices
@@ -1247,9 +1248,9 @@ class CertificateRegenerationRequest(models.Model):
     class Meta(object):
         app_label = "certificates"
 
-    user = models.ForeignKey(User, db_index=True)
+    user = models.ForeignKey(User, on_delete=models.DO_NOTHING, db_index=True)
     course_id = CourseKeyField(db_index=True, max_length=255)
     purpose = models.CharField(max_length=255)
     created = models.DateTimeField(auto_now_add=True)
     status = models.CharField(max_length=255)
-    modified = models.DateTimeField(default=django.utils.timezone.now)
+    modified = models.DateTimeField(default=timezone.now)

@@ -3,7 +3,7 @@
 import string
 
 from lms.djangoapps.grades.course_grade_factory import CourseGradeFactory
-from models import CertificateRegenerationRequest, GeneratedCertificate
+from .models import CertificateRegenerationRequest, GeneratedCertificate
 from student.models import UserProfile
 
 def trigram_check(s1, s2):
@@ -247,10 +247,10 @@ def trigram_check(s1, s2):
 
 
 def regeneration_request_available(user, course_id):
-	"""
-	Check if certificate regeneration can be requested
-	and return the purpose of regeneration if available
-	"""
+    """
+    Check if certificate regeneration can be requested
+    and return the purpose of regeneration if available
+    """
     try:
         generated_certificate = GeneratedCertificate.objects.get(  # pylint: disable=no-member
             user=user, course_id=course_id)
@@ -284,9 +284,9 @@ def regeneration_request_available(user, course_id):
 
 
 def regeneration_in_progress(user, course_id):
-	"""
-	Check if certificate regeneration has already been requested
-	"""
+    """
+    Check if certificate regeneration has already been requested
+    """
     regeneration_is_requested = CertificateRegenerationRequest.objects.filter(user=user,
             course_id=course_id, status='requested')
     if len(regeneration_is_requested)>0:
