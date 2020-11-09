@@ -21,7 +21,8 @@ from lms.djangoapps.certificates.models import (
     CertificateStatuses,
     ExampleCertificate,
     GeneratedCertificate,
-    certificate_status_for_student
+    certificate_status_for_student,
+    CertificateRegenerationRequest
 )
 from util.json_request import JsonResponse, JsonResponseBadRequest
 from util.request_rate_limiter import BadRequestRateLimiter
