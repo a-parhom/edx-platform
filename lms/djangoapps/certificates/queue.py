@@ -184,7 +184,7 @@ class XQueueCertInterface(object):
         raise NotImplementedError
 
     # pylint: disable=too-many-statements
-    def add_cert(self, student, course_id, course=None, forced_grade=None, template_file=None, generate_pdf=True):
+    def add_cert(self, student, course_id, course=None, forced_grade=None, template_file=None, generate_pdf=True, generation_mode='batch'):
         """
         Request a new certificate for a student.
 
@@ -426,13 +426,16 @@ class XQueueCertInterface(object):
             return cert
 
         # Finally, generate the certificate and send it off.
-        return self._generate_cert(cert, course, student, grade_contents, template_pdf, generate_pdf)
+        return self._generate_cert(cert, course, student, grade_contents, template_pdf, generate_pdf, generation_mode)
 
-    def _generate_cert(self, cert, course, student, grade_contents, template_pdf, generate_pdf):
+    def _generate_cert(self, cert, course, student, grade_contents, template_pdf, generate_pdf, generation_mode='batch'):
         """
         Generate a certificate for the student. If `generate_pdf` is True,
         sends a request to XQueue.
         """
+        if generation_mode not in ['batch', 'self']:
+            generation_mode = 'batch'
+
         course_id = six.text_type(course.id)
 
         key = make_hashkey(random.random())
@@ -445,6 +448,7 @@ class XQueueCertInterface(object):
             'name': cert.name,
             'grade': grade_contents,
             'template_pdf': template_pdf,
+            'generation_mode': generation_mode,
         }
         if generate_pdf:
             cert.status = status.generating

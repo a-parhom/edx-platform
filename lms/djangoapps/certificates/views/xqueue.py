@@ -243,7 +243,7 @@ def request_certificate_regeneration(request):
     """
     if 'course_id' not in request.POST:
         return HttpResponseBadRequest(_("Course id not specified"))
-    
+
     user = request.user
 
     try:

@@ -218,7 +218,8 @@ def generate_user_certificates(student, course_key, course=None, insecure=False,
         course_key,
         course=course,
         generate_pdf=generate_pdf,
-        forced_grade=forced_grade
+        forced_grade=forced_grade,
+        generation_mode=generation_mode
     )
 
     message = u'Queued Certificate Generation task for {user} : {course}'
