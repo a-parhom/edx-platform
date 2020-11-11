@@ -449,6 +449,7 @@ class XQueueCertInterface(object):
             'grade': grade_contents,
             'template_pdf': template_pdf,
             'generation_mode': generation_mode,
+            'user_email': student.email,
         }
         if generate_pdf:
             cert.status = status.generating
