@@ -53,7 +53,7 @@ def request_certificate(request):
             if status in [CertificateStatuses.unavailable, CertificateStatuses.notpassing, CertificateStatuses.error]:
                 log_msg = u'Grading and certification requested for user %s in course %s via /request_certificate call'
                 log.info(log_msg, username, course_key)
-                status = generate_user_certificates(student, course_key, course=course)
+                status = generate_user_certificates(student, course_key, course=course, generation_mode='self')
             return HttpResponse(json.dumps({'add_status': status}), content_type='application/json')
         return HttpResponse(json.dumps({'add_status': 'ERRORANONYMOUSUSER'}), content_type='application/json')
 
