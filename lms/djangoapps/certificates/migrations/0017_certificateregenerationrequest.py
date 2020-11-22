@@ -3,7 +3,7 @@
 from django.conf import settings
 from django.db import migrations, models
 from openedx.core.djangoapps.xmodule_django.models import CourseKeyField
-
+from django.utils import timezone
 
 class Migration(migrations.Migration):
 
@@ -20,7 +20,7 @@ class Migration(migrations.Migration):
                 ('purpose', models.CharField(max_length=255)),
                 ('created', models.DateTimeField(auto_now_add=True)),
                 ('status', CourseKeyField(max_length=255)),
-                ('modified', models.DateTimeField(default=django.utils.timezone.now)),
+                ('modified', models.DateTimeField(default=timezone.now)),
                 ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
             ],
         ),
