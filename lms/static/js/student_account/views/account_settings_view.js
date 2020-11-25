@@ -84,7 +84,7 @@
                     $.cookie('focus_id', '#beta-language-message');
                 }
 
-                if (view.options.phoneNumberRequired && this.options.model.attributes.phone_number == '') {
+                if (view.options.phoneNumberRequired) {
                     phoneNumberRequiredMessage = gettext('Please, set your mobile phone number.');
                     $.cookie('focus_id', '#phone-message');
                 }
