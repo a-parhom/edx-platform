@@ -25,7 +25,7 @@
             },
 
             render: function() {
-                var tabName, betaLangMessage, helpTranslateText, helpTranslateLink, betaLangCode, oldLangCode,
+                var tabName, betaLangMessage, phoneNumberRequiredMessage, helpTranslateText, helpTranslateLink, betaLangCode, oldLangCode,
                     view = this;
                 var accountSettingsTabs = [
                     {
