@@ -115,9 +115,9 @@
             phoneFieldView = {
                 view: new AccountSettingsFieldViews.TextFieldView({
                     model: userAccountModel,
-                    title: gettext('Phone Number'),
+                    title: gettext('Mobile phone number'),
                     valueAttribute: 'phone_number',
-                    helpMessage: gettext('Phone Number'),  // eslint-disable-line max-len,
+                    helpMessage: gettext('Mobile phone number'),  // eslint-disable-line max-len,
                     persistChanges: true
                 })
             };

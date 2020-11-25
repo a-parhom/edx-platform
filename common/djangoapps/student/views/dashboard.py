@@ -572,9 +572,9 @@ def student_dashboard(request):
     if not UserProfile.objects.filter(user=user).exists():
         return redirect(reverse('account_settings'))
 
-
-    if UserProfile.objects.get(user=user).phone_number == None:
-        return redirect(reverse('account_settings'))
+    if settings.REGISTRATION_EXTRA_FIELDS['phone_number'] == "required":
+        if UserProfile.objects.get(user=user).phone_number == None:
+            return redirect(reverse('account_settings'))
 
     platform_name = configuration_helpers.get_value("platform_name", settings.PLATFORM_NAME)
 
