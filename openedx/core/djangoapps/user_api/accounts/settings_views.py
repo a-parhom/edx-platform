@@ -36,6 +36,9 @@ from student.models import UserProfile
 from third_party_auth import pipeline
 from util.date_utils import strftime_localized
 
+from openedx.core.djangoapps.user_api.helpers import FormDescription
+from openedx.core.djangoapps.user_authn.views.registration_form import get_registration_extension_form
+
 log = logging.getLogger(__name__)
 
 
@@ -270,5 +273,21 @@ def _get_extended_profile_fields():
         else:
             field_dict["field_type"] = "TextField"
         extended_profile_fields.append(field_dict)
+
+    custom_form = get_registration_extension_form()
+    if custom_form:
+        for field_name, field in custom_form.fields.items():
+            field_options = getattr(
+                getattr(custom_form, 'Meta', None), 'serialization_options', {}
+            ).get(field_name, {})
+            field_dict = {
+                "field_name": field_name,
+                "field_label": field.label,
+                "field_type": field_options.get('field_type', FormDescription.FIELD_TYPE_MAP.get(field.__class__)),
+            }
+            options=getattr(field, 'choices', None), error_messages=field.error_messages
+            if options:
+                field_dict["field_options"] = options
+            extended_profile_fields.append(field_dict)
 
     return extended_profile_fields

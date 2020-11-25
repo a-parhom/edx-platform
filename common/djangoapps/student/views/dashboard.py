@@ -59,6 +59,8 @@ from student.models import (
 from util.milestones_helpers import get_pre_requisite_courses_not_completed
 from xmodule.modulestore.django import modulestore
 
+#from custom_reg_form.models import ExtraInfo
+
 log = logging.getLogger("edx.student")
 
 experiments_namespace = WaffleFlagNamespace(name=u'student.experiments')
@@ -571,6 +573,13 @@ def student_dashboard(request):
     user = request.user
     if not UserProfile.objects.filter(user=user).exists():
         return redirect(reverse('account_settings'))
+
+    if getattr(settings, 'REGISTRATION_EXTENSION_FORM', None):
+        module, klass = settings.REGISTRATION_EXTENSION_FORM.rsplit('.', 1)
+        module = import_module(module)
+
+        if not module.models.ExtraInfo.objects.filter(user=user).exists():
+            return redirect(reverse('account_settings'))
 
     platform_name = configuration_helpers.get_value("platform_name", settings.PLATFORM_NAME)
 
