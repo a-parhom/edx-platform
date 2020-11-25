@@ -35,8 +35,8 @@
             var $accountSettingsElement, userAccountModel, userPreferencesModel, aboutSectionsData,
                 accountsSectionData, ordersSectionData, accountSettingsView, showAccountSettingsPage,
                 showLoadingError, orderNumber, getUserField, userFields, timeZoneDropdownField, countryDropdownField,
-                emailFieldView, secondaryEmailFieldView, socialFields, accountDeletionFields, platformData,
-                aboutSectionMessageType, aboutSectionMessage, fullnameFieldView, countryFieldView,
+                emailFieldView, secondaryEmailFieldView, socialFields, accountDeletionFields, platformData, phoneFieldView,
+                aboutSectionMessageType, aboutSectionMessage, fullnameFieldView, countryFieldView, 
                 fullNameFieldData, emailFieldData, secondaryEmailFieldData, countryFieldData, additionalFields,
                 fieldItem, emailFieldViewIndex, focusId,
                 tabIndex = 0;
