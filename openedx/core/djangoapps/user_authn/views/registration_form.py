@@ -298,9 +298,10 @@ class RegistrationFormFactory(object):
     Construct Registration forms and associated fields.
     """
 
-    DEFAULT_FIELDS = ["email", "phone_number", "name", "username", "password"]
+    DEFAULT_FIELDS = ["email", "name", "username", "password"]
 
     EXTRA_FIELDS = [
+        "phone_number", 
         "confirm_email",
         "first_name",
         "last_name",
