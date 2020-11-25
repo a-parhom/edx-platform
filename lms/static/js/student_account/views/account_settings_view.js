@@ -83,14 +83,21 @@
 
                     $.cookie('focus_id', '#beta-language-message');
                 }
+
+                if (!_.isEmpty(view.options.phoneNumberRequired) && this.options.model.phone_number == '') {
+                    phoneNumberRequiredMessage = gettext('Please, set your mobile phone number.');
+                    $.cookie('focus_id', '#phone-message');
+                }
                 HtmlUtils.setHtml(this.$el, HtmlUtils.template(accountSettingsTemplate)({
                     accountSettingsTabs: accountSettingsTabs,
                     HtmlUtils: HtmlUtils,
                     message: betaLangMessage,
                     helpTranslateText: helpTranslateText,
                     helpTranslateLink: helpTranslateLink,
-                    oldLangCode: oldLangCode
+                    oldLangCode: oldLangCode,
+                    phoneMessage: phoneNumberRequiredMessage
                 }));
+
                 _.each(accountSettingsTabs, function(tab) {
                     tabName = tab.name;
                     view.renderSection(view.options.tabSections[tabName], tabName, tab.label);
