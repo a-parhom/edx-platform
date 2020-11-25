@@ -37,6 +37,8 @@ from util.password_policy_validators import (
     validate_password,
 )
 
+from phonenumber_field.formfields import PhoneNumberField
+
 
 class TrueCheckbox(widgets.CheckboxInput):
     """
@@ -151,6 +153,8 @@ class AccountCreationForm(forms.Form):
             "max_length": _(u"Email cannot be more than %(limit_value)s characters long"),
         }
     )
+
+    phone_number = PhoneNumberField()
 
     password = forms.CharField()
 
