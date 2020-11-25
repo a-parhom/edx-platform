@@ -37,8 +37,6 @@ from util.password_policy_validators import (
     validate_password,
 )
 
-from phonenumber_field.formfields import PhoneNumberField
-
 
 class TrueCheckbox(widgets.CheckboxInput):
     """
@@ -153,8 +151,6 @@ class AccountCreationForm(forms.Form):
             "max_length": _(u"Email cannot be more than %(limit_value)s characters long"),
         }
     )
-
-    phone_number = PhoneNumberField()
 
     password = forms.CharField()
 
@@ -559,7 +555,7 @@ class RegistrationFormFactory(object):
             required=required
         )
 
-    def _add_phone_number_field(self, form_desc, required=True):
+    def _add_phone_number_field(self, form_desc, required=False):
         """Add a phone_number field to a form description.
         Arguments:
             form_desc: A form description
