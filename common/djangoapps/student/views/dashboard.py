@@ -573,7 +573,7 @@ def student_dashboard(request):
         return redirect(reverse('account_settings'))
 
 
-    if UserProfile.objects.get(id=user.id).phone_number == None:
+    if UserProfile.objects.get(user=user).phone_number == None:
         return redirect(reverse('account_settings'))
 
     platform_name = configuration_helpers.get_value("platform_name", settings.PLATFORM_NAME)
