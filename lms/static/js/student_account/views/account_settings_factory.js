@@ -112,6 +112,16 @@
                 };
             }
 
+            phoneFieldView = {
+                view: new AccountSettingsFieldViews.TextFieldView({
+                    model: userAccountModel,
+                    title: gettext('Phone Number'),
+                    valueAttribute: 'phone_number',
+                    helpMessage: gettext('Phone Number'),  // eslint-disable-line max-len,
+                    persistChanges: true
+                })
+            };
+
             countryFieldData = {
                 model: userAccountModel,
                 required: true,
@@ -156,6 +166,7 @@
                         },
                         fullnameFieldView,
                         emailFieldView,
+                        phoneFieldView,
                         {
                             view: new AccountSettingsFieldViews.PasswordFieldView({
                                 model: userAccountModel,

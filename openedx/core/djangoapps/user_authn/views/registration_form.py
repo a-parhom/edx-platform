@@ -294,7 +294,7 @@ class RegistrationFormFactory(object):
     Construct Registration forms and associated fields.
     """
 
-    DEFAULT_FIELDS = ["email", "name", "username", "password"]
+    DEFAULT_FIELDS = ["email", "phone_number", "name", "username", "password"]
 
     EXTRA_FIELDS = [
         "confirm_email",
@@ -551,6 +551,24 @@ class RegistrationFormFactory(object):
             field_type="password",
             instructions=password_validators_instruction_texts(),
             restrictions=password_validators_restrictions(),
+            required=required
+        )
+
+    def _add_phone_number_field(self, form_desc, required=True):
+        """Add a phone_number field to a form description.
+        Arguments:
+            form_desc: A form description
+        Keyword Arguments:
+            required (bool): Whether this field is required; defaults to True
+        """
+        # Translators: This label appears above a field on the registration form
+        # meant to hold the user's phone number.
+        phone_number_label = _(u"Phone Number")
+
+        form_desc.add_field(
+            "phone_number",
+            label=phone_number_label,
+            field_type="tel",
             required=required
         )
 
