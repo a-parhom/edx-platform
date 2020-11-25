@@ -71,6 +71,8 @@ from openedx.core.djangoapps.user_api.accounts.utils import is_secondary_email_f
         displayAccountDeletion,
         isSecondaryEmailFeatureEnabled,
         ${ beta_language | n, dump_js_escaped_json },
+
+        ${ phone_number_required | n, dump_js_escaped_json },
     );
 </%static:require_module>
 

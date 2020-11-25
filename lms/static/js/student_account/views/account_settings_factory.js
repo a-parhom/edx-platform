@@ -30,7 +30,8 @@
             extendedProfileFields,
             displayAccountDeletion,
             isSecondaryEmailFeatureEnabled,
-            betaLanguage
+            betaLanguage,
+            phoneNumberRequired
         ) {
             var $accountSettingsElement, userAccountModel, userPreferencesModel, aboutSectionsData,
                 accountsSectionData, ordersSectionData, accountSettingsView, showAccountSettingsPage,
@@ -434,7 +435,8 @@
                 },
                 userPreferencesModel: userPreferencesModel,
                 disableOrderHistoryTab: disableOrderHistoryTab,
-                betaLanguage: betaLanguage
+                betaLanguage: betaLanguage,
+                phoneNumberRequired: phoneNumberRequired
             });
 
             accountSettingsView.render();

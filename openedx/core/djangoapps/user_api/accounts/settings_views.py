@@ -144,6 +144,7 @@ def account_settings_context(request):
         ),
         'extended_profile_fields': _get_extended_profile_fields(),
         'beta_language': beta_language,
+        'phone_number_required': settings.REGISTRATION_EXTRA_FIELDS['phone_number'] == "required",
     }
 
     enterprise_customer = enterprise_customer_for_request(request)
