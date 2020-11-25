@@ -34,6 +34,8 @@ from . import (
 from .image_helpers import get_profile_image_urls_for_user
 from .utils import format_social_link, validate_social_link
 
+from phonenumber_field.serializerfields import PhoneNumberField
+
 PROFILE_IMAGE_KEY_PREFIX = 'image_url'
 LOGGER = logging.getLogger(__name__)
 
@@ -235,7 +237,8 @@ class AccountLegacyProfileSerializer(serializers.HyperlinkedModelSerializer, Rea
     requires_parental_consent = serializers.SerializerMethodField()
     language_proficiencies = LanguageProficiencySerializer(many=True, required=False)
     social_links = SocialLinkSerializer(many=True, required=False)
-    phone_number = PhoneNumberSerializer(required=False)
+    #phone_number = PhoneNumberSerializer(required=False)
+    phone_number = PhoneNumberField(required=False)
 
     class Meta(object):
         model = UserProfile

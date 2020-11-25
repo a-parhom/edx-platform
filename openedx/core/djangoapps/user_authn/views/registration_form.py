@@ -564,7 +564,7 @@ class RegistrationFormFactory(object):
         """
         # Translators: This label appears above a field on the registration form
         # meant to hold the user's phone number.
-        phone_number_label = _(u"Phone Number")
+        phone_number_label = _(u"Mobile phone number")
 
         form_desc.add_field(
             "phone_number",
