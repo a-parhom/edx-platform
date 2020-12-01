@@ -417,7 +417,8 @@ def get_password_validation_error(password, username=None, email=None):
 
 
 def get_phone_number_validation_error(phone_number):
-    return _validate(validate_international_phonenumber, ValidationError, phone_number)
+    phone_number_validation_error = _validate(validate_international_phonenumber, ValidationError, phone_number)
+    return phone_number_validation_error[2:-2]
     
 
 def get_country_validation_error(country):
