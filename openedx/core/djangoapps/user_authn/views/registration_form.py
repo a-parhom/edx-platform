@@ -570,10 +570,16 @@ class RegistrationFormFactory(object):
         # meant to hold the user's phone number.
         phone_number_label = _(u"Mobile phone number")
 
+        phone_number_instructions = _(
+            u"Номер телефону необхідно вводити в міжнародному форматі, наприклад:"
+            u"+380001112233"
+        )
+
         form_desc.add_field(
             "phone_number",
             label=phone_number_label,
             field_type="tel",
+            instructions=phone_number_instructions,
             required=required
         )
 
