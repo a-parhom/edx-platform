@@ -559,7 +559,7 @@ class RegistrationFormFactory(object):
             required=required
         )
 
-    def _add_phone_number_field(self, form_desc, required=False):
+    def _add_phone_number_field(self, form_desc, required=True):
         """Add a phone_number field to a form description.
         Arguments:
             form_desc: A form description
