@@ -575,12 +575,17 @@ class RegistrationFormFactory(object):
             u"+380001112233"
         )
 
+        phone_number_error_msg = _(u"Введіть ваш номер телефону")
+
         form_desc.add_field(
             "phone_number",
             label=phone_number_label,
             field_type="tel",
             instructions=phone_number_instructions,
-            required=required
+            required=required,
+            error_messages={
+                "required": phone_number_error_msg
+            }
         )
 
     def _add_level_of_education_field(self, form_desc, required=True):
