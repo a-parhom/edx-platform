@@ -1028,12 +1028,14 @@ class SubsectionGradeView(GradeViewMixin, APIView):
                 error_code='invalid_usage_key'
             )
 
+        """
         if not has_course_author_access(request.user, usage_key.course_key):
             raise DeveloperErrorViewMixin.api_error(
                 status_code=status.HTTP_403_FORBIDDEN,
                 developer_message='The requesting user does not have course author permissions.',
                 error_code='user_permissions',
             )
+        """
 
         try:
             user_id = int(request.GET.get('user_id'))
