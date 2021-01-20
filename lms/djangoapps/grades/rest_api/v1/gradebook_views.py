@@ -507,7 +507,7 @@ class GradebookView(GradeViewMixin, PaginatedAPIView):
 
     @verify_course_exists
     @verify_writable_gradebook_enabled
-    @course_author_access_required
+    #@course_author_access_required
     def get(self, request, course_key):
         """
         Returns a gradebook entry/entries (i.e. both course and subsection-level grade data)
@@ -1028,14 +1028,12 @@ class SubsectionGradeView(GradeViewMixin, APIView):
                 error_code='invalid_usage_key'
             )
 
-        """
         if not has_course_author_access(request.user, usage_key.course_key):
             raise DeveloperErrorViewMixin.api_error(
                 status_code=status.HTTP_403_FORBIDDEN,
                 developer_message='The requesting user does not have course author permissions.',
                 error_code='user_permissions',
             )
-        """
 
         try:
             user_id = int(request.GET.get('user_id'))
