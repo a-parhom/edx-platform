@@ -25,7 +25,7 @@
             },
 
             render: function() {
-                var tabName, betaLangMessage, phoneNumberRequiredMessage, helpTranslateText, helpTranslateLink, betaLangCode, oldLangCode,
+                var tabName, betaLangMessage, helpTranslateText, helpTranslateLink, betaLangCode, oldLangCode,
                     view = this;
                 var accountSettingsTabs = [
                     {
@@ -83,21 +83,14 @@
 
                     $.cookie('focus_id', '#beta-language-message');
                 }
-
-                if (view.options.phoneNumberRequired) {
-                    phoneNumberRequiredMessage = gettext('Please, set your mobile phone number.');
-                    $.cookie('focus_id', '#phone-message');
-                }
                 HtmlUtils.setHtml(this.$el, HtmlUtils.template(accountSettingsTemplate)({
                     accountSettingsTabs: accountSettingsTabs,
                     HtmlUtils: HtmlUtils,
                     message: betaLangMessage,
                     helpTranslateText: helpTranslateText,
                     helpTranslateLink: helpTranslateLink,
-                    oldLangCode: oldLangCode,
-                    phoneMessage: phoneNumberRequiredMessage
+                    oldLangCode: oldLangCode
                 }));
-
                 _.each(accountSettingsTabs, function(tab) {
                     tabName = tab.name;
                     view.renderSection(view.options.tabSections[tabName], tabName, tab.label);

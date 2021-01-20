@@ -38,8 +38,6 @@ from openedx.core.lib.api.view_utils import add_serializer_errors
 from openedx.features.enterprise_support.utils import get_enterprise_readonly_account_fields
 from .serializers import AccountLegacyProfileSerializer, AccountUserSerializer, UserReadOnlySerializer, _visible_fields
 
-from phonenumber_field.validators import validate_international_phonenumber
-
 # Public access point for this function.
 visible_fields = _visible_fields
 
@@ -415,13 +413,6 @@ def get_password_validation_error(password, username=None, email=None):
     """
     return _validate(_validate_password, errors.AccountPasswordInvalid, password, username, email)
 
-
-def get_phone_number_validation_error(phone_number):
-    if (phone_number == ''):
-        return u"Введіть ваш номер телефону у міжнародному форматі"
-    phone_number_validation_error = _validate(validate_international_phonenumber, ValidationError, phone_number)
-    return phone_number_validation_error[2:-2]
-    
 
 def get_country_validation_error(country):
     """Get the built-in validation error message for when

@@ -105,11 +105,6 @@ def account_settings_context(request):
             beta_language['code'] = pref_language
             beta_language['name'] = settings.LANGUAGE_DICT.get(pref_language)
 
-    phone_number_required = False
-    if UserProfile.objects.get(user=user).phone_number == None:
-        if settings.REGISTRATION_EXTRA_FIELDS['phone_number'] == "required":
-            phone_number_required = True
-
     context = {
         'auth': {},
         'duplicate_provider': None,
@@ -149,7 +144,6 @@ def account_settings_context(request):
         ),
         'extended_profile_fields': _get_extended_profile_fields(),
         'beta_language': beta_language,
-        'phone_number_required': phone_number_required,
     }
 
     enterprise_customer = enterprise_customer_for_request(request)

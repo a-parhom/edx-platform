@@ -11,14 +11,6 @@
             </div>
         </div>
     <% } %>
-    <% if (phoneMessage) { %>
-        <div class="account-settings-message">
-            <div id="phone-message" class="alert-message warning" aria-live="assertive" role="alert">
-                <!--span><%= HtmlUtils.ensureHtml(phoneMessage) %></span-->
-                <span><%- gettext('Будь ласка, вкажіть ваш номер телефону.') %></span>
-            </div>
-        </div>
-    <% } %>
     <div class="wrapper-header">
         <h2 class="header-title"><%- gettext("Account Settings") %></h2>
         <div class="left list-inline account-nav" role="tablist">

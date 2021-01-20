@@ -46,8 +46,7 @@ from openedx.core.djangoapps.user_api.accounts.api import (
     get_name_validation_error,
     get_password_validation_error,
     get_username_existence_validation_error,
-    get_username_validation_error,
-    get_phone_number_validation_error
+    get_username_validation_error
 )
 from openedx.core.djangoapps.user_authn.utils import generate_password
 from openedx.core.djangoapps.user_api.preferences import api as preferences_api
@@ -714,18 +713,13 @@ class RegistrationValidationView(APIView):
         country = request.data.get('country')
         return get_country_validation_error(country)
 
-    def phone_number_handler(self, request):
-        phone_number = request.data.get('phone_number')
-        return get_phone_number_validation_error(phone_number)
-
     validation_handlers = {
         "name": name_handler,
         "username": username_handler,
         "email": email_handler,
         "confirm_email": confirm_email_handler,
         "password": password_handler,
-        "country": country_handler,
-        "phone_number": phone_number_handler
+        "country": country_handler
     }
 
     def post(self, request):

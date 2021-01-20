@@ -16,8 +16,6 @@ from django.core.serializers.json import DjangoJSONEncoder
 from django.utils.encoding import force_text
 from django.utils.functional import Promise
 
-from phonenumber_field.formfields import PhoneNumberField
-
 LOGGER = logging.getLogger(__name__)
 
 
@@ -97,7 +95,7 @@ class InvalidFieldError(Exception):
 class FormDescription(object):
     """Generate a JSON representation of a form. """
 
-    ALLOWED_TYPES = ["text", "email", "select", "textarea", "checkbox", "plaintext", "password", "hidden", "tel"]
+    ALLOWED_TYPES = ["text", "email", "select", "textarea", "checkbox", "plaintext", "password", "hidden"]
 
     ALLOWED_RESTRICTIONS = {
         "text": ["min_length", "max_length"],
@@ -114,7 +112,6 @@ class FormDescription(object):
         forms.Textarea: "textarea",
         forms.BooleanField: "checkbox",
         forms.EmailField: "email",
-        PhoneNumberField: "tel",
     }
 
     OVERRIDE_FIELD_PROPERTIES = [

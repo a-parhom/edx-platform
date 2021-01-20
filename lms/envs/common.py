@@ -2804,7 +2804,6 @@ REGISTRATION_EXTRA_FIELDS = {
     'terms_of_service': 'hidden',
     'city': 'hidden',
     'country': 'hidden',
-    'phone_number': 'hidden',
 }
 
 REGISTRATION_FIELD_ORDER = [
@@ -2814,7 +2813,6 @@ REGISTRATION_FIELD_ORDER = [
     "username",
     "email",
     "confirm_email",
-    "phone_number",
     "password",
     "city",
     "state",

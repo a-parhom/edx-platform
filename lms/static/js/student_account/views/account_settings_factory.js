@@ -30,14 +30,13 @@
             extendedProfileFields,
             displayAccountDeletion,
             isSecondaryEmailFeatureEnabled,
-            betaLanguage,
-            phoneNumberRequired
+            betaLanguage
         ) {
             var $accountSettingsElement, userAccountModel, userPreferencesModel, aboutSectionsData,
                 accountsSectionData, ordersSectionData, accountSettingsView, showAccountSettingsPage,
                 showLoadingError, orderNumber, getUserField, userFields, timeZoneDropdownField, countryDropdownField,
-                emailFieldView, secondaryEmailFieldView, socialFields, accountDeletionFields, platformData, phoneFieldView,
-                aboutSectionMessageType, aboutSectionMessage, fullnameFieldView, countryFieldView, 
+                emailFieldView, secondaryEmailFieldView, socialFields, accountDeletionFields, platformData,
+                aboutSectionMessageType, aboutSectionMessage, fullnameFieldView, countryFieldView,
                 fullNameFieldData, emailFieldData, secondaryEmailFieldData, countryFieldData, additionalFields,
                 fieldItem, emailFieldViewIndex, focusId,
                 tabIndex = 0;
@@ -113,16 +112,6 @@
                 };
             }
 
-            phoneFieldView = {
-                view: new AccountSettingsFieldViews.TextFieldView({
-                    model: userAccountModel,
-                    title: gettext('Номер мобільного телефону'),
-                    valueAttribute: 'phone_number',
-                    helpMessage: gettext('Номер телефону необхідно вводити в міжнародному форматі, наприклад: +380001112233'),  // eslint-disable-line max-len,
-                    persistChanges: true
-                })
-            };
-
             countryFieldData = {
                 model: userAccountModel,
                 required: true,
@@ -167,7 +156,6 @@
                         },
                         fullnameFieldView,
                         emailFieldView,
-                        phoneFieldView,
                         {
                             view: new AccountSettingsFieldViews.PasswordFieldView({
                                 model: userAccountModel,
@@ -435,8 +423,7 @@
                 },
                 userPreferencesModel: userPreferencesModel,
                 disableOrderHistoryTab: disableOrderHistoryTab,
-                betaLanguage: betaLanguage,
-                phoneNumberRequired: phoneNumberRequired
+                betaLanguage: betaLanguage
             });
 
             accountSettingsView.render();
