@@ -237,6 +237,7 @@ def course_author_access_required(view):
 
 def get_view(view):
     def _wrapper_view(self, request, course_id, *args, **kwargs):
+        course_key = CourseKey.from_string(course_id)
         return view(self, request, course_key, *args, **kwargs)
     return _wrapper_view
 
