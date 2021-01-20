@@ -235,6 +235,11 @@ def course_author_access_required(view):
         return view(self, request, course_key, *args, **kwargs)
     return _wrapper_view
 
+def get_view(view):
+    def _wrapper_view(self, request, course_id, *args, **kwargs):
+        return view(self, request, course_key, *args, **kwargs)
+    return _wrapper_view
+
 
 class CourseGradingView(BaseCourseView):
     """
@@ -508,6 +513,7 @@ class GradebookView(GradeViewMixin, PaginatedAPIView):
     @verify_course_exists
     @verify_writable_gradebook_enabled
     #@course_author_access_required
+    @get_view
     def get(self, request, course_key):
         """
         Returns a gradebook entry/entries (i.e. both course and subsection-level grade data)
