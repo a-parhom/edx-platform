@@ -66,7 +66,7 @@ NPM_INSTALLED_LIBRARIES = [
     'underscore/underscore.js',
     '@edx/studio-frontend/dist/',
     'which-country/index.js',
-    'intl-tel-input/build/js/intlTelInput-jquery.js'
+    'intl-tel-input/build/'
 ]
 
 # A list of NPM installed developer libraries that should be copied into the common
