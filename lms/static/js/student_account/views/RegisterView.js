@@ -265,6 +265,7 @@
                         separateDialCode: true,
                         preferredCountries: ['ua'],
                         initialCountry: "auto",
+                        autoPlaceholder: "off",
                         geoIpLookup: function(success, failure) {
                             $.get("https://ipinfo.io", function() {}, "jsonp").always(function(resp) {
                                 var countryCode = (resp && resp.country) ? resp.country : "ua";
@@ -545,6 +546,8 @@
                     }
 
                     obj.phone_number = $phoneNumber.getNumber();
+
+                    console.log(obj);
 
                     return obj;
                 },
