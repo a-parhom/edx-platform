@@ -271,7 +271,7 @@
                                 success(countryCode);
                             });
                         },
-                        utilsScript: '/static/common/js/vendor/utils.js';
+                        utilsScript: '/static/common/js/vendor/utils.js'
                     });
 
                     // Clicking on links inside a label should open that link.
