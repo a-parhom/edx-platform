@@ -260,6 +260,11 @@
                     // xss-lint: disable=javascript-jquery-insert-into-target
                     $('.checkbox-terms_of_service').insertAfter('.optional-fields');
 
+                    //IntlTelInput
+                    $('input[type=tel]').intlTelInput({
+                        separateDialCode: true
+                    });
+
                     // Clicking on links inside a label should open that link.
                     $('label a').click(function(ev) {
                         ev.stopPropagation();
