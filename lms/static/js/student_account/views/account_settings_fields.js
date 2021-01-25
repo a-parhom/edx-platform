@@ -13,7 +13,8 @@
         'text!templates/fields/field_social_link_account.underscore',
         'text!templates/fields/field_order_history.underscore',
         'edx-ui-toolkit/js/utils/string-utils',
-        'edx-ui-toolkit/js/utils/html-utils'
+        'edx-ui-toolkit/js/utils/html-utils',
+        'intl-tel-input'
     ], function(
         gettext, $, _, Backbone,
         FieldViews,
@@ -46,6 +47,36 @@
                             {new_email_address: this.fieldValue()}
                         )
                     );
+                }
+            }),
+            PhoneNumberFieldView: FieldViews.TextFieldView.extend({
+                render: function() {
+                    HtmlUtils.setHtml(this.$el, HtmlUtils.template(field_text_account_template)({
+                        id: this.options.valueAttribute,
+                        title: this.options.title,
+                        value: this.modelValue(),
+                        message: this.options.helpMessage,
+                        placeholder: this.options.placeholder || ''
+                    }));
+                    this.$el.intlTelInput({
+                        separateDialCode: true,
+                        preferredCountries: ['ua'],
+                        initialCountry: "auto",
+                        geoIpLookup: function(success, failure) {
+                            $.get("https://ipinfo.io", function() {}, "jsonp").always(function(resp) {
+                                var countryCode = (resp && resp.country) ? resp.country : "ua";
+                                success(countryCode);
+                            });
+                        },
+                        utilsScript: '/static/common/js/vendor/utils.js'
+                    });
+                    this.delegateEvents();
+                    return this;
+                },
+                saveValue: function() {
+                    var attributes = {};
+                    attributes[this.options.valueAttribute] = this.$el.getNumber();
+                    this.saveAttributes(attributes);
                 }
             }),
             LanguagePreferenceFieldView: FieldViews.DropdownFieldView.extend({

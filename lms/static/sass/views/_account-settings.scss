@@ -1,5 +1,6 @@
 // lms - application - account settings
 // ====================
+@import 'intl-tel-input/build/css/intlTelInput';
 
 // Table of Contents
 // * +Container - Account Settings
@@ -680,4 +681,12 @@
       }
     }
   }
+}
+
+.iti { width: 100%; }
+
+.iti__flag {background-image: url("/static/common/js/vendor/flags.png");}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .iti__flag {background-image: url("/static/common/js/vendor/flags@2x.png");}
 }
