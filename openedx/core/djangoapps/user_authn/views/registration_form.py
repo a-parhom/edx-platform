@@ -580,6 +580,7 @@ class RegistrationFormFactory(object):
         form_desc.add_field(
             "phone_number",
             label=phone_number_label,
+            placeholder=phone_number_label,
             field_type="tel",
             instructions=phone_number_instructions,
             required=required,
