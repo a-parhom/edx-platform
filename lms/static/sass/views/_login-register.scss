@@ -890,8 +890,14 @@ body.open-modal {
   overflow: hidden;
 }
 
-.iti__flag {background-image: url("intl-tel-input/build/img/flags.png");}
+.iti { width: 100%; }
+
+.iti__flag {background-image: url("#{$static-path}/common/js/vendor/flags.png");}
 
 @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
-  .iti__flag {background-image: url("intl-tel-input/build/img/flags@2x.png");}
+  .iti__flag {background-image: url("#{$static-path}/common/js/vendor/flags@2x.png");}
+}
+
+.tel-phone_number label[for=register-phone_number].focus-out {
+  padding-left: 80px;
 }
