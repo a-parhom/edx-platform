@@ -262,7 +262,16 @@
 
                     //IntlTelInput
                     $('input[type=tel]').intlTelInput({
-                        separateDialCode: true
+                        separateDialCode: true,
+                        preferredCountries: ['ua'],
+                        initialCountry: "auto",
+                        geoIpLookup: function(success, failure) {
+                            $.get("https://ipinfo.io", function() {}, "jsonp").always(function(resp) {
+                                var countryCode = (resp && resp.country) ? resp.country : "ua";
+                                success(countryCode);
+                            });
+                        },
+                        utilsScript: '/static/common/js/vendor/utils.js';
                     });
 
                     // Clicking on links inside a label should open that link.
@@ -523,7 +532,8 @@
                 getFormData: function() {
                     var obj = FormView.prototype.getFormData.apply(this, arguments),
                         $emailElement = this.$form.find('input[name=email]'),
-                        $confirmEmail = this.$form.find('input[name=confirm_email]');
+                        $confirmEmail = this.$form.find('input[name=confirm_email]'),
+                        $phoneNumber = this.$form.find('input[name=phone_number]');
 
                     if ($confirmEmail.length) {
                         if (!$confirmEmail.val() || ($emailElement.val() !== $confirmEmail.val())) {
@@ -533,6 +543,8 @@
                         }
                         obj.confirm_email = $confirmEmail.val();
                     }
+
+                    obj.phone_number = $phoneNumber.getNumber();
 
                     return obj;
                 },
