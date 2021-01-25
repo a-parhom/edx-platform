@@ -38,7 +38,6 @@ from util.password_policy_validators import (
 )
 
 from phonenumber_field.formfields import PhoneNumberField
-from phonenumber_field.widgets import PhoneNumberPrefixWidget
 
 
 class TrueCheckbox(widgets.CheckboxInput):
@@ -155,7 +154,7 @@ class AccountCreationForm(forms.Form):
         }
     )
 
-    phone_number = PhoneNumberField(widget=PhoneNumberPrefixWidget)
+    phone_number = PhoneNumberField()
 
     password = forms.CharField()
 
