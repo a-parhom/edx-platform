@@ -114,7 +114,7 @@
             }
 
             phoneFieldView = {
-                view: new AccountSettingsFieldViews.TextFieldView({
+                view: new AccountSettingsFieldViews.PhoneNumberFieldView({
                     model: userAccountModel,
                     title: gettext('Номер мобільного телефону'),
                     valueAttribute: 'phone_number',

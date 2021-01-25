@@ -547,8 +547,6 @@
 
                     obj.phone_number = $phoneNumber.getNumber();
 
-                    console.log(obj);
-
                     return obj;
                 },
 
@@ -572,10 +570,16 @@
                 liveValidate: function($el) {
                     var data = {},
                         field,
+                        $field_el,
                         i;
                     for (i = 0; i < this.liveValidationFields.length; ++i) {
                         field = this.liveValidationFields[i];
-                        data[field] = $('#register-' + field).val();
+                        $field_el = $('#register-' + field);
+                        if($field_el.attr('type') == "tel") {
+                            data[field] = $field_el.getNumber();
+                        } else {
+                            data[field] = $field_el.val();
+                        }
                     }
                     FormView.prototype.liveValidate(
                         $el, this.validationUrl, 'json', data, 'POST', this.model
