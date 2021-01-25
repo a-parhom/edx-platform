@@ -8,7 +8,7 @@
         'edx-ui-toolkit/js/utils/html-utils',
         'js/student_account/views/FormView',
         'text!templates/student_account/form_status.underscore',
-        'intl-tel-input/js/intlTelInput-jquery'
+        'intl-tel-input'
     ],
         function(
             $, _, gettext,
