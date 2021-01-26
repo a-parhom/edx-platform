@@ -17,7 +17,6 @@ from requests.auth import HTTPBasicAuth
 
 from capa.xqueue_interface import XQueueInterface, make_hashkey, make_xheader
 from course_modes.models import CourseMode
-from lms.djangoapps.badges.events.course_complete import get_completion_badge
 from lms.djangoapps.badges.utils import badges_enabled
 from lms.djangoapps.certificates.models import CertificateStatuses as status
 from lms.djangoapps.certificates.models import (
@@ -429,17 +428,6 @@ class XQueueCertInterface(object):
 
         # Finally, generate the certificate and send it off.
         return self._generate_cert(cert, course, student, grade_contents, template_pdf, generate_pdf, generation_mode)
-    
-    def _update_badge_contents(contents, course, user):
-        """
-        Updates context with badge info.
-        """
-        badge = None
-        if badges_enabled() and course.issue_badges:
-            badges = get_completion_badge(course.location.course_key, user).get_for_user(user)
-            if badges:
-                badge = badges[0]
-        contents['badge'] = badge
 
     def _generate_cert(self, cert, course, student, grade_contents, template_pdf, generate_pdf, generation_mode='batch'):
         """
@@ -463,10 +451,8 @@ class XQueueCertInterface(object):
             'template_pdf': template_pdf,
             'generation_mode': generation_mode,
             'user_email': student.email,
+            'issue_bagdes': (badges_enabled() and course.issue_badges),
         }
-        
-        #Append badge info
-        _update_badge_contents(contents, course, student)
         
         if generate_pdf:
             cert.status = status.generating
