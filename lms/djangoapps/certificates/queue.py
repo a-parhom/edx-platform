@@ -451,9 +451,9 @@ class XQueueCertInterface(object):
             'template_pdf': template_pdf,
             'generation_mode': generation_mode,
             'user_email': student.email,
-            'issue_bagdes': (badges_enabled() and course.issue_badges),
+            'issue_badges': (badges_enabled() and course.issue_badges),
         }
-        
+
         if generate_pdf:
             cert.status = status.generating
         else:
