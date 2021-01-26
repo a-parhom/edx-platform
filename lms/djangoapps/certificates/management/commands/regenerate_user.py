@@ -9,8 +9,8 @@ from django.core.management.base import BaseCommand
 from opaque_keys.edx.keys import CourseKey
 from six import text_type
 
-from badges.events.course_complete import get_completion_badge
-from badges.utils import badges_enabled
+#from badges.events.course_complete import get_completion_badge
+#from badges.utils import badges_enabled
 from lms.djangoapps.certificates.api import regenerate_user_certificates
 from xmodule.modulestore.django import modulestore
 
@@ -92,6 +92,7 @@ class Command(BaseCommand):
                 course_id
             )
 
+            """
             if badges_enabled() and course.issue_badges:
                 badge_class = get_completion_badge(course_id, student)
                 badge = badge_class.get_for_user(student)
@@ -99,6 +100,7 @@ class Command(BaseCommand):
                 if badge:
                     badge.delete()
                     LOGGER.info(u"Cleared badge for student %s.", student.id)
+            """
 
             # Add the certificate request to the queue
             ret = regenerate_user_certificates(

@@ -6,7 +6,7 @@ from optparse import make_option
 from opaque_keys import InvalidKeyError
 from opaque_keys.edx.keys import CourseKey
 
-from badges.events.course_complete import get_completion_badge
+#from badges.events.course_complete import get_completion_badge
 from lms.djangoapps.certificates.api import regenerate_user_certificates
 from lms.djangoapps.certificates.models import CertificateRegenerationRequest
 from xmodule.modulestore.django import modulestore
@@ -69,6 +69,7 @@ class Command(BaseCommand):
                     course_id
                 )
 
+		"""
                 if course.issue_badges:
                     badge_class = get_completion_badge(course_id, student)
                     badge = badge_class.get_for_user(student)
@@ -76,6 +77,7 @@ class Command(BaseCommand):
                     if badge:
                         badge.delete()
                         LOGGER.info(u"Cleared badge for student %s.", student.id)
+		"""
 
                 # Add the certificate request to the queue
                 ret = regenerate_user_certificates(
