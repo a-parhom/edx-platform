@@ -52,7 +52,7 @@
             PhoneNumberFieldView: FieldViews.TextFieldView.extend({
                 initialize: function (options) {                    
                     this.render = _.wrap(this.render, function(render) {
-                        render();                       
+                        render.apply(this);                       
                         this.postRender();
                     });                     
                     this._super(options);
