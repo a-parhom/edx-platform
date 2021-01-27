@@ -78,7 +78,7 @@
                 },
                 saveValue: function() {
                     var attributes = {};
-                    attributes[this.options.valueAttribute] = this.$el.find('input').getNumber();
+                    attributes[this.options.valueAttribute] = this.$el.find('input').intlTelInput("getNumber");
                     this.saveAttributes(attributes);
                 }
             }),
