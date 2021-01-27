@@ -545,7 +545,7 @@
                         obj.confirm_email = $confirmEmail.val();
                     }
 
-                    obj.phone_number = $phoneNumber.getNumber();
+                    obj.phone_number = $phoneNumber.intlTelInput("getNumber");
 
                     return obj;
                 },
@@ -576,7 +576,7 @@
                         field = this.liveValidationFields[i];
                         $field_el = $('#register-' + field);
                         if($field_el.attr('type') == "tel") {
-                            data[field] = $field_el.getNumber();
+                            data[field] = $field_el.intlTelInput("getNumber");
                         } else {
                             data[field] = $field_el.val();
                         }
