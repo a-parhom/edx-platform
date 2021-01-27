@@ -80,6 +80,10 @@
                     var attributes = {};
                     attributes[this.options.valueAttribute] = this.$el.find('input').intlTelInput("getNumber");
                     this.saveAttributes(attributes);
+                },
+                updateValueInField: function() {
+                    var value = (_.isUndefined(this.modelValue()) || _.isNull(this.modelValue())) ? '' : this.modelValue();
+                    this.$el.find('input').intlTelInput("setNumber", value)
                 }
             }),
             LanguagePreferenceFieldView: FieldViews.DropdownFieldView.extend({
