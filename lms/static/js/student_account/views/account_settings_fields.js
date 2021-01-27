@@ -50,6 +50,13 @@
                 }
             }),
             PhoneNumberFieldView: FieldViews.TextFieldView.extend({
+                initialize: function (options) {                    
+                    this.render = _.wrap(this.render, function(render) {
+                        render();                       
+                        this.postRender();
+                    });                     
+                    this._super(options);
+                },
                 render: function() {
                     HtmlUtils.setHtml(this.$el, HtmlUtils.template(field_text_account_template)({
                         id: this.options.valueAttribute,
@@ -58,6 +65,10 @@
                         message: this.options.helpMessage,
                         placeholder: this.options.placeholder || ''
                     }));
+                    this.delegateEvents();
+                    return this;
+                },
+                postRender: function() {
                     this.$el.intlTelInput({
                         separateDialCode: true,
                         preferredCountries: ['ua'],
@@ -70,8 +81,6 @@
                         },
                         utilsScript: '/static/common/js/vendor/utils.js'
                     });
-                    this.delegateEvents();
-                    return this;
                 },
                 saveValue: function() {
                     var attributes = {};
