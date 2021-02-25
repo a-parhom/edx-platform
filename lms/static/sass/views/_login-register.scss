@@ -2,6 +2,7 @@
 // ====================
 @import '../base/grid-settings';
 @import "neat/neat"; // lib - Neat
+@import 'intl-tel-input/build/css/intlTelInput';
 
 @media (min-width: 768px) {
   .enterprise-content {
@@ -889,3 +890,14 @@ body.open-modal {
   overflow: hidden;
 }
 
+.iti { width: 100%; }
+
+.iti__flag {background-image: url("/static/common/js/vendor/flags.png");}
+
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  .iti__flag {background-image: url("/static/common/js/vendor/flags@2x.png");}
+}
+
+.tel-phone_number label[for=register-phone_number].focus-out {
+  display: none;
+}

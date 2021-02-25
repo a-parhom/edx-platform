@@ -11,6 +11,14 @@
             </div>
         </div>
     <% } %>
+    <% if (phoneMessage) { %>
+        <div class="account-settings-message">
+            <div id="phone-message" class="alert-message warning" aria-live="assertive" role="alert">
+                <!--span><%= HtmlUtils.ensureHtml(phoneMessage) %></span-->
+                <span><%- gettext('З 25 лютого 2021 року для продовження навчання на Prometheus ми просимо вказати номер вашого телефону. Навіщо нам ваш номер? Аби забезпечити високі стандарти академічної доброчесності та гарантувати, що навчання на платформі пройшла саме та людина, на ім’я якої виданий сертифікат про успішне завершення курсу. Зверніть увагу, що при видачі сертифікату ми можемо відправити на вказаний номер SMS з кодом для підтвердження вашої особи. Вкажіть, будь ласка, ваш номер телефону в текстовому полі «Номер мобільного телефону» нижче.') %></span>
+            </div>
+        </div>
+    <% } %>
     <div class="wrapper-header">
         <h2 class="header-title"><%- gettext("Account Settings") %></h2>
         <div class="left list-inline account-nav" role="tablist">

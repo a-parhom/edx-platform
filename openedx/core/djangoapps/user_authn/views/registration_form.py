@@ -554,6 +554,36 @@ class RegistrationFormFactory(object):
             required=required
         )
 
+    def _add_phone_number_field(self, form_desc, required=True):
+        """Add a phone_number field to a form description.
+        Arguments:
+            form_desc: A form description
+        Keyword Arguments:
+            required (bool): Whether this field is required; defaults to True
+        """
+        # Translators: This label appears above a field on the registration form
+        # meant to hold the user's phone number.
+        phone_number_label = _(u"Mobile phone number")
+
+        phone_number_instructions = _(
+            u"Номер телефону необхідно вводити в міжнародному форматі, наприклад:"
+            u"+380001112233"
+        )
+
+        phone_number_error_msg = _(u"Введіть ваш номер телефону")
+
+        form_desc.add_field(
+            "phone_number",
+            label=phone_number_label,
+            placeholder=phone_number_label,
+            field_type="tel",
+            instructions=phone_number_instructions,
+            required=required,
+            error_messages={
+                "required": phone_number_error_msg
+            }
+        )
+
     def _add_level_of_education_field(self, form_desc, required=True):
         """Add a level of education field to a form description.
         Arguments:

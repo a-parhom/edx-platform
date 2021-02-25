@@ -112,6 +112,16 @@
                 };
             }
 
+            phoneFieldView = {
+                view: new AccountSettingsFieldViews.PhoneNumberFieldView({
+                    model: userAccountModel,
+                    title: gettext('Номер мобільного телефону'),
+                    valueAttribute: 'phone_number',
+                    helpMessage: gettext('Номер телефону необхідно вводити в міжнародному форматі, наприклад: +380001112233'),  // eslint-disable-line max-len,
+                    persistChanges: true
+                })
+            };
+
             countryFieldData = {
                 model: userAccountModel,
                 required: true,
