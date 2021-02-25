@@ -105,7 +105,6 @@
             'hls': 'common/js/vendor/hls',
             'tinymce': 'js/vendor/tinymce/js/tinymce/tinymce.full.min',
             'jquery.tinymce': 'js/vendor/tinymce/js/tinymce/jquery.tinymce.min',
-            'intl-tel-input': 'common/js/vendor/intlTelInput-jquery',
         },
         shim: {
             'annotator_1.2.9': {

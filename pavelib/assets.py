@@ -65,8 +65,7 @@ NPM_INSTALLED_LIBRARIES = [
     'underscore.string/dist/underscore.string.js',
     'underscore/underscore.js',
     '@edx/studio-frontend/dist/',
-    'which-country/index.js',
-    'intl-tel-input/build/'
+    'which-country/index.js'
 ]
 
 # A list of NPM installed developer libraries that should be copied into the common

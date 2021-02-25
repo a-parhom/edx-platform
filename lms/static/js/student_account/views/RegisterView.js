@@ -7,8 +7,7 @@
         'edx-ui-toolkit/js/utils/string-utils',
         'edx-ui-toolkit/js/utils/html-utils',
         'js/student_account/views/FormView',
-        'text!templates/student_account/form_status.underscore',
-        'intl-tel-input'
+        'text!templates/student_account/form_status.underscore'
     ],
         function(
             $, _, gettext,
@@ -258,21 +257,6 @@
                     $('.checkbox-honor_code').insertAfter('.optional-fields');
                     // xss-lint: disable=javascript-jquery-insert-into-target
                     $('.checkbox-terms_of_service').insertAfter('.optional-fields');
-
-                    //IntlTelInput
-                    $('input[type=tel]').intlTelInput({
-                        separateDialCode: true,
-                        preferredCountries: ['ua'],
-                        initialCountry: "auto",
-                        autoPlaceholder: "off",
-                        geoIpLookup: function(success, failure) {
-                            $.get("https://ipinfo.io", function() {}, "jsonp").always(function(resp) {
-                                var countryCode = (resp && resp.country) ? resp.country : "ua";
-                                success(countryCode);
-                            });
-                        },
-                        utilsScript: '/static/common/js/vendor/utils.js'
-                    });
 
                     // Clicking on links inside a label should open that link.
                     $('label a').click(function(ev) {
@@ -532,8 +516,7 @@
                 getFormData: function() {
                     var obj = FormView.prototype.getFormData.apply(this, arguments),
                         $emailElement = this.$form.find('input[name=email]'),
-                        $confirmEmail = this.$form.find('input[name=confirm_email]'),
-                        $phoneNumber = this.$form.find('input[name=phone_number]');
+                        $confirmEmail = this.$form.find('input[name=confirm_email]');
 
                     if ($confirmEmail.length) {
                         if (!$confirmEmail.val() || ($emailElement.val() !== $confirmEmail.val())) {
@@ -543,8 +526,6 @@
                         }
                         obj.confirm_email = $confirmEmail.val();
                     }
-
-                    obj.phone_number = $phoneNumber.intlTelInput("getNumber");
 
                     return obj;
                 },
@@ -569,16 +550,10 @@
                 liveValidate: function($el) {
                     var data = {},
                         field,
-                        $field_el,
                         i;
                     for (i = 0; i < this.liveValidationFields.length; ++i) {
                         field = this.liveValidationFields[i];
-                        $field_el = $('#register-' + field);
-                        if($field_el.attr('type') == "tel") {
-                            data[field] = $field_el.intlTelInput("getNumber");
-                        } else {
-                            data[field] = $field_el.val();
-                        }
+                        data[field] = $('#register-' + field).val();
                     }
                     FormView.prototype.liveValidate(
                         $el, this.validationUrl, 'json', data, 'POST', this.model
