@@ -170,7 +170,7 @@
 
             BadgeCollection = PagingCollection.extend({
                 queryParams: {
-                    currentPage: 'current_page'
+                    currentPage: 'page'
                 }
             });
             badgeCollection = new BadgeCollection();
