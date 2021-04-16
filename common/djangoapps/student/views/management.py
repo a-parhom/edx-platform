@@ -162,17 +162,18 @@ def index(request, extra_context=None, user=AnonymousUser()):
     return render_to_response('index.html', context)
 
 
-def compose_activation_email(root_url, user, user_registration=None, route_enabled=False, profile_name=''):
+def compose_activation_email(root_url, user, user_registration=None, route_enabled=False, profile_name='', ecommerce_redirect=False):
     """
     Construct all the required params for the activation email
     through celery task
     """
+
     if user_registration is None:
         user_registration = Registration.objects.get(user=user)
 
     message_context = generate_activation_email_context(user, user_registration)
     message_context.update({
-        'confirm_activation_link': '{root_url}/activate/{activation_key}'.format(
+        'confirm_activation_link': '{root_url}/activate/{activation_key}{redirect}'.format(
             root_url=root_url,
             activation_key=message_context['key']
         ),
@@ -180,6 +181,7 @@ def compose_activation_email(root_url, user, user_registration=None, route_enabl
         'routed_user': user.username,
         'routed_user_email': user.email,
         'routed_profile_name': profile_name,
+        'ecommerce_redirect': '?ecommerce_redirect='+ecommerce_redirect if ecommerce_redirect else '',
     })
 
     if route_enabled:
@@ -196,7 +198,7 @@ def compose_activation_email(root_url, user, user_registration=None, route_enabl
     return msg
 
 
-def compose_and_send_activation_email(user, profile, user_registration=None):
+def compose_and_send_activation_email(user, profile, user_registration=None, ecommerce_redirect=False):
     """
     Construct all the required params and send the activation email
     through celery task
@@ -209,7 +211,7 @@ def compose_and_send_activation_email(user, profile, user_registration=None):
     route_enabled = settings.FEATURES.get('REROUTE_ACTIVATION_EMAIL')
 
     root_url = configuration_helpers.get_value('LMS_ROOT_URL', settings.LMS_ROOT_URL)
-    msg = compose_activation_email(root_url, user, user_registration, route_enabled, profile.name)
+    msg = compose_activation_email(root_url, user, user_registration, route_enabled, profile.name, ecommerce_redirect)
 
     send_activation_email.delay(str(msg))
 
@@ -492,9 +494,11 @@ def activate_account(request, key):
     # TODO: Use metric to determine if there are any `activate_account` calls for cms in Production.
     # If not, the templates wouldn't be needed for cms, but we still need a way to activate for cms tests.
     monitoring_utils.set_custom_metric('student_activate_account', 'lms')
+    activation_message_type = None
     try:
         registration = Registration.objects.get(activation_key=key)
     except (Registration.DoesNotExist, Registration.MultipleObjectsReturned):
+        activation_message_type = 'error'
         messages.error(
             request,
             HTML(_(
@@ -511,6 +515,7 @@ def activate_account(request, key):
         )
     else:
         if registration.user.is_active:
+            activation_message_type = 'info'
             messages.info(
                 request,
                 HTML(_('{html_start}This account has already been activated.{html_end}')).format(
@@ -533,6 +538,7 @@ def activate_account(request, key):
                 )
 
             # Add message for later use.
+            activation_message_type = 'success'
             messages.success(
                 request,
                 HTML(message).format(
@@ -541,6 +547,9 @@ def activate_account(request, key):
                 ),
                 extra_tags='account-activation aa-icon',
             )
+
+    if activation_message_type in ['info','success'] and request.GET.get('ecommerce_redirect', False):
+        return redirect(settings.ECOMMERCE_PUBLIC_URL_ROOT+request.GET['ecommerce_redirect'])
 
     return redirect('dashboard')
 
