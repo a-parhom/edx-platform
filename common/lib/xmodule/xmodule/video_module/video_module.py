@@ -1094,7 +1094,6 @@ class VideoBlock(
         Returns a JSON representation of the student_view of this XModule.
         The contract of the JSON content is between the caller and the particular XModule.
         """
-        log.info("student_view_data called")
         context = context or {}
 
         # If the "only_on_web" field is set on this video, do not return the rest of the video's data
