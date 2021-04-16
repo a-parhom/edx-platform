@@ -99,6 +99,11 @@ try:
 except ImportError:
     BrandingInfoConfig = None
 
+try:
+    from prometheus_video_api.api import FileSizeAPI
+except ImportError:
+    FileSizeAPI = None
+
 log = logging.getLogger(__name__)
 
 # Make '_' a no-op so we can scrape strings. Using lambda instead of
@@ -1075,11 +1080,21 @@ class VideoBlock(
         """
         return edxval_api.get_video_info_for_course_and_profiles(six.text_type(course_id), video_profile_names)
 
+    @classmethod
+    @request_cached(
+        request_cache_getter=lambda args, kwargs: args[1],
+    )
+    def get_cached_filesize(cls, request_cache, link):
+        filesize_api = FileSizeAPI(settings.VIDEO_API['SECRET_KEY'],
+            settings.VIDEO_API['CLIENT_ID'], settings.VIDEO_API['CLIENT_SECRET'])
+        return filesize_api.get_file_size(link)
+
     def student_view_data(self, context=None):
         """
         Returns a JSON representation of the student_view of this XModule.
         The contract of the JSON content is between the caller and the particular XModule.
         """
+        log.info("student_view_data called")
         context = context or {}
 
         # If the "only_on_web" field is set on this video, do not return the rest of the video's data
@@ -1128,9 +1143,14 @@ class VideoBlock(
         # Fall back to other video URLs in the video module if not found in VAL
         if not encoded_videos:
             if all_sources:
+                if FileSizeAPI == None:
+                    file_size = 0 # File size is unknown for fallback URLs
+                else:
+                    file_size = self.get_cached_filesize(self.request_cache, all_sources[0])
+
                 encoded_videos["fallback"] = {
                     "url": all_sources[0],
-                    "file_size": 0,  # File size is unknown for fallback URLs
+                    "file_size": file_size,
                 }
 
             # Include youtube link if there is no encoding for mobile- ie only a fallback URL or no encodings at all
