@@ -294,12 +294,14 @@ class XQueueCertInterface(object):
             template_pdf = template_file
         elif mode_is_verified and user_is_verified:
             template_pdf = "certificate-template-{id.org}-{id.course}-verified.pdf".format(id=course_id)
+        """ For now we don't need the user to be verified in order to get payed certificate
         elif mode_is_verified and not user_is_verified:
             template_pdf = "certificate-template-{id.org}-{id.course}.pdf".format(id=course_id)
             if CourseMode.mode_for_course(course_id, CourseMode.HONOR):
                 cert_mode = GeneratedCertificate.MODES.honor
             else:
                 unverified = True
+        """
         else:
             # honor code and audit students
             template_pdf = "certificate-template-{id.org}-{id.course}.pdf".format(id=course_id)
