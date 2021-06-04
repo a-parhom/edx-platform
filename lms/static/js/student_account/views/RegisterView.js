@@ -174,7 +174,7 @@
 
                 postRender: function() {
                     var inputs = this.$('.form-field'),
-                        inputSelectors = 'input, select, textarea',
+                        inputSelectors = 'input, textarea',
                         inputTipSelectors = ['tip error', 'tip tip-input'],
                         inputTipSelectorsHidden = ['tip error hidden', 'tip tip-input hidden'],
                         onInputFocus = function() {
@@ -206,6 +206,9 @@
                             });
                         },
                         handleInputBehavior = function(input) {
+                            if(typeof(input.find(inputSelectors).val()) === "undefined") {
+                                return;
+                            }
                             // Initially put label in input
                             if (input.find(inputSelectors).val().length === 0) {
                                 input.find('label').addClass('focus-out')
@@ -227,6 +230,10 @@
                                 var $input = $(this),
                                     isCheckbox = $input.attr('class').indexOf('checkbox') !== -1;
 
+                                if(typeof($input.find(inputSelectors).val()) === "undefined") {
+                                    return;
+                                }
+                                
                                 if (!isCheckbox) {
                                     if ($input.find(inputSelectors).val().length === 0
                                         && !$input.is(':-webkit-autofill')) {
